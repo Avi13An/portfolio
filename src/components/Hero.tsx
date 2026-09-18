@@ -48,7 +48,7 @@ export function Hero() {
           {/* Top Status Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-950 border border-white/10 text-zinc-300 text-xs font-mono tracking-wide mb-8 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>PRODUCTION MVP ARCHITECT & NATIVE SYSTEMS SPECIALIST</span>
+            <span>AVI TANDON • FULL-STACK &amp; SYSTEMS MVP DEVELOPER</span>
             <ChevronRight className="w-3.5 h-3.5 text-zinc-500" />
           </div>
 

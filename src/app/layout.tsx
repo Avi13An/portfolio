@@ -2,33 +2,33 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Engineering Portfolio | Production-Ready MVPs & Native Audio Systems",
+  title: "Avi Tandon | Full-Stack & Systems MVP Developer",
   description:
-    "I turn ambitious ideas into production-ready MVPs and mobile/web applications. Specialized in high-performance streaming, real-time audio engines, and rapid 2-week deployments.",
+    "Avi Tandon — Full-Stack & Systems MVP Developer turning ambitious ideas into production-ready MVPs, mobile applications, and native audio/real-time systems.",
   keywords: [
+    "Avi Tandon",
     "Full-Stack Developer",
+    "Systems MVP Developer",
     "React Native",
     "Expo",
-    "Audio Engineering",
     "MediaCodec",
     "MQTT",
     "Next.js",
     "MVP Development",
-    "Software Engineer",
   ],
-  authors: [{ name: "Avi Tandon" }],
+  authors: [{ name: "Avi Tandon", url: "https://github.com/Avi13An" }],
   openGraph: {
-    title: "Engineering Portfolio | Production-Ready MVPs & Real-Time Systems",
+    title: "Avi Tandon | Full-Stack & Systems MVP Developer",
     description:
-      "Turning ambitious ideas into production-ready MVPs, mobile applications, and native audio pipelines in 2 weeks.",
+      "Turning ambitious ideas into production-ready MVPs, mobile applications, and real-time audio systems in 2 weeks.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Engineering Portfolio | Production-Ready MVPs",
+    title: "Avi Tandon | Full-Stack & Systems MVP Developer",
     description:
-      "Full-stack development, native audio pipelines, and high-performance real-time applications.",
+      "Turning ambitious ideas into production-ready MVPs, mobile applications, and real-time audio systems in 2 weeks.",
   },
   robots: {
     index: true,

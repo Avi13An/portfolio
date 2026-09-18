@@ -42,11 +42,11 @@ export function Navbar() {
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-semibold tracking-tight text-white flex items-center gap-1.5 font-mono">
-                ENGINEERING LAB
+                AVI TANDON
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
               </span>
-              <span className="text-[11px] text-zinc-500 font-mono hidden sm:inline-block">
-                MVP & Audio Systems
+              <span className="text-[11px] text-zinc-400 font-mono hidden sm:inline-block">
+                Full-Stack &amp; Systems MVP Developer
               </span>
             </div>
           </a>
