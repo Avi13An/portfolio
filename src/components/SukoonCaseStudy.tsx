@@ -6,42 +6,107 @@ import {
   Pause,
   Volume2,
   Users,
-  ShieldAlert,
-  Cpu,
   Radio,
   Clock,
   CheckCircle2,
-  Maximize2,
   Sparkles,
-  Terminal,
   Zap,
-  ArrowRight,
   Sliders,
-  Layers,
   Code2,
+  Layers,
+  Activity,
+  Compass,
+  Music,
+  FileText,
+  Mic,
+  Share2,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function SukoonCaseStudy() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(14); // seconds
-  const [activeHighlight, setActiveHighlight] = useState<string>("stream");
+  const [activeTab, setActiveTab] = useState<number>(1); // Default to "Now Playing"
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [telemetry, setTelemetry] = useState({
+    buffer: 99.2,
+    transit: 16,
+    jitter: 1.2,
+  });
+  const [imageError, setImageError] = useState<Record<string, boolean>>({});
 
-  // Simulated 45s audio player timeline
+  // Simulate subtle real-time telemetry fluctuations during playback session
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isPlaying) {
-      timer = setInterval(() => {
-        setProgress((prev) => (prev >= 45 ? 0 : prev + 1));
-      }, 1000);
+    let interval: NodeJS.Timeout;
+    if (isSimulating) {
+      interval = setInterval(() => {
+        setTelemetry({
+          buffer: +(98.8 + Math.random() * 0.9).toFixed(1),
+          transit: Math.floor(14 + Math.random() * 5),
+          jitter: +(0.8 + Math.random() * 0.7).toFixed(1),
+        });
+      }, 1200);
     }
-    return () => clearInterval(timer);
-  }, [isPlaying]);
+    return () => clearInterval(interval);
+  }, [isSimulating]);
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-  };
+  const showcaseTabs = [
+    {
+      id: "home",
+      title: "Discovery Feed",
+      icon: Compass,
+      imageSrc: "/screenshots/home.png",
+      telemetry: "Apple Music RSS + iTunes Search API • Sub-150ms Ingestion",
+      glowColor: "rgba(16, 185, 129, 0.25)",
+      accentBorder: "border-emerald-500/50",
+      accentText: "text-emerald-400",
+      description: "Edge-cached track indexing with real-time algorithmic search over 10M+ records.",
+    },
+    {
+      id: "player",
+      title: "Now Playing",
+      icon: Music,
+      imageSrc: "/screenshots/player.png",
+      telemetry: "ExoPlayer Dual-Queue Pre-Seeding • 24-bit Lossless • 7s Stall Watchdog",
+      glowColor: "rgba(6, 182, 212, 0.25)",
+      accentBorder: "border-cyan-500/50",
+      accentText: "text-cyan-400",
+      description: "Direct-to-client edge CDN stream resolution bypassing 403 authorization timeouts.",
+    },
+    {
+      id: "lyrics",
+      title: "Live Synced Lyrics",
+      icon: FileText,
+      imageSrc: "/screenshots/lyrics.png",
+      telemetry: "LRCLIB Millisecond Timecode Parsing • Programmatic Centering",
+      glowColor: "rgba(139, 92, 246, 0.25)",
+      accentBorder: "border-violet-500/50",
+      accentText: "text-violet-400",
+      description: "Sub-millisecond karaoke sync with GPU-accelerated active line centering.",
+    },
+    {
+      id: "karaoke",
+      title: "Studio Vocal Engine",
+      icon: Mic,
+      imageSrc: "/screenshots/karaoke.png",
+      telemetry: "Raw 44.1kHz 16-bit PCM • Hardware Android MediaCodec Mixer",
+      glowColor: "rgba(245, 158, 11, 0.25)",
+      accentBorder: "border-amber-500/50",
+      accentText: "text-amber-400",
+      description: "Hardware zero-latency vocal overdubbing directly through native NDK buffers.",
+    },
+    {
+      id: "party",
+      title: "Sukoon Jam",
+      icon: Users,
+      imageSrc: "/screenshots/party.png",
+      telemetry: "HiveMQ MQTT over WebSockets • NTP Mathematical Drift Compensation",
+      glowColor: "rgba(16, 185, 129, 0.25)",
+      accentBorder: "border-emerald-500/50",
+      accentText: "text-emerald-400",
+      description: "Collaborative multiplayer listening rooms with sub-100ms global drift correction.",
+    },
+  ];
+
+  const currentScreen = showcaseTabs[activeTab];
 
   const techBadges = [
     { name: "React Native", color: "text-cyan-400 border-cyan-500/30 bg-cyan-950/20" },
@@ -190,10 +255,13 @@ class AudioCodecPipeline(private val sampleRate: Int = 44100) {
   ];
 
   return (
-    <section id="featured-architecture" className="py-24 bg-black relative border-t border-white/10">
-      {/* Background radial highlight */}
-      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] glow-emerald opacity-60 pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-[500px] h-[500px] glow-cyan opacity-40 pointer-events-none" />
+    <section id="featured-architecture" className="py-24 bg-black relative border-t border-white/10 overflow-hidden">
+      {/* Dynamic Ambient Background Backlight matching active screen */}
+      <div
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] blur-[170px] rounded-full pointer-events-none transition-all duration-700 -z-10"
+        style={{ backgroundColor: currentScreen.glowColor }}
+      />
+      <div className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-cyan-500/5 blur-[160px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -223,238 +291,305 @@ class AudioCodecPipeline(private val sampleRate: Int = 44100) {
           </div>
         </div>
 
-        {/* Visual & Video Showcase Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-16">
-          {/* Main Visual / Video Demo Player Frame (7 cols) */}
-          <div className="lg:col-span-7">
-            <div className="rounded-2xl bg-zinc-950 border border-white/15 p-1.5 shadow-2xl relative overflow-hidden group">
-              {/* Window Header */}
-              <div className="bg-black/80 px-4 py-3 rounded-t-xl border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-2 text-xs font-mono text-zinc-400">
-                    Sukoon Audio Engine 45s Architecture Preview
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 text-xs font-mono text-zinc-500">
-                  <span className="px-2 py-0.5 rounded bg-zinc-900 border border-white/10 text-emerald-400 text-[10px]">
-                    44.1kHz • 320kbps
-                  </span>
-                </div>
+        {/* 3. INTERACTIVE AUDIO SESSION ENGINE MONITOR WIDGET */}
+        <div className="mb-12 rounded-2xl bg-[#090909] border border-white/10 p-5 sm:p-6 shadow-2xl relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-white/10">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/15 flex items-center justify-center text-emerald-400 shadow-inner">
+                <Activity className="w-5 h-5 animate-pulse" />
               </div>
-
-              {/* Video Showcase Frame / Interactive Demo Simulation */}
-              <div className="relative aspect-video bg-zinc-950/90 flex flex-col justify-between p-6 overflow-hidden">
-                {/* Visualizer background grid */}
-                <div className="absolute inset-0 amoled-mesh opacity-20" />
-                <div className="absolute -top-10 -right-10 w-64 h-64 bg-emerald-500/10 blur-[90px] rounded-full pointer-events-none" />
-
-                {/* Top overlay in player */}
-                <div className="relative z-10 flex items-start justify-between">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2.5 py-1 rounded-md bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-mono flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        LIVE SYNC SESSION
-                      </span>
-                      <span className="text-xs font-mono text-zinc-500">Room #8492-DX</span>
-                    </div>
-                    <h3 className="text-white text-lg font-bold mt-2">
-                      Spatial Symphony — High-Bitrate Native Mix
-                    </h3>
-                    <p className="text-zinc-400 text-xs font-mono">
-                      Host: Avi • 4 Listeners Connected • HiveMQ Broker: Frankfurt
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-2 bg-black/70 border border-white/10 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-300">
-                    <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                    <span>±18ms sync drift</span>
-                  </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-white font-mono">
+                    Audio Engine Diagnostics Monitor
+                  </span>
+                  <span
+                    className={`px-2 py-0.5 rounded text-[10px] font-mono border ${
+                      isSimulating
+                        ? "bg-emerald-950/60 border-emerald-500/40 text-emerald-300"
+                        : "bg-zinc-900 border-white/10 text-zinc-500"
+                    }`}
+                  >
+                    {isSimulating ? "LIVE SESSION ACTIVE" : "ENGINE STANDBY"}
+                  </span>
                 </div>
-
-                {/* Center Dynamic Audio Waveform Equalizer */}
-                <div className="relative z-10 py-6">
-                  <div className="h-28 flex items-center justify-between gap-1 sm:gap-1.5 px-4 bg-black/60 rounded-xl border border-white/5 backdrop-blur-sm">
-                    {[
-                      "animate-eq-1",
-                      "animate-eq-3",
-                      "animate-eq-2",
-                      "animate-eq-5",
-                      "animate-eq-4",
-                      "animate-eq-7",
-                      "animate-eq-6",
-                      "animate-eq-8",
-                      "animate-eq-2",
-                      "animate-eq-4",
-                      "animate-eq-1",
-                      "animate-eq-5",
-                      "animate-eq-3",
-                      "animate-eq-6",
-                      "animate-eq-7",
-                      "animate-eq-2",
-                      "animate-eq-8",
-                      "animate-eq-1",
-                      "animate-eq-4",
-                      "animate-eq-5",
-                      "animate-eq-3",
-                      "animate-eq-2",
-                      "animate-eq-6",
-                      "animate-eq-7",
-                    ].map((animClass, idx) => (
-                      <div
-                        key={idx}
-                        className={`w-1.5 sm:w-2 rounded-full transition-all duration-300 ${
-                          isPlaying
-                            ? `${animClass} bg-gradient-to-t from-emerald-500 via-cyan-400 to-white shadow-[0_0_8px_rgba(16,185,129,0.5)]`
-                            : "h-2 bg-zinc-800"
-                        }`}
-                        style={{ minHeight: isPlaying ? "8px" : "4px" }}
-                      />
-                    ))}
-                  </div>
-
-                  {/* Latency & Stall Watchdog Banner */}
-                  <div className="flex items-center justify-between mt-3 text-[11px] font-mono text-zinc-400 px-1">
-                    <span className="flex items-center gap-1 text-emerald-400">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      MediaCodec Buffer: 1024 frames (locked)
-                    </span>
-                    <span className="text-zinc-500">Stall Watchdog: 7.0s Active</span>
-                  </div>
-                </div>
-
-                {/* Bottom Player Controls & 45-second scrubber */}
-                <div className="relative z-10 space-y-2 bg-black/80 p-3.5 rounded-xl border border-white/10">
-                  {/* Scrubber */}
-                  <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden relative cursor-pointer">
-                    <div
-                      className="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full rounded-full transition-all duration-300 shadow-[0_0_10px_rgba(16,185,129,0.7)]"
-                      style={{ width: `${(progress / 45) * 100}%` }}
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between pt-1">
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => setIsPlaying(!isPlaying)}
-                        className="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center hover:bg-zinc-200 transition-all shadow-md shadow-emerald-500/20"
-                        aria-label={isPlaying ? "Pause audio engine demo" : "Play audio engine demo"}
-                      >
-                        {isPlaying ? (
-                          <Pause className="w-4 h-4 fill-black" />
-                        ) : (
-                          <Play className="w-4 h-4 fill-black ml-0.5" />
-                        )}
-                      </button>
-                      <div className="font-mono text-xs text-zinc-300">
-                        <span>{formatTime(progress)}</span>
-                        <span className="text-zinc-600 mx-1">/</span>
-                        <span className="text-zinc-500">0:45 (Demo Clip)</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <div className="flex items-center gap-1 text-xs font-mono text-zinc-400 bg-zinc-900 px-2 py-1 rounded border border-white/5">
-                        <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
-                        <span>PCM 16-Bit Stereo</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <p className="text-xs text-zinc-400 font-mono">
+                  Real-time NDK hardware buffer telemetry &amp; distributed clock mesh
+                </p>
               </div>
             </div>
+
+            {/* Interactive Simulation Toggle */}
+            <button
+              onClick={() => setIsSimulating(!isSimulating)}
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono text-xs font-semibold transition-all duration-200 shadow-lg ${
+                isSimulating
+                  ? "bg-emerald-500 text-black shadow-emerald-500/30 hover:bg-emerald-400"
+                  : "bg-white text-black hover:bg-zinc-200 shadow-white/10"
+              }`}
+            >
+              {isSimulating ? (
+                <>
+                  <Pause className="w-3.5 h-3.5 fill-black" />
+                  <span>Stop Playback Session</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-3.5 h-3.5 fill-black ml-0.5" />
+                  <span>Simulate Playback Session</span>
+                </>
+              )}
+            </button>
           </div>
 
-          {/* High-Res Mobile Mockup Frame (5 cols) */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="w-full max-w-[320px] rounded-[36px] bg-black p-3 border-2 border-zinc-700 shadow-2xl shadow-emerald-950/30 relative">
-              {/* Phone speaker notch */}
-              <div className="w-24 h-4 bg-zinc-900 rounded-full mx-auto mb-3 border border-white/10 flex items-center justify-center">
-                <div className="w-8 h-1 bg-zinc-700 rounded-full" />
+          {/* Equalizer & Telemetry Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pt-5">
+            {/* Equalizer Display (5 cols) */}
+            <div className="md:col-span-5 bg-black/80 rounded-xl p-4 border border-white/5 flex flex-col justify-center">
+              <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 mb-2">
+                <span>PCM Hardware Frequency Spectrum</span>
+                <span className={isSimulating ? "text-emerald-400" : "text-zinc-600"}>
+                  {isSimulating ? "44.1 kHz • Active Stream" : "Muted"}
+                </span>
+              </div>
+              <div className="h-16 flex items-end justify-between gap-1 px-2">
+                {[
+                  "animate-eq-1",
+                  "animate-eq-3",
+                  "animate-eq-2",
+                  "animate-eq-5",
+                  "animate-eq-4",
+                  "animate-eq-7",
+                  "animate-eq-6",
+                  "animate-eq-8",
+                  "animate-eq-2",
+                  "animate-eq-4",
+                  "animate-eq-1",
+                  "animate-eq-5",
+                  "animate-eq-3",
+                  "animate-eq-6",
+                  "animate-eq-7",
+                  "animate-eq-2",
+                  "animate-eq-8",
+                  "animate-eq-1",
+                  "animate-eq-4",
+                  "animate-eq-5",
+                ].map((animClass, idx) => (
+                  <div
+                    key={idx}
+                    className={`w-1.5 sm:w-2 rounded-full transition-all duration-300 ${
+                      isSimulating
+                        ? `${animClass} bg-gradient-to-t from-emerald-500 via-cyan-400 to-white shadow-[0_0_8px_rgba(16,185,129,0.5)]`
+                        : "h-2 bg-zinc-800"
+                    }`}
+                    style={{ minHeight: isSimulating ? "10px" : "4px" }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Live Telemetry Cards (7 cols) */}
+            <div className="md:col-span-7 grid grid-cols-3 gap-3">
+              <div className="p-3.5 rounded-xl bg-black border border-white/5 font-mono">
+                <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1">
+                  PCM Sample Rate
+                </div>
+                <div className="text-sm sm:text-base font-extrabold text-white">
+                  44,100 Hz
+                </div>
+                <div className="text-[10px] text-emerald-400 mt-0.5">
+                  {isSimulating ? "Hardware Locked" : "Standby"}
+                </div>
               </div>
 
-              {/* Phone Screen Contents */}
-              <div className="rounded-[28px] bg-zinc-950 border border-white/10 p-4 space-y-4 font-mono overflow-hidden">
-                {/* Sukoon App Header */}
-                <div className="flex items-center justify-between pb-2 border-b border-white/5">
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-md bg-emerald-500 flex items-center justify-center text-black font-extrabold text-[10px]">
-                      S
-                    </div>
-                    <span className="text-xs font-bold text-white tracking-wide">Sukoon Engine</span>
-                  </div>
-                  <span className="text-[10px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
-                    EXPO 57
-                  </span>
+              <div className="p-3.5 rounded-xl bg-black border border-white/5 font-mono">
+                <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1">
+                  Buffer Health
                 </div>
-
-                {/* Active Session Card */}
-                <div className="rounded-xl bg-black border border-white/10 p-3 space-y-2">
-                  <div className="flex items-center justify-between text-[11px] text-zinc-400">
-                    <span>Collaborative Stream</span>
-                    <span className="text-emerald-400 font-bold">QoS 1 ACTIVE</span>
-                  </div>
-                  <div className="text-xs font-bold text-white">Midnight Lo-Fi Master #03</div>
-                  <div className="text-[10px] text-zinc-500">
-                    Stream resolved via direct client worker (HTTP 200)
-                  </div>
+                <div className="text-sm sm:text-base font-extrabold text-white">
+                  {isSimulating ? `${telemetry.buffer}%` : "100.0%"}
                 </div>
-
-                {/* Overdub Track Monitor */}
-                <div className="rounded-xl bg-zinc-900/60 border border-white/5 p-3 space-y-2">
-                  <div className="flex items-center justify-between text-[10px]">
-                    <span className="text-zinc-400">Track 2: Vocal Overdub</span>
-                    <span className="text-cyan-400">44.1kHz Rec</span>
-                  </div>
-                  <div className="w-full bg-zinc-950 h-2 rounded-full overflow-hidden flex items-center">
-                    <div className="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 w-3/4 animate-pulse rounded-full" />
-                  </div>
-                  <div className="flex justify-between text-[9px] text-zinc-500">
-                    <span>Hardware Latency: 12ms</span>
-                    <span>Zero Phase Drift</span>
-                  </div>
+                <div className="text-[10px] text-cyan-400 mt-0.5">
+                  {isSimulating ? "1024 frames" : "Ready"}
                 </div>
+              </div>
 
-                {/* Room Participants */}
-                <div className="space-y-1.5 pt-1">
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wider">
-                    Room Mesh (MQTT Sub-100ms)
-                  </div>
-                  {[
-                    { name: "Avi (Host / Mobile)", status: "Master Clock", latency: "0ms" },
-                    { name: "Sarah K.", status: "Synced (Frankfurt)", latency: "+22ms" },
-                    { name: "David M.", status: "Synced (NYC)", latency: "+48ms" },
-                  ].map((p, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-between text-[11px] p-1.5 rounded-lg bg-black border border-white/5"
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        <span className="text-zinc-300">{p.name}</span>
-                      </div>
-                      <span className="text-zinc-500 text-[10px]">{p.latency}</span>
-                    </div>
-                  ))}
+              <div className="p-3.5 rounded-xl bg-black border border-white/5 font-mono">
+                <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1">
+                  MQTT Transit
                 </div>
-
-                {/* Phone Bottom Home Bar */}
-                <div className="pt-2">
-                  <div className="w-20 h-1 bg-zinc-700 rounded-full mx-auto" />
+                <div className="text-sm sm:text-base font-extrabold text-white">
+                  {isSimulating ? `${telemetry.transit}ms` : "< 20ms"}
+                </div>
+                <div className="text-[10px] text-violet-400 mt-0.5">
+                  {isSimulating ? `Jitter ±${telemetry.jitter}ms` : "Sub-100ms sync"}
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 4 Key Highlights Architecture Grid */}
-        <div className="mt-8">
+        {/* 2. INTERACTIVE SMARTPHONE SHOWCASE WITH REAL SCREENSHOTS */}
+        <div className="mb-20">
+          {/* Horizontal Screen Tab Selector */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+            {showcaseTabs.map((tab, idx) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === idx;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(idx)}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-mono text-xs font-semibold whitespace-nowrap transition-all border shrink-0 ${
+                    isActive
+                      ? "bg-zinc-900 border-white/30 text-white shadow-[0_0_20px_rgba(255,255,255,0.1)] ring-1 ring-white/20"
+                      : "bg-[#090909] border-white/10 text-zinc-400 hover:text-white hover:border-white/20"
+                  }`}
+                >
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? tab.accentText : "text-zinc-500"}`} />
+                  <span>{tab.title}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Smartphone Chassis + Interactive Screen Display */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Phone Chassis (6 cols on desktop) */}
+            <div className="lg:col-span-6 flex justify-center">
+              <div className="relative">
+                {/* Ambient dynamic backlight glowing behind phone */}
+                <div
+                  className="absolute -inset-6 rounded-[52px] blur-2xl opacity-50 transition-all duration-500 pointer-events-none"
+                  style={{ backgroundColor: currentScreen.glowColor }}
+                />
+
+                {/* Smartphone Metallic Titanium Chassis */}
+                <div className="relative w-[300px] sm:w-[330px] rounded-[48px] p-3 bg-gradient-to-b from-zinc-700 via-zinc-900 to-black border-2 border-zinc-600 shadow-[0_0_60px_rgba(0,0,0,0.9)]">
+                  {/* Dynamic Island / Speaker Notch */}
+                  <div className="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-4 bg-black rounded-full z-30 border border-white/10 flex items-center justify-between px-3">
+                    <div className="w-2.5 h-2.5 rounded-full bg-zinc-900 border border-white/10" />
+                    <div className="w-2 h-2 rounded-full bg-emerald-500/80 animate-pulse" />
+                  </div>
+
+                  {/* Phone Screen Container */}
+                  <div className="relative w-full aspect-[9/19.5] rounded-[38px] bg-black overflow-hidden border border-white/15">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentScreen.id}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        className="w-full h-full relative"
+                      >
+                        {imageError[currentScreen.id] ? (
+                          /* Fallback Mockup View if Image Fails to Load */
+                          <div className="w-full h-full bg-gradient-to-b from-zinc-900 via-zinc-950 to-black p-6 flex flex-col justify-between font-mono">
+                            <div className="pt-8">
+                              <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-500/30 text-emerald-400">
+                                SUKOON ARCHITECTURE
+                              </span>
+                              <h4 className="text-base font-bold text-white mt-3">
+                                {currentScreen.title}
+                              </h4>
+                              <p className="text-xs text-zinc-400 mt-2">
+                                {currentScreen.description}
+                              </p>
+                            </div>
+                            <div className="p-4 rounded-xl bg-black border border-white/10 space-y-2">
+                              <div className="text-[10px] text-zinc-500 uppercase">
+                                Telemetry Stream
+                              </div>
+                              <div className="text-xs text-emerald-300">
+                                {currentScreen.telemetry}
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          /* Real Screenshot Image */
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={currentScreen.imageSrc}
+                            alt={currentScreen.title}
+                            onError={() =>
+                              setImageError((prev) => ({ ...prev, [currentScreen.id]: true }))
+                            }
+                            className="w-full h-full object-cover object-top select-none"
+                          />
+                        )}
+
+                        {/* Subtle Glass Reflection Gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none" />
+                      </motion.div>
+                    </AnimatePresence>
+
+                    {/* Bottom Home Indicator Bar */}
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-white/30 rounded-full z-20 pointer-events-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Telemetry Detail Card & Active Feature Breakdown (6 cols) */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="p-6 sm:p-8 rounded-3xl bg-[#080808]/90 border border-white/10 shadow-2xl relative overflow-hidden">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xs font-mono uppercase tracking-widest text-zinc-500">
+                    Active Module //
+                  </span>
+                  <span className={`text-xs font-mono font-bold ${currentScreen.accentText}`}>
+                    {currentScreen.title}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3 font-mono">
+                  {currentScreen.title}
+                </h3>
+
+                <p className="text-sm text-zinc-400 font-mono leading-relaxed mb-6">
+                  {currentScreen.description}
+                </p>
+
+                {/* Dynamic Engineering Telemetry Card */}
+                <div className="p-4 rounded-2xl bg-black border border-white/10 space-y-2">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                    <span className="flex items-center gap-1.5 text-zinc-400">
+                      <Zap className="w-3.5 h-3.5 text-emerald-400" />
+                      Engineering Telemetry Spec
+                    </span>
+                    <span className="text-[10px] text-emerald-400 font-semibold">VERIFIED</span>
+                  </div>
+                  <div className="text-xs sm:text-sm font-mono font-semibold text-white bg-zinc-950 p-3 rounded-xl border border-white/5">
+                    {currentScreen.telemetry}
+                  </div>
+                </div>
+
+                {/* Quick Feature Checklist for active screen */}
+                <div className="mt-6 pt-5 border-t border-white/10 space-y-2 font-mono text-xs text-zinc-300">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>Cross-platform Expo 57 &amp; Kotlin native bridges</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>Synchronous C++ MMKV persistence (0 dropped UI frames)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>Sub-100ms global synchronized playback over MQTT QoS 1</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 4 KEY ARCHITECTURAL HIGHLIGHTS & DEEP DIVES GRID */}
+        <div className="mt-16">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white">
+              <h3 className="text-xl sm:text-2xl font-bold text-white font-mono">
                 Key Architectural Highlights &amp; Deep Dives
               </h3>
               <p className="text-sm text-zinc-400 font-mono mt-1">
@@ -466,16 +601,10 @@ class AudioCodecPipeline(private val sampleRate: Int = 44100) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {highlights.map((item) => {
               const Icon = item.icon;
-              const isSelected = activeHighlight === item.id;
               return (
                 <div
                   key={item.id}
-                  onClick={() => setActiveHighlight(item.id)}
-                  className={`amoled-card rounded-2xl p-6 cursor-pointer relative overflow-hidden transition-all duration-300 border ${
-                    isSelected
-                      ? "border-emerald-500/60 shadow-[0_0_30px_rgba(16,185,129,0.15)] bg-zinc-950"
-                      : "border-white/10 hover:border-white/20"
-                  }`}
+                  className="amoled-card rounded-2xl p-6 relative overflow-hidden transition-all duration-300 border border-white/10 hover:border-white/20"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
@@ -513,14 +642,14 @@ class AudioCodecPipeline(private val sampleRate: Int = 44100) {
                     ))}
                   </ul>
 
-                  {/* Interactive Code / Technical Spec Drawer */}
+                  {/* Code Snippet */}
                   <div className="mt-4 pt-4 border-t border-white/10">
                     <div className="flex items-center justify-between text-xs font-mono text-zinc-400 mb-2">
                       <span className="flex items-center gap-1.5 text-emerald-400">
                         <Code2 className="w-3.5 h-3.5" />
                         Production Implementation Snippet
                       </span>
-                      <span className="text-[10px] text-zinc-500">Tap to inspect</span>
+                      <span className="text-[10px] text-zinc-500">Kotlin / TS / C++</span>
                     </div>
                     <pre className="bg-black/90 p-3 rounded-lg border border-white/5 text-[11px] font-mono text-zinc-300 overflow-x-auto">
                       <code>{item.codeSnippet}</code>
