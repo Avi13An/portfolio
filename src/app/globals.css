@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #f4f4f5;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #000000;
+  color: #f4f4f5;
+  color-scheme: dark;
+}
+
+body {
+  background-color: #000000;
+  color: #f4f4f5;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+}
+
+/* Custom AMOLED scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Glassmorphic AMOLED card styling */
+.amoled-card {
+  background: #060606;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.amoled-card:hover {
+  background: #0c0c0c;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Subtle dot mesh background */
+.amoled-mesh {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Glow gradient accents */
+.glow-emerald {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.glow-cyan {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.glow-violet {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* Audio equalizer bar animation */
+@keyframes eqBar {
+  0% { height: 15%; }
+  50% { height: 95%; }
+  100% { height: 15%; }
+}
+
+.animate-eq-1 { animation: eqBar 1.2s ease-in-out infinite alternate; }
+.animate-eq-2 { animation: eqBar 0.8s ease-in-out infinite alternate 0.2s; }
+.animate-eq-3 { animation: eqBar 1.5s ease-in-out infinite alternate 0.4s; }
+.animate-eq-4 { animation: eqBar 0.9s ease-in-out infinite alternate 0.1s; }
+.animate-eq-5 { animation: eqBar 1.3s ease-in-out infinite alternate 0.3s; }
+.animate-eq-6 { animation: eqBar 1.1s ease-in-out infinite alternate 0.5s; }
+.animate-eq-7 { animation: eqBar 0.7s ease-in-out infinite alternate 0.25s; }
+.animate-eq-8 { animation: eqBar 1.4s ease-in-out infinite alternate 0.15s; }
+
+/* Selection styling */
+::selection {
+  background-color: rgba(16, 185, 129, 0.3);
+  color: #34d399;
+}
