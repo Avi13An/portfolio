@@ -9,7 +9,9 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+
+const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export function SukoonCaseStudy() {
   const [viewMode, setViewMode] = useState<"video" | "screenshots">("video");
@@ -90,7 +92,7 @@ export function SukoonCaseStudy() {
       metric: "< 85ms",
       badge: "Indexing",
       color: "text-emerald-400",
-      accentBorder: "group-hover:border-emerald-500/40",
+      accentBorder: "group-hover:border-emerald-500/50",
     },
     {
       title: "24-Bit Lossless",
@@ -98,7 +100,7 @@ export function SukoonCaseStudy() {
       metric: "44.1 kHz",
       badge: "ExoPlayer",
       color: "text-cyan-400",
-      accentBorder: "group-hover:border-cyan-500/40",
+      accentBorder: "group-hover:border-cyan-500/50",
     },
     {
       title: "Live Synced Lyrics",
@@ -106,7 +108,7 @@ export function SukoonCaseStudy() {
       metric: "±2ms Sync",
       badge: "Timing",
       color: "text-violet-400",
-      accentBorder: "group-hover:border-violet-500/40",
+      accentBorder: "group-hover:border-violet-500/50",
     },
     {
       title: "Zero UI Jank",
@@ -114,9 +116,28 @@ export function SukoonCaseStudy() {
       metric: "0.12ms Read",
       badge: "NDK C++",
       color: "text-amber-400",
-      accentBorder: "group-hover:border-amber-500/40",
+      accentBorder: "group-hover:border-amber-500/50",
     },
   ];
+
+  const specsContainerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
+  const specCardVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: EASE_CUSTOM },
+    },
+  };
 
   return (
     <section
@@ -124,8 +145,14 @@ export function SukoonCaseStudy() {
       className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-2xl mx-auto text-center mb-12">
+        {/* Section Header with Viewport Entrance */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: EASE_CUSTOM }}
+          className="max-w-2xl mx-auto text-center mb-12"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>FEATURED SHOWCASE</span>
@@ -138,34 +165,49 @@ export function SukoonCaseStudy() {
             HiveMQ MQTT.
           </p>
 
-          {/* Segmented Top Control Pill */}
+          {/* Segmented Top Control Pill with Spring Tabs */}
           <div className="mt-8 inline-flex items-center p-1 rounded-full bg-neutral-950/90 border border-white/15 shadow-2xl backdrop-blur-md">
             <button
               onClick={() => setViewMode("video")}
-              className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-mono font-medium transition-all duration-200 ${
-                viewMode === "video"
-                  ? "bg-white text-black shadow-md font-semibold"
-                  : "text-neutral-400 hover:text-white"
+              className={`relative flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-mono font-medium transition-colors ${
+                viewMode === "video" ? "text-black font-semibold" : "text-neutral-400 hover:text-white"
               }`}
             >
-              <span>🎬 Watch 60s Demo Video</span>
+              {viewMode === "video" && (
+                <motion.div
+                  layoutId="activePill"
+                  className="absolute inset-0 bg-white rounded-full shadow-md z-0"
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">🎬 Watch 60s Demo Video</span>
             </button>
+
             <button
               onClick={() => setViewMode("screenshots")}
-              className={`flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-mono font-medium transition-all duration-200 ${
-                viewMode === "screenshots"
-                  ? "bg-white text-black shadow-md font-semibold"
-                  : "text-neutral-400 hover:text-white"
+              className={`relative flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-mono font-medium transition-colors ${
+                viewMode === "screenshots" ? "text-black font-semibold" : "text-neutral-400 hover:text-white"
               }`}
             >
-              <span>📱 Interactive Screenshots</span>
+              {viewMode === "screenshots" && (
+                <motion.div
+                  layoutId="activePill"
+                  className="absolute inset-0 bg-white rounded-full shadow-md z-0"
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">📱 Interactive Screenshots</span>
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Screenshot Mode Horizontal Tab Switcher */}
         {viewMode === "screenshots" && (
-          <div className="flex items-center justify-center gap-2 mb-8 overflow-x-auto px-2 no-scrollbar">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-center gap-2 mb-8 overflow-x-auto px-2 no-scrollbar"
+          >
             {screens.map((screen, idx) => {
               const isActive = activeScreenIndex === idx;
               return (
@@ -182,24 +224,34 @@ export function SukoonCaseStudy() {
                 </button>
               );
             })}
-          </div>
+          </motion.div>
         )}
 
-        {/* CENTERPIECE PHONE CHASSIS */}
-        <div className="flex flex-col items-center justify-center mb-16 relative">
-          {/* Dynamic Ambient Glow Backlight that shifts with active screen / video */}
+        {/* CENTERPIECE PHONE CHASSIS with Dramatic Scroll Zoom Reveal */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94, y: 40 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.9, ease: EASE_CUSTOM }}
+          className="flex flex-col items-center justify-center mb-16 relative"
+        >
+          {/* Dynamic Ambient Glow Backlight */}
           <div
-            className="absolute w-[360px] sm:w-[500px] h-[360px] sm:h-[500px] rounded-full blur-[140px] pointer-events-none transition-all duration-700 -z-10"
+            className="absolute w-[360px] sm:w-[520px] h-[360px] sm:h-[520px] rounded-full blur-[140px] pointer-events-none transition-all duration-700 -z-10 animate-pulse"
             style={{
               backgroundColor:
                 viewMode === "video"
-                  ? "rgba(16, 185, 129, 0.25)"
+                  ? "rgba(16, 185, 129, 0.28)"
                   : currentScreen.color,
             }}
           />
 
           {/* Smartphone Titanium Chassis */}
-          <div className="relative w-[300px] sm:w-[340px] rounded-[52px] p-3 bg-gradient-to-b from-zinc-700 via-zinc-900 to-black border-2 border-zinc-600 shadow-[0_0_90px_rgba(0,0,0,0.95)]">
+          <motion.div
+            whileHover={{ y: -4, scale: 1.01 }}
+            transition={{ duration: 0.4, ease: EASE_CUSTOM }}
+            className="relative w-[300px] sm:w-[340px] rounded-[52px] p-3 bg-gradient-to-b from-zinc-700 via-zinc-900 to-black border-2 border-zinc-600 shadow-[0_0_90px_rgba(0,0,0,0.95)] group/chassis"
+          >
             {/* Dynamic Island Notch */}
             <div className="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-4 bg-black rounded-full z-30 border border-white/10 flex items-center justify-between px-3">
               <div className="w-2 h-2 rounded-full bg-zinc-900 border border-white/10" />
@@ -312,7 +364,7 @@ export function SukoonCaseStudy() {
               {/* Home indicator */}
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-28 h-1 bg-white/30 rounded-full z-20 pointer-events-none" />
             </div>
-          </div>
+          </motion.div>
 
           {/* Active Screen Tagline in Screenshots mode */}
           {viewMode === "screenshots" && (
@@ -322,14 +374,23 @@ export function SukoonCaseStudy() {
               </span>
             </div>
           )}
-        </div>
+        </motion.div>
 
-        {/* 4-CARD BENTO SPECS GRID (Punchy, bold metrics) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* 4-CARD BENTO SPECS GRID with Staggered Cascades & Hover Physics */}
+        <motion.div
+          variants={specsContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
           {bentoSpecs.map((item, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className={`p-5 rounded-2xl bg-neutral-950/80 border border-white/[0.08] hover:border-white/20 transition-all group relative overflow-hidden backdrop-blur-md ${item.accentBorder}`}
+              variants={specCardVariants}
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ duration: 0.35, ease: EASE_CUSTOM }}
+              className={`p-5 rounded-2xl bg-neutral-950/80 border border-white/[0.08] hover:border-white/25 transition-all group relative overflow-hidden backdrop-blur-md shadow-lg ${item.accentBorder}`}
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black border border-white/10 text-neutral-400">
@@ -346,9 +407,9 @@ export function SukoonCaseStudy() {
               <p className="text-xs text-neutral-400 font-mono leading-relaxed">
                 {item.summary}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

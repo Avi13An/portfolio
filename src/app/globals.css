@@ -44,12 +44,12 @@ body {
 .amoled-card {
   background: #080808;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .amoled-card:hover {
   background: #0d0d0d;
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 /* Dot-Matrix Layer Masked toward edges */
@@ -66,7 +66,7 @@ body {
     transform: translateY(0px) scale(1);
   }
   50% {
-    transform: translateY(-20px) scale(1.05);
+    transform: translateY(-24px) scale(1.06);
   }
 }
 
@@ -75,7 +75,16 @@ body {
     transform: translateY(0px) scale(1);
   }
   50% {
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(24px) scale(0.94);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -84,7 +93,11 @@ body {
 }
 
 .animate-float-reverse {
-  animation: floatReverse 12s ease-in-out infinite;
+  animation: floatReverse 13s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 15s linear infinite;
 }
 
 /* High-Contrast Metallic Heading Helper */
@@ -94,13 +107,17 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Neon Glow Accents */
+/* Neon Glow Spheres */
 .glow-emerald-sphere {
-  background: radial-gradient(circle, rgba(5, 150, 105, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(5, 150, 105, 0.16) 0%, rgba(0, 0, 0, 0) 70%);
 }
 
 .glow-cyan-sphere {
-  background: radial-gradient(circle, rgba(2, 132, 199, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.glow-indigo-sphere {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
 }
 
 /* Selection styling */

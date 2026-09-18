@@ -6,10 +6,15 @@ import { ServicesGrid } from "@/components/ServicesGrid";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { ProjectIntake } from "@/components/ProjectIntake";
 import { Footer } from "@/components/Footer";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { FloatingDock } from "@/components/FloatingDock";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-emerald-500/20 selection:text-emerald-300">
+    <main className="min-h-screen bg-black text-white selection:bg-emerald-500/20 selection:text-emerald-300 relative">
+      {/* Real-Time Scroll Progress Indicator */}
+      <ScrollProgress />
+
       {/* Top Fixed Navigation */}
       <Navbar />
 
@@ -30,6 +35,9 @@ export default function Home() {
 
       {/* FOOTER */}
       <Footer />
+
+      {/* Persistent Floating Quick-Contact Dock */}
+      <FloatingDock />
     </main>
   );
 }

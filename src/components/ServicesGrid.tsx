@@ -9,44 +9,59 @@ import {
   ArrowUpRight,
   Check,
   Zap,
-  CheckCircle2,
 } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+
+const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 interface BentoCardProps {
   children: React.ReactNode;
   className?: string;
   spotlightColor?: string;
+  hasBorderBeam?: boolean;
 }
 
 function BentoCard({
   children,
   className = "",
   spotlightColor = "rgba(16, 185, 129, 0.15)",
+  hasBorderBeam = false,
 }: BentoCardProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePosition({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
     });
-  };
+  }
 
   return (
-    <div
+    <motion.div
       onMouseMove={handleMouseMove}
-      className={`group relative rounded-3xl bg-[#080808] border border-white/[0.08] p-6 sm:p-7 transition-all duration-300 hover:border-white/20 overflow-hidden ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      whileHover={{ y: -6, scale: 1.015 }}
+      transition={{ duration: 0.35, ease: EASE_CUSTOM }}
+      className={`group relative rounded-3xl bg-[#080808] border border-white/[0.08] p-6 sm:p-7 transition-colors duration-300 hover:border-white/20 overflow-hidden h-full flex flex-col justify-between ${className}`}
     >
+      {/* Animated Glowing Border Beam for Flagship Card */}
+      {hasBorderBeam && (
+        <div className="absolute -inset-[100%] animate-spin-slow opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(16,185,129,0.8)_120deg,transparent_180deg)] pointer-events-none" />
+      )}
+
       {/* Interactive Cursor Following Spotlight */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"
         style={{
           background: `radial-gradient(450px circle at ${mousePosition.x}px ${mousePosition.y}px, ${spotlightColor}, transparent 80%)`,
         }}
       />
+
       <div className="relative z-10 flex flex-col justify-between h-full">{children}</div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -72,6 +87,7 @@ export function ServicesGrid() {
       accentColor: "text-emerald-400",
       badgeClass: "bg-emerald-950/60 border-emerald-500/40 text-emerald-300",
       highlight: true,
+      hasBorderBeam: true,
     },
     {
       id: "mobile-app",
@@ -92,6 +108,7 @@ export function ServicesGrid() {
       accentColor: "text-cyan-400",
       badgeClass: "bg-cyan-950/60 border-cyan-500/40 text-cyan-300",
       highlight: false,
+      hasBorderBeam: false,
     },
     {
       id: "prototype",
@@ -112,6 +129,7 @@ export function ServicesGrid() {
       accentColor: "text-emerald-400",
       badgeClass: "bg-zinc-900 border-white/10 text-zinc-300",
       highlight: false,
+      hasBorderBeam: false,
     },
     {
       id: "realtime",
@@ -132,14 +150,40 @@ export function ServicesGrid() {
       accentColor: "text-violet-400",
       badgeClass: "bg-violet-950/60 border-violet-500/40 text-violet-300",
       highlight: false,
+      hasBorderBeam: false,
     },
   ];
+
+  const gridContainerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
+  const gridItemVariants: Variants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: EASE_CUSTOM },
+    },
+  };
 
   return (
     <section id="services" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-2xl mx-auto text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: EASE_CUSTOM }}
+          className="max-w-2xl mx-auto text-center mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-white/10 text-zinc-300 text-xs font-mono mb-4">
             <Zap className="w-3.5 h-3.5 text-cyan-400" />
             <span>SPRINT TIERS &amp; SERVICES</span>
@@ -150,17 +194,24 @@ export function ServicesGrid() {
           <p className="mt-3 text-sm sm:text-base text-neutral-400 font-mono">
             Predictable 2-week MVP sprints with transparent INR pricing. No hourly billing.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Asymmetrical Bento Grid with Mouse Spotlight */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        {/* Asymmetrical Bento Grid with Staggered Scroll Cascades */}
+        <motion.div
+          variants={gridContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-5"
+        >
           {packages.map((pkg) => {
             const Icon = pkg.icon;
             return (
-              <div key={pkg.id} className={pkg.colSpan}>
+              <motion.div key={pkg.id} variants={gridItemVariants} className={pkg.colSpan}>
                 <BentoCard
                   spotlightColor={pkg.spotlight}
-                  className={pkg.highlight ? "border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.12)]" : ""}
+                  hasBorderBeam={pkg.hasBorderBeam}
+                  className={pkg.highlight ? "border-emerald-500/40 shadow-[0_0_35px_rgba(16,185,129,0.12)]" : ""}
                 >
                   <div>
                     {/* Header */}
@@ -208,17 +259,17 @@ export function ServicesGrid() {
                     </span>
                     <a
                       href="#intake"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-white hover:text-emerald-400 transition-colors font-medium"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-white hover:text-emerald-400 transition-colors font-medium group/link"
                     >
                       <span>Start Sprint</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
+                      <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                     </a>
                   </div>
                 </BentoCard>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
