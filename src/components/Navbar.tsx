@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ArrowUpRight, Menu, X, Terminal, Cpu } from "lucide-react";
+import { ArrowUpRight, Menu, X, Cpu } from "lucide-react";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -9,7 +9,7 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 80);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -26,15 +26,15 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/90 backdrop-blur-md border-b border-white/10 shadow-2xl py-3.5"
-          : "bg-transparent border-b border-transparent py-5"
+          ? "opacity-100 pointer-events-auto bg-black/90 backdrop-blur-md border-b border-white/10 shadow-2xl py-3.5 translate-y-0"
+          : "opacity-0 pointer-events-none -translate-y-4 py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Brand Logo / Identity */}
           <a
-            href="#"
+            href="#hero"
             className="flex items-center gap-3 group focus:outline-none"
           >
             <div className="w-9 h-9 rounded-lg bg-zinc-950 border border-white/15 flex items-center justify-center text-zinc-100 font-mono text-sm font-bold shadow-inner group-hover:border-emerald-500/50 group-hover:text-emerald-400 transition-colors">
