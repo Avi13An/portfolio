@@ -155,7 +155,7 @@ export function SukoonCaseStudy() {
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
           className="max-w-2xl mx-auto text-center mb-10"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-4 shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-cyan-400 text-xs mb-4 shadow-[0_0_20px_rgba(6,182,212,0.15)]">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
@@ -167,19 +167,19 @@ export function SukoonCaseStudy() {
             Sukoon Architecture
           </h2>
 
-          <p className="text-sm sm:text-base text-neutral-400 font-mono leading-relaxed mb-6">
+          <p className="text-sm sm:text-base text-neutral-400 leading-relaxed mb-6">
             Cross-platform mobile streaming pipeline built with custom Kotlin MediaCodec mixing, 7s stall watchdog, and sub-100ms MQTT drift compensation.
           </p>
 
           {/* Colorful Glowing Tech Tags */}
           <div className="flex flex-wrap items-center justify-center gap-2.5 mb-8">
-            <span className="px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-xs font-mono shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+            <span className="px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-xs shadow-[0_0_15px_rgba(6,182,212,0.2)]">
               React Native (Cyan)
             </span>
-            <span className="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-mono shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+            <span className="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs shadow-[0_0_15px_rgba(16,185,129,0.2)]">
               C++ MMKV (Emerald)
             </span>
-            <span className="px-3 py-1 rounded-full bg-violet-950/60 border border-violet-500/40 text-violet-300 text-xs font-mono shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+            <span className="px-3 py-1 rounded-full bg-violet-950/60 border border-violet-500/40 text-violet-300 text-xs shadow-[0_0_15px_rgba(139,92,246,0.2)]">
               MQTT (Violet)
             </span>
           </div>
@@ -188,7 +188,7 @@ export function SukoonCaseStudy() {
           <div className="inline-flex items-center p-1 rounded-full bg-zinc-950/90 border border-white/15 shadow-2xl backdrop-blur-md">
             <button
               onClick={() => setViewMode("video")}
-              className={`relative flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-mono font-medium transition-colors ${
+              className={`relative flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-medium transition-colors ${
                 viewMode === "video" ? "text-black font-semibold" : "text-neutral-400 hover:text-white"
               }`}
             >
@@ -204,7 +204,7 @@ export function SukoonCaseStudy() {
 
             <button
               onClick={() => setViewMode("screenshots")}
-              className={`relative flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-mono font-medium transition-colors ${
+              className={`relative flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-medium transition-colors ${
                 viewMode === "screenshots" ? "text-black font-semibold" : "text-neutral-400 hover:text-white"
               }`}
             >
@@ -233,7 +233,7 @@ export function SukoonCaseStudy() {
                 <button
                   key={screen.id}
                   onClick={() => setActiveScreenIndex(idx)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all border ${
+                  className={`px-3.5 py-1.5 rounded-full text-xs whitespace-nowrap transition-all border ${
                     isActive
                       ? "bg-zinc-900 border-white/40 text-white shadow-lg font-semibold"
                       : "bg-black border-white/10 text-neutral-400 hover:text-white hover:border-white/20"
@@ -297,7 +297,7 @@ export function SukoonCaseStudy() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 opacity-0 group-hover/video:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6 pointer-events-auto">
                     {/* Top Status */}
                     <div className="flex items-center justify-between pt-6">
-                      <span className="text-[10px] font-mono tracking-widest text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                      <span className="text-[10px] tracking-widest text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">
                         HD 60FPS STREAM
                       </span>
                       <button
@@ -335,7 +335,7 @@ export function SukoonCaseStudy() {
                           style={{ width: `${videoProgress}%` }}
                         />
                       </div>
-                      <div className="flex justify-between items-center text-[10px] font-mono text-neutral-400 mt-2">
+                      <div className="flex justify-between items-center text-[10px] text-neutral-400 mt-2">
                         <span>SUKOON ENGINE</span>
                         <span className="text-emerald-400">44.1kHz PCM</span>
                       </div>
@@ -358,10 +358,10 @@ export function SukoonCaseStudy() {
                         <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center mb-3 text-emerald-400">
                           <Smartphone className="w-6 h-6" />
                         </div>
-                        <h4 className="text-sm font-bold text-white mb-1 font-mono">
+                        <h4 className="text-sm font-bold text-white mb-1">
                           {currentScreen.label}
                         </h4>
-                        <p className="text-xs text-neutral-400 font-mono">
+                        <p className="text-xs text-neutral-400">
                           {currentScreen.tagline}
                         </p>
                       </div>
@@ -391,7 +391,7 @@ export function SukoonCaseStudy() {
           {/* Active Screen Tagline in Screenshots mode */}
           {viewMode === "screenshots" && (
             <div className="mt-4 text-center">
-              <span className="text-xs font-mono text-neutral-400">
+              <span className="text-xs text-neutral-400">
                 {currentScreen.tagline}
               </span>
             </div>
@@ -415,10 +415,10 @@ export function SukoonCaseStudy() {
               className={`p-5 rounded-2xl bg-zinc-950/85 border border-white/[0.08] hover:border-white/25 transition-all group relative overflow-hidden backdrop-blur-md shadow-lg ${item.accentBorder}`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black border border-white/10 text-neutral-400">
+                <span className="text-[10px] px-2 py-0.5 rounded bg-black border border-white/10 text-neutral-400">
                   {item.badge}
                 </span>
-                <span className={`text-xs font-mono font-bold ${item.color}`}>
+                <span className={`text-xs font-bold ${item.color}`}>
                   {item.metric}
                 </span>
               </div>
@@ -426,7 +426,7 @@ export function SukoonCaseStudy() {
               <h4 className="text-base font-bold text-white tracking-tight mb-1">
                 {item.title}
               </h4>
-              <p className="text-xs text-neutral-400 font-mono leading-relaxed">
+              <p className="text-xs text-neutral-400 leading-relaxed">
                 {item.summary}
               </p>
             </motion.div>

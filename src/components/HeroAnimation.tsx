@@ -383,13 +383,13 @@ export function HeroAnimation() {
               {/* Left Identity */}
               <a
                 href="#hero"
-                className="font-mono text-xs sm:text-sm font-bold tracking-widest text-white hover:opacity-80 transition-opacity"
+                className="text-xs sm:text-sm font-bold tracking-widest text-white hover:opacity-80 transition-opacity"
               >
                 AVI TANDON
               </a>
 
               {/* Right Minimal Menu */}
-              <nav className="flex items-center gap-4 sm:gap-8 font-mono text-[11px] sm:text-xs tracking-widest text-zinc-400">
+              <nav className="flex items-center gap-4 sm:gap-8 text-[11px] sm:text-xs tracking-widest text-zinc-400">
                 <a href="#hero" className="hover:text-white transition-colors">
                   HOME
                 </a>
@@ -496,7 +496,7 @@ export function HeroAnimation() {
                 return (
                   <span
                     key={idx}
-                    className={`text-[8.5vw] sm:text-[7.5vw] md:text-[6.5vw] lg:text-[6vw] font-black tracking-tight font-mono whitespace-nowrap leading-none transition-colors select-none ${
+                    className={`text-[8.5vw] sm:text-[7.5vw] md:text-[6.5vw] lg:text-[6vw] font-black tracking-tight whitespace-nowrap leading-none transition-colors select-none ${
                       isActive ? "text-cyan-400 drop-shadow-[0_0_20px_rgba(6,182,212,0.8)]" : "heading-metallic"
                     }`}
                   >

@@ -187,14 +187,14 @@ export function ServicesGrid() {
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
           className="max-w-2xl mx-auto text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-950/40 border border-violet-500/30 text-violet-300 text-xs font-mono mb-4 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-950/40 border border-violet-500/30 text-violet-300 text-xs mb-4 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
             <Zap className="w-3.5 h-3.5 text-violet-400" />
             <span>SPRINT TIERS &amp; SERVICES</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic">
             What I Build
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-neutral-400 font-mono">
+          <p className="mt-3 text-sm sm:text-base text-neutral-400">
             Predictable 2-week MVP sprints with transparent INR pricing. No hourly billing.
           </p>
         </motion.div>
@@ -223,7 +223,7 @@ export function ServicesGrid() {
                         <Icon className={`w-5 h-5 ${pkg.accentColor}`} />
                       </div>
                       <span
-                        className={`text-[11px] font-mono px-3 py-1 rounded-full border ${pkg.badgeClass}`}
+                        className={`text-[11px] px-3 py-1 rounded-full border ${pkg.badgeClass}`}
                       >
                         {pkg.badge}
                       </span>
@@ -233,14 +233,14 @@ export function ServicesGrid() {
                     <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
                       {pkg.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-neutral-400 font-mono mb-6 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-neutral-400 mb-6 leading-relaxed">
                       {pkg.tagline}
                     </p>
 
                     {/* Crisp Bullet Chips */}
                     <div className="space-y-2 mb-6">
                       {pkg.chips.map((chip, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-xs font-mono text-neutral-300">
+                        <div key={idx} className="flex items-center gap-2 text-xs text-neutral-300">
                           <Check className={`w-3.5 h-3.5 ${pkg.accentColor} shrink-0`} />
                           <span>{chip}</span>
                         </div>
@@ -251,16 +251,16 @@ export function ServicesGrid() {
                   {/* Pricing Footer */}
                   <div className="pt-4 border-t border-white/[0.08] flex items-end justify-between">
                     <div>
-                      <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
+                      <div className="text-[10px] text-neutral-400 uppercase tracking-wider">
                         Turnaround: {pkg.turnaround}
                       </div>
-                      <div className="text-lg sm:text-xl font-extrabold text-white font-mono mt-0.5">
+                      <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5">
                         {pkg.price}
                       </div>
                     </div>
                     <a
                       href="#intake"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-black font-semibold text-xs font-mono hover:bg-neutral-200 transition-colors shadow-md"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-colors shadow-md"
                     >
                       <span>Book Sprint</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />

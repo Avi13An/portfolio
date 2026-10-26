@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-plus-jakarta-sans",
+const modernRomance = localFont({
+  src: "./fonts/ModernRomanceRegular-PVDjx.otf",
+  variable: "--font-modern-romance",
   display: "swap",
 });
 
@@ -57,8 +56,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark bg-black">
-      <body className={`${plusJakartaSans.variable} font-sans bg-black text-neutral-200 min-h-screen antialiased relative overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-300`}>
+    <html lang="en" className={modernRomance.variable}>
+      <body
+        className={`${modernRomance.className} bg-black text-white antialiased selection:bg-violet-500/30 selection:text-white min-h-screen relative overflow-x-hidden`}
+      >
         {/* Global Atmospheric Ambient Layers */}
         <div className="fixed inset-0 dot-matrix-bg pointer-events-none z-0" />
 

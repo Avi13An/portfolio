@@ -12,7 +12,7 @@ import { FloatingDock } from "@/components/FloatingDock";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-emerald-500/20 selection:text-emerald-300 relative">
+    <main className="min-h-screen bg-black text-white selection:bg-violet-500/30 selection:text-white relative">
       {/* Real-Time Scroll Progress Indicator */}
       <ScrollProgress />
 

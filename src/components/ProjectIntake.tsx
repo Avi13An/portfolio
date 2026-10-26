@@ -82,16 +82,16 @@ export function ProjectIntake() {
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
           className="max-w-2xl mx-auto text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
             <Sparkles className="w-3.5 h-3.5" />
             <span>DIRECT INTAKE &amp; CONTACT HUB</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-3 heading-metallic font-sans">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-3 heading-metallic">
             Let&apos;s build something unforgettable.
           </h2>
 
-          <p className="text-sm sm:text-base text-neutral-400 font-mono">
+          <p className="text-sm sm:text-base text-neutral-400">
             ⚡ Guaranteed response within 12–24h • Currently booking next sprint.
           </p>
         </motion.div>
@@ -115,14 +115,14 @@ export function ProjectIntake() {
                 <div className="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-inner">
                   <Mail className="w-5 h-5" />
                 </div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
+                <span className="text-[10px] uppercase tracking-wider text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
                   Direct Inbox
                 </span>
               </div>
-              <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-1">
+              <div className="text-xs text-neutral-400 uppercase tracking-wider mb-1">
                 Official Email
               </div>
-              <div className="text-sm sm:text-base font-bold text-white font-mono break-all mb-4">
+              <div className="text-sm sm:text-base font-bold text-white break-all mb-4">
                 avitan.offic@gmail.com
               </div>
             </div>
@@ -130,7 +130,7 @@ export function ProjectIntake() {
             <div className="flex items-center gap-2 pt-3 border-t border-white/[0.06]">
               <button
                 onClick={handleCopyEmail}
-                className="flex-1 py-2 px-3 rounded-xl bg-zinc-900 border border-white/10 hover:border-emerald-500/50 text-xs font-mono text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-1.5"
+                className="flex-1 py-2 px-3 rounded-xl bg-zinc-900 border border-white/10 hover:border-emerald-500/50 text-xs text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-1.5"
               >
                 {copied ? (
                   <>
@@ -147,7 +147,7 @@ export function ProjectIntake() {
 
               <a
                 href="mailto:avitan.offic@gmail.com"
-                className="py-2 px-3 rounded-xl bg-white text-black font-semibold text-xs font-mono hover:bg-neutral-200 transition-colors flex items-center justify-center gap-1 shrink-0 shadow-md"
+                className="py-2 px-3 rounded-xl bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-colors flex items-center justify-center gap-1 shrink-0 shadow-md"
               >
                 <span>Send</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -169,22 +169,22 @@ export function ProjectIntake() {
                 <div className="w-10 h-10 rounded-xl bg-violet-950/60 border border-violet-500/40 flex items-center justify-center text-violet-400 shadow-inner">
                   <Linkedin className="w-5 h-5" />
                 </div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-violet-400 bg-violet-950/40 px-2 py-0.5 rounded border border-violet-500/30">
+                <span className="text-[10px] uppercase tracking-wider text-violet-400 bg-violet-950/40 px-2 py-0.5 rounded border border-violet-500/30">
                   Network
                 </span>
               </div>
-              <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-1">
+              <div className="text-xs text-neutral-400 uppercase tracking-wider mb-1">
                 Professional Profile
               </div>
               <div className="text-base sm:text-lg font-bold text-white tracking-tight mb-1">
                 Avi Tandon
               </div>
-              <p className="text-xs text-neutral-400 font-mono">
+              <p className="text-xs text-neutral-400">
                 Full-Stack &amp; Systems MVP Developer
               </p>
             </div>
 
-            <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-violet-400 group-hover:text-violet-300 transition-colors">
+            <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs text-violet-400 group-hover:text-violet-300 transition-colors">
               <span>Connect on LinkedIn</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </div>
@@ -204,22 +204,22 @@ export function ProjectIntake() {
                 <div className="w-10 h-10 rounded-xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shadow-inner">
                   <Github className="w-5 h-5" />
                 </div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-500/30">
+                <span className="text-[10px] uppercase tracking-wider text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-500/30">
                   Source Code
                 </span>
               </div>
-              <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-1">
+              <div className="text-xs text-neutral-400 uppercase tracking-wider mb-1">
                 GitHub Repositories
               </div>
-              <div className="text-base sm:text-lg font-bold text-white tracking-tight mb-1 font-mono">
+              <div className="text-base sm:text-lg font-bold text-white tracking-tight mb-1">
                 github.com/Avi13An
               </div>
-              <p className="text-xs text-neutral-400 font-mono">
+              <p className="text-xs text-neutral-400">
                 Open-source modules &amp; architecture
               </p>
             </div>
 
-            <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-cyan-400 group-hover:text-cyan-300 transition-colors">
+            <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs text-cyan-400 group-hover:text-cyan-300 transition-colors">
               <span>Explore GitHub</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </div>
@@ -257,11 +257,11 @@ export function ProjectIntake() {
                     Project Brief Created!
                   </h3>
 
-                  <p className="text-sm text-neutral-400 max-w-md mx-auto mb-6 font-mono">
+                  <p className="text-sm text-neutral-400 max-w-md mx-auto mb-6">
                     Your email client should have opened with the pre-filled brief. If not, click below to send it directly.
                   </p>
 
-                  <div className="p-4 rounded-xl bg-black border border-white/10 max-w-md w-full text-left mb-6 font-mono text-xs text-neutral-300 space-y-1">
+                  <div className="p-4 rounded-xl bg-black border border-white/10 max-w-md w-full text-left mb-6 text-xs text-neutral-300 space-y-1">
                     <div><span className="text-neutral-500">From:</span> {name} ({email})</div>
                     <div><span className="text-neutral-500">Type:</span> {projectType}</div>
                     <div><span className="text-neutral-500">Tier:</span> {budget}</div>
@@ -270,14 +270,14 @@ export function ProjectIntake() {
                   <div className="flex flex-col sm:flex-row items-center gap-3">
                     <button
                       onClick={() => setIsSubmitted(false)}
-                      className="px-5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-white text-xs font-mono hover:bg-zinc-800 transition-colors"
+                      className="px-5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-white text-xs hover:bg-zinc-800 transition-colors"
                     >
                       ← Submit Another Brief
                     </button>
 
                     <a
                       href="mailto:avitan.offic@gmail.com"
-                      className="px-5 py-2.5 rounded-xl bg-emerald-500 text-black font-semibold text-xs font-mono hover:bg-emerald-400 transition-colors shadow-lg"
+                      className="px-5 py-2.5 rounded-xl bg-emerald-500 text-black font-semibold text-xs hover:bg-emerald-400 transition-colors shadow-lg"
                     >
                       Open Email App ↗
                     </a>
@@ -287,7 +287,7 @@ export function ProjectIntake() {
                 /* Native Glass Form */
                 <form key="form" onSubmit={handleSubmit} className="space-y-6">
                   {errorMessage && (
-                    <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs font-mono">
+                    <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs">
                       {errorMessage}
                     </div>
                   )}
@@ -295,7 +295,7 @@ export function ProjectIntake() {
                   {/* Name and Email Inputs */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2">
+                      <label className="block text-xs uppercase tracking-wider text-neutral-300 mb-2">
                         Your Name <span className="text-emerald-400">*</span>
                       </label>
                       <input
@@ -304,12 +304,12 @@ export function ProjectIntake() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Satya Nadella"
-                        className="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/10 text-white text-sm placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all font-mono"
+                        className="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/10 text-white text-sm placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2">
+                      <label className="block text-xs uppercase tracking-wider text-neutral-300 mb-2">
                         Email Address <span className="text-emerald-400">*</span>
                       </label>
                       <input
@@ -318,14 +318,14 @@ export function ProjectIntake() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="satya@microsoft.com"
-                        className="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/10 text-white text-sm placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all font-mono"
+                        className="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/10 text-white text-sm placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all"
                       />
                     </div>
                   </div>
 
                   {/* Project Type Chips */}
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2.5">
+                    <label className="block text-xs uppercase tracking-wider text-neutral-300 mb-2.5">
                       What are we building?
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -336,7 +336,7 @@ export function ProjectIntake() {
                             key={type}
                             type="button"
                             onClick={() => setProjectType(type)}
-                            className={`py-2.5 px-3 rounded-xl text-xs font-mono transition-all border text-center ${
+                            className={`py-2.5 px-3 rounded-xl text-xs transition-all border text-center ${
                               isSelected
                                 ? "bg-emerald-950/60 border-emerald-500/60 text-emerald-300 shadow-[0_0_20px_rgba(16,185,129,0.2)] font-semibold"
                                 : "bg-black/60 border-white/10 text-neutral-400 hover:text-white hover:border-white/20"
@@ -351,7 +351,7 @@ export function ProjectIntake() {
 
                   {/* Budget Selector Chips */}
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2.5">
+                    <label className="block text-xs uppercase tracking-wider text-neutral-300 mb-2.5">
                       Expected INR Budget
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -362,7 +362,7 @@ export function ProjectIntake() {
                             key={tier}
                             type="button"
                             onClick={() => setBudget(tier)}
-                            className={`py-2.5 px-3 rounded-xl text-xs font-mono transition-all border text-center ${
+                            className={`py-2.5 px-3 rounded-xl text-xs transition-all border text-center ${
                               isSelected
                                 ? "bg-violet-950/60 border-violet-500/60 text-violet-300 shadow-[0_0_20px_rgba(139,92,246,0.2)] font-semibold"
                                 : "bg-black/60 border-white/10 text-neutral-400 hover:text-white hover:border-white/20"
@@ -377,7 +377,7 @@ export function ProjectIntake() {
 
                   {/* Scope Details Textarea */}
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2">
+                    <label className="block text-xs uppercase tracking-wider text-neutral-300 mb-2">
                       Project Details &amp; Target Timeline
                     </label>
                     <textarea
@@ -385,7 +385,7 @@ export function ProjectIntake() {
                       value={details}
                       onChange={(e) => setDetails(e.target.value)}
                       placeholder="Tell me about the MVP core flow, integrations (Stripe, Supabase, Native Media), or existing codebase..."
-                      className="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/10 text-white text-sm placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all font-mono resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/10 text-white text-sm placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all resize-none"
                     />
                   </div>
 
@@ -393,7 +393,7 @@ export function ProjectIntake() {
                   <div>
                     <button
                       type="submit"
-                      className="w-full py-4 rounded-xl bg-white text-black font-semibold text-sm font-mono hover:bg-neutral-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.35)] flex items-center justify-center gap-2 group"
+                      className="w-full py-4 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.35)] flex items-center justify-center gap-2 group"
                     >
                       <span>Send Project Brief</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -406,7 +406,7 @@ export function ProjectIntake() {
                       href="https://tally.so/r/RGOLX4"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-mono text-neutral-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
+                      className="text-xs text-neutral-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
                     >
                       <span>Prefer standard form? Open on Tally</span>
                       <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

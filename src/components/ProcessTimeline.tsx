@@ -72,14 +72,14 @@ export function ProcessTimeline() {
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
           className="max-w-2xl mx-auto text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-mono mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
             <Calendar className="w-3.5 h-3.5 text-emerald-400" />
             <span>THE 2-WEEK SPRINT</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic">
             Predictable 14-Day Delivery
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-neutral-400 font-mono">
+          <p className="mt-3 text-sm sm:text-base text-neutral-400">
             Zero fluff, zero scope creep. From technical spec to live production deployment.
           </p>
         </motion.div>
@@ -107,11 +107,11 @@ export function ProcessTimeline() {
                     <span
                       className={`w-2.5 h-2.5 rounded-full ${item.nodeColor} shadow-[0_0_12px_currentColor]`}
                     />
-                    <span className="text-base font-extrabold font-mono text-white">
+                    <span className="text-base font-extrabold text-white">
                       {item.step}
                     </span>
                   </div>
-                  <span className="text-[11px] font-mono text-neutral-400 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10">
+                  <span className="text-[11px] text-neutral-400 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10">
                     {item.days}
                   </span>
                 </div>
@@ -119,7 +119,7 @@ export function ProcessTimeline() {
                 <h3 className="text-lg font-bold text-white tracking-tight mb-2">
                   {item.title}
                 </h3>
-                <p className="text-xs text-neutral-400 font-mono leading-relaxed">
+                <p className="text-xs text-neutral-400 leading-relaxed">
                   {item.summary}
                 </p>
               </div>

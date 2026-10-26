@@ -30,7 +30,7 @@ export function FloatingDock() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span className="text-[11px] font-mono text-emerald-300 font-medium whitespace-nowrap">
+          <span className="text-[11px] text-emerald-300 font-medium whitespace-nowrap">
             Available for Next Sprint
           </span>
         </div>
@@ -38,7 +38,7 @@ export function FloatingDock() {
         {/* Email Copy Pill */}
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-white/10 hover:border-emerald-500/50 text-zinc-300 hover:text-white transition-all text-xs font-mono group"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-white/10 hover:border-emerald-500/50 text-zinc-300 hover:text-white transition-all text-xs group"
           title="Click to copy email address"
         >
           <Mail className="w-3.5 h-3.5 text-emerald-400" />
@@ -66,7 +66,7 @@ export function FloatingDock() {
         {/* Start Project Button */}
         <a
           href="#intake"
-          className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full bg-white text-black font-semibold text-xs font-mono hover:bg-zinc-200 transition-all shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)] shrink-0"
+          className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-all shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)] shrink-0"
         >
           <span>Start Project</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
