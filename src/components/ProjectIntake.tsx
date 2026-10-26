@@ -30,17 +30,17 @@ export function ProjectIntake() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const projectTypes = [
-    { id: "web", label: "Web MVP" },
-    { id: "mobile", label: "Mobile App" },
-    { id: "realtime", label: "Real-Time Platform" },
-    { id: "dashboard", label: "Dashboard / SaaS" },
+    "Web MVP",
+    "Mobile App",
+    "Real-Time Platform",
+    "Dashboard / SaaS",
   ];
 
-  const budgetOptions = [
-    { id: "b1", label: "₹5k – ₹8k", tier: "Starter" },
-    { id: "b2", label: "₹10k – ₹18k", tier: "Core MVP" },
-    { id: "b3", label: "₹20k – ₹30k", tier: "Real-Time" },
-    { id: "b4", label: "₹30k+", tier: "Enterprise" },
+  const budgetTiers = [
+    "₹5k – ₹8k (Starter)",
+    "₹10k – ₹18k (Core MVP)",
+    "₹20k – ₹30k (Flagship)",
+    "₹30k+ (Enterprise)",
   ];
 
   const handleCopyEmail = (e: React.MouseEvent) => {
@@ -52,31 +52,16 @@ export function ProjectIntake() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim()) {
-      setErrorMessage("Please enter your name.");
+    if (!name.trim() || !email.trim()) {
+      setErrorMessage("Please enter both your name and email.");
       return;
     }
-    if (!email.trim() || !email.includes("@")) {
-      setErrorMessage("Please enter a valid email address.");
-      return;
-    }
-    if (!details.trim()) {
-      setErrorMessage("Please share a few sentences about what you want to build.");
-      return;
-    }
-
     setErrorMessage("");
     setIsSubmitted(true);
 
-    const subject = encodeURIComponent(`Project Brief: ${projectType} (${budget}) - ${name}`);
+    const subject = encodeURIComponent(`Project Brief: ${projectType} from ${name}`);
     const body = encodeURIComponent(
-      `Hi Avi,\n\nI would like to discuss a project:\n\n` +
-        `• Name: ${name}\n` +
-        `• Email: ${email}\n` +
-        `• Category: ${projectType}\n` +
-        `• Budget Tier: ${budget}\n\n` +
-        `Scope & Goals:\n${details}\n\n` +
-        `Looking forward to your 24h technical breakdown.`
+      `Hi Avi,\n\nI'm reaching out about a new project.\n\nProject Type: ${projectType}\nEstimated Budget: ${budget}\n\nDetails:\n${details || "No details provided yet."}\n\nBest,\n${name} (${email})`
     );
 
     const mailtoUrl = `mailto:avitan.offic@gmail.com?subject=${subject}&body=${body}`;
@@ -84,34 +69,34 @@ export function ProjectIntake() {
   };
 
   return (
-    <section id="intake" className="py-28 bg-black relative border-t border-white/[0.08] overflow-hidden">
+    <section id="intake" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
       {/* Ambient background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-emerald-500/10 blur-[170px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Massive Artistic Section Header */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
-          className="max-w-3xl mx-auto text-center mb-14"
+          className="max-w-2xl mx-auto text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-5 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
             <Sparkles className="w-3.5 h-3.5" />
             <span>DIRECT INTAKE &amp; CONTACT HUB</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08] mb-4 heading-metallic font-sans">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-3 heading-metallic font-sans">
             Let&apos;s build something unforgettable.
           </h2>
 
           <p className="text-sm sm:text-base text-neutral-400 font-mono">
-            ⚡ Guaranteed response within 12–24 hours • Currently booking the next 2-week sprint.
+            ⚡ Guaranteed response within 12–24h • Currently booking next sprint.
           </p>
         </motion.div>
 
-        {/* 3 BIG PROMINENT CHANNEL CARDS ABOVE THE FORM */}
+        {/* 3 PROMINENT CHANNEL CARDS */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -123,11 +108,11 @@ export function ProjectIntake() {
           <motion.div
             whileHover={{ y: -6, scale: 1.015 }}
             transition={{ duration: 0.3, ease: EASE_CUSTOM }}
-            className="p-6 rounded-3xl bg-[#080808] border border-emerald-500/30 shadow-[0_0_30px_-10px_rgba(16,185,129,0.15)] flex flex-col justify-between group relative overflow-hidden"
+            className="p-6 rounded-3xl bg-zinc-950/85 backdrop-blur-xl border border-emerald-500/30 shadow-[0_0_30px_-10px_rgba(16,185,129,0.2)] flex flex-col justify-between group relative overflow-hidden"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                <div className="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-inner">
                   <Mail className="w-5 h-5" />
                 </div>
                 <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/30">
@@ -145,7 +130,7 @@ export function ProjectIntake() {
             <div className="flex items-center gap-2 pt-3 border-t border-white/[0.06]">
               <button
                 onClick={handleCopyEmail}
-                className="flex-1 py-2 px-3 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500/50 text-xs font-mono text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-1.5"
+                className="flex-1 py-2 px-3 rounded-xl bg-zinc-900 border border-white/10 hover:border-emerald-500/50 text-xs font-mono text-neutral-300 hover:text-white transition-all flex items-center justify-center gap-1.5"
               >
                 {copied ? (
                   <>
@@ -162,7 +147,7 @@ export function ProjectIntake() {
 
               <a
                 href="mailto:avitan.offic@gmail.com"
-                className="py-2 px-3 rounded-xl bg-white text-black font-semibold text-xs font-mono hover:bg-neutral-200 transition-colors flex items-center justify-center gap-1 shrink-0"
+                className="py-2 px-3 rounded-xl bg-white text-black font-semibold text-xs font-mono hover:bg-neutral-200 transition-colors flex items-center justify-center gap-1 shrink-0 shadow-md"
               >
                 <span>Send</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -177,11 +162,11 @@ export function ProjectIntake() {
             rel="noopener noreferrer"
             whileHover={{ y: -6, scale: 1.015 }}
             transition={{ duration: 0.3, ease: EASE_CUSTOM }}
-            className="p-6 rounded-3xl bg-[#080808] border border-violet-500/30 shadow-[0_0_30px_-10px_rgba(139,92,246,0.15)] flex flex-col justify-between group relative overflow-hidden"
+            className="p-6 rounded-3xl bg-zinc-950/85 backdrop-blur-xl border border-violet-500/30 shadow-[0_0_30px_-10px_rgba(139,92,246,0.2)] flex flex-col justify-between group relative overflow-hidden"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-xl bg-violet-950/60 border border-violet-500/40 flex items-center justify-center text-violet-400">
+                <div className="w-10 h-10 rounded-xl bg-violet-950/60 border border-violet-500/40 flex items-center justify-center text-violet-400 shadow-inner">
                   <Linkedin className="w-5 h-5" />
                 </div>
                 <span className="text-[10px] font-mono uppercase tracking-wider text-violet-400 bg-violet-950/40 px-2 py-0.5 rounded border border-violet-500/30">
@@ -212,11 +197,11 @@ export function ProjectIntake() {
             rel="noopener noreferrer"
             whileHover={{ y: -6, scale: 1.015 }}
             transition={{ duration: 0.3, ease: EASE_CUSTOM }}
-            className="p-6 rounded-3xl bg-[#080808] border border-cyan-500/30 shadow-[0_0_30px_-10px_rgba(6,182,212,0.15)] flex flex-col justify-between group relative overflow-hidden"
+            className="p-6 rounded-3xl bg-zinc-950/85 backdrop-blur-xl border border-cyan-500/30 shadow-[0_0_30px_-10px_rgba(6,182,212,0.2)] flex flex-col justify-between group relative overflow-hidden"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+                <div className="w-10 h-10 rounded-xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shadow-inner">
                   <Github className="w-5 h-5" />
                 </div>
                 <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-500/30">
@@ -253,182 +238,183 @@ export function ProjectIntake() {
           <div className="absolute -inset-[100%] animate-spin-slow opacity-30 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(16,185,129,0.8)_120deg,transparent_180deg)] pointer-events-none" />
 
           {/* Form Container */}
-          <div className="relative rounded-[22px] bg-[#080808]/95 backdrop-blur-2xl border border-white/10 p-6 sm:p-10 shadow-2xl">
+          <div className="relative rounded-[22px] bg-zinc-950/90 backdrop-blur-2xl border border-white/10 p-6 sm:p-10 shadow-2xl">
             <AnimatePresence mode="wait">
               {isSubmitted ? (
+                /* Celebration Confirmation Screen */
                 <motion.div
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="py-14 px-4 text-center space-y-4"
+                  className="py-12 px-4 text-center flex flex-col items-center justify-center"
                 >
-                  <div className="w-20 h-20 rounded-3xl bg-emerald-950/70 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto shadow-[0_0_50px_rgba(16,185,129,0.4)]">
-                    <PartyPopper className="w-10 h-10" />
+                  <div className="w-16 h-16 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-6 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
+                    <PartyPopper className="w-8 h-8 animate-bounce" />
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                    Project Brief Queued!
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2">
+                    Project Brief Created!
                   </h3>
 
-                  <p className="text-neutral-300 text-xs sm:text-sm max-w-md mx-auto font-mono leading-relaxed">
-                    Thank you, <span className="text-emerald-400 font-semibold">{name}</span>. Your
-                    brief for a <span className="text-white font-semibold">{projectType}</span> ({budget})
-                    has been submitted. Your email client has been prepared.
+                  <p className="text-sm text-neutral-400 max-w-md mx-auto mb-6 font-mono">
+                    Your email client should have opened with the pre-filled brief. If not, click below to send it directly.
                   </p>
 
-                  <div className="pt-4">
+                  <div className="p-4 rounded-xl bg-black border border-white/10 max-w-md w-full text-left mb-6 font-mono text-xs text-neutral-300 space-y-1">
+                    <div><span className="text-neutral-500">From:</span> {name} ({email})</div>
+                    <div><span className="text-neutral-500">Type:</span> {projectType}</div>
+                    <div><span className="text-neutral-500">Tier:</span> {budget}</div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center gap-3">
                     <button
-                      onClick={() => {
-                        setIsSubmitted(false);
-                        setDetails("");
-                      }}
-                      className="px-5 py-2.5 rounded-xl bg-neutral-900 border border-white/10 text-xs font-mono text-neutral-300 hover:text-white transition-colors"
+                      onClick={() => setIsSubmitted(false)}
+                      className="px-5 py-2.5 rounded-xl bg-zinc-900 border border-white/10 text-white text-xs font-mono hover:bg-zinc-800 transition-colors"
                     >
-                      Submit Another Brief
+                      ← Submit Another Brief
                     </button>
+
+                    <a
+                      href="mailto:avitan.offic@gmail.com"
+                      className="px-5 py-2.5 rounded-xl bg-emerald-500 text-black font-semibold text-xs font-mono hover:bg-emerald-400 transition-colors shadow-lg"
+                    >
+                      Open Email App ↗
+                    </a>
                   </div>
                 </motion.div>
               ) : (
-                <motion.form
-                  key="form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  onSubmit={handleSubmit}
-                  className="space-y-6 relative z-10"
-                >
-                  {/* 1. Project Type Selector */}
-                  <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-2.5">
-                      1. Project Category
-                    </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      {projectTypes.map((item) => {
-                        const active = projectType === item.label;
-                        return (
-                          <button
-                            type="button"
-                            key={item.id}
-                            onClick={() => setProjectType(item.label)}
-                            className={`py-2.5 px-3 rounded-xl border text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 ${
-                              active
-                                ? "bg-emerald-950/40 border-emerald-500/60 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.15)] ring-1 ring-emerald-500/50 font-semibold"
-                                : "bg-neutral-950/80 border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-neutral-200"
-                            }`}
-                          >
-                            {active && <CheckCircle2 className="w-3 h-3 text-emerald-400" />}
-                            <span>{item.label}</span>
-                          </button>
-                        );
-                      })}
+                /* Native Glass Form */
+                <form key="form" onSubmit={handleSubmit} className="space-y-6">
+                  {errorMessage && (
+                    <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-300 text-xs font-mono">
+                      {errorMessage}
                     </div>
-                  </div>
+                  )}
 
-                  {/* 2. Budget Selection */}
-                  <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-2.5">
-                      2. Target Investment (INR Tiers)
-                    </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      {budgetOptions.map((opt) => {
-                        const active = budget === opt.label;
-                        return (
-                          <button
-                            type="button"
-                            key={opt.id}
-                            onClick={() => setBudget(opt.label)}
-                            className={`py-2.5 px-3 rounded-xl border text-xs font-mono transition-all text-center flex flex-col items-center justify-center gap-0.5 ${
-                              active
-                                ? "bg-emerald-950/40 border-emerald-500/60 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.15)] ring-1 ring-emerald-500/50 font-semibold"
-                                : "bg-neutral-950/80 border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-neutral-200"
-                            }`}
-                          >
-                            <span className="font-bold text-white text-xs">{opt.label}</span>
-                            <span className="text-[10px] text-neutral-500">{opt.tier}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* 3. Name & Email Inputs */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {/* Name and Email Inputs */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                        3. Your Name
+                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2">
+                        Your Name <span className="text-emerald-400">*</span>
                       </label>
                       <input
                         type="text"
                         required
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="e.g. Alex Sharma"
-                        className="w-full bg-neutral-950/80 border border-neutral-800 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-xl px-4 py-3 font-mono text-xs sm:text-sm placeholder-neutral-500 transition-all outline-none"
+                        placeholder="Satya Nadella"
+                        className="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/10 text-white text-sm placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all font-mono"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                        4. Email Address
+                      <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2">
+                        Email Address <span className="text-emerald-400">*</span>
                       </label>
                       <input
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="alex@company.com"
-                        className="w-full bg-neutral-950/80 border border-neutral-800 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-xl px-4 py-3 font-mono text-xs sm:text-sm placeholder-neutral-500 transition-all outline-none"
+                        placeholder="satya@microsoft.com"
+                        className="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/10 text-white text-sm placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all font-mono"
                       />
                     </div>
                   </div>
 
-                  {/* 4. Scope / Details Textarea */}
+                  {/* Project Type Chips */}
                   <div>
-                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1.5">
-                      5. Project Scope &amp; Target Deliverables
+                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2.5">
+                      What are we building?
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                      {projectTypes.map((type) => {
+                        const isSelected = projectType === type;
+                        return (
+                          <button
+                            key={type}
+                            type="button"
+                            onClick={() => setProjectType(type)}
+                            className={`py-2.5 px-3 rounded-xl text-xs font-mono transition-all border text-center ${
+                              isSelected
+                                ? "bg-emerald-950/60 border-emerald-500/60 text-emerald-300 shadow-[0_0_20px_rgba(16,185,129,0.2)] font-semibold"
+                                : "bg-black/60 border-white/10 text-neutral-400 hover:text-white hover:border-white/20"
+                            }`}
+                          >
+                            {type}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Budget Selector Chips */}
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2.5">
+                      Expected INR Budget
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                      {budgetTiers.map((tier) => {
+                        const isSelected = budget === tier;
+                        return (
+                          <button
+                            key={tier}
+                            type="button"
+                            onClick={() => setBudget(tier)}
+                            className={`py-2.5 px-3 rounded-xl text-xs font-mono transition-all border text-center ${
+                              isSelected
+                                ? "bg-violet-950/60 border-violet-500/60 text-violet-300 shadow-[0_0_20px_rgba(139,92,246,0.2)] font-semibold"
+                                : "bg-black/60 border-white/10 text-neutral-400 hover:text-white hover:border-white/20"
+                            }`}
+                          >
+                            {tier}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Scope Details Textarea */}
+                  <div>
+                    <label className="block text-xs font-mono uppercase tracking-wider text-neutral-300 mb-2">
+                      Project Details &amp; Target Timeline
                     </label>
                     <textarea
-                      rows={3}
-                      required
+                      rows={4}
                       value={details}
                       onChange={(e) => setDetails(e.target.value)}
-                      placeholder="Briefly describe what you're building, target audience, or link to PRD/Figma..."
-                      className="w-full bg-neutral-950/80 border border-neutral-800 text-white focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-xl p-3.5 font-mono text-xs sm:text-sm placeholder-neutral-500 transition-all outline-none resize-none"
+                      placeholder="Tell me about the MVP core flow, integrations (Stripe, Supabase, Native Media), or existing codebase..."
+                      className="w-full px-4 py-3 rounded-xl bg-black/80 border border-white/10 text-white text-sm placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all font-mono resize-none"
                     />
                   </div>
 
-                  {errorMessage && (
-                    <div className="p-3 rounded-lg bg-red-950/40 border border-red-500/40 text-red-300 text-xs font-mono">
-                      {errorMessage}
-                    </div>
-                  )}
-
-                  {/* Glowing Send Brief Button */}
+                  {/* Submit Button */}
                   <div>
                     <button
                       type="submit"
-                      className="w-full py-4 rounded-xl bg-white text-black font-semibold text-xs font-mono hover:bg-neutral-200 transition-all duration-200 flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(255,255,255,0.25)] hover:shadow-[0_0_40px_rgba(255,255,255,0.45)] group"
+                      className="w-full py-4 rounded-xl bg-white text-black font-semibold text-sm font-mono hover:bg-neutral-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.35)] flex items-center justify-center gap-2 group"
                     >
                       <span>Send Project Brief</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
-                </motion.form>
+
+                  {/* External Tally Fallback Link */}
+                  <div className="pt-2 text-center">
+                    <a
+                      href="https://tally.so/r/RGOLX4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-mono text-neutral-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
+                    >
+                      <span>Prefer standard form? Open on Tally</span>
+                      <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                  </div>
+                </form>
               )}
             </AnimatePresence>
-
-            {/* Subtle Fallback Link below */}
-            <div className="mt-8 pt-5 border-t border-white/[0.06] text-center text-xs font-mono text-neutral-500">
-              <a
-                href="https://tally.so/r/RGOLX4"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-neutral-300 transition-colors inline-flex items-center gap-1"
-              >
-                <span>Prefer standard form? Open on Tally</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
-            </div>
           </div>
         </motion.div>
       </div>

@@ -45,11 +45,11 @@ function BentoCard({
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -6, scale: 1.015 }}
       transition={{ duration: 0.35, ease: EASE_CUSTOM }}
-      className={`group relative rounded-3xl bg-[#080808] border border-white/[0.08] p-6 sm:p-7 transition-colors duration-300 hover:border-white/20 overflow-hidden h-full flex flex-col justify-between ${className}`}
+      className={`group relative rounded-3xl bg-zinc-950/85 backdrop-blur-xl border p-6 sm:p-7 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between ${className}`}
     >
       {/* Animated Glowing Border Beam for Flagship Card */}
       {hasBorderBeam && (
-        <div className="absolute -inset-[100%] animate-spin-slow opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(16,185,129,0.8)_120deg,transparent_180deg)] pointer-events-none" />
+        <div className="absolute -inset-[100%] animate-spin-slow opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(139,92,246,0.8)_120deg,transparent_180deg)] pointer-events-none" />
       )}
 
       {/* Interactive Cursor Following Spotlight */}
@@ -70,85 +70,88 @@ export function ServicesGrid() {
     {
       id: "lean-core",
       name: "Lean Core MVP",
-      tagline: "Ideal for validation. Full-stack production app ready for paying customers and investor pitches.",
+      tagline: "Full-stack web application ready for paying customers and investor demos.",
       price: "₹10,000 – ₹18,000",
       turnaround: "7–10 Days",
-      badge: "Most Popular",
+      badge: "Flagship Sprint",
       icon: Rocket,
       chips: [
         "Full-Stack Next.js 15 App Router",
-        "PostgreSQL / Supabase Schema & Auth",
-        "Stripe / Razorpay Payment Webhooks",
-        "High-Converting Tailwind Design",
-        "Automated CI/CD & Vercel Edge Deploy",
+        "PostgreSQL & Supabase Architecture",
+        "Stripe & Razorpay Payment Webhooks",
+        "Automated CI/CD & Vercel Edge Launch",
       ],
       colSpan: "lg:col-span-7",
-      spotlight: "rgba(16, 185, 129, 0.22)",
-      accentColor: "text-emerald-400",
-      badgeClass: "bg-emerald-950/60 border-emerald-500/40 text-emerald-300",
+      spotlight: "rgba(139, 92, 246, 0.25)",
+      accentColor: "text-violet-400",
+      badgeClass: "bg-violet-950/70 border-violet-500/40 text-violet-300",
+      borderClass: "border-violet-500/40 hover:border-violet-400/80 shadow-[0_0_35px_-5px_rgba(139,92,246,0.25)]",
       highlight: true,
       hasBorderBeam: true,
     },
     {
       id: "mobile-app",
       name: "Mobile Applications",
-      tagline: "Native iOS & Android from a single codebase with 60/120fps fluid gestures and custom native bridges.",
+      tagline: "Fluid cross-platform iOS & Android mobile apps with custom native modules.",
       price: "₹20,000 – ₹30,000",
       turnaround: "2 Weeks",
       badge: "iOS & Android",
       icon: Smartphone,
       chips: [
-        "Expo 57 / React Native Codebase",
-        "Custom Native Kotlin / Swift Bridges",
-        "Offline-First Caching via MMKV",
-        "EAS Store Submission Pipelines",
+        "Expo 57 & React Native Codebase",
+        "Custom Native Kotlin & Swift Bridges",
+        "Offline-First C++ MMKV Caching",
+        "Automated EAS Store Pipelines",
       ],
       colSpan: "lg:col-span-5",
-      spotlight: "rgba(6, 182, 212, 0.2)",
+      spotlight: "rgba(6, 182, 212, 0.22)",
       accentColor: "text-cyan-400",
-      badgeClass: "bg-cyan-950/60 border-cyan-500/40 text-cyan-300",
+      badgeClass: "bg-cyan-950/70 border-cyan-500/40 text-cyan-300",
+      borderClass: "border-cyan-500/30 hover:border-cyan-400/80 shadow-[0_0_30px_-5px_rgba(6,182,212,0.2)]",
       highlight: false,
       hasBorderBeam: false,
     },
     {
       id: "prototype",
       name: "Starter / Prototype",
-      tagline: "Functional proof-of-concept and high-converting landing page to rapidly validate your thesis.",
+      tagline: "Interactive proof-of-concept and high-converting landing page to validate your thesis.",
       price: "₹5,000 – ₹8,000",
       turnaround: "2–4 Days",
       badge: "Fast Validation",
       icon: Layers,
       chips: [
-        "Clickable Interactive UI in Tailwind",
-        "Waitlist / Lead Capture Integration",
+        "Clickable Interactive Tailwind UI",
+        "Waitlist & Lead Capture Integration",
         "Database Architecture Blueprint",
-        "Live Production URL on Vercel",
+        "Live Production URL Deployment",
       ],
       colSpan: "lg:col-span-5",
-      spotlight: "rgba(16, 185, 129, 0.16)",
+      spotlight: "rgba(16, 185, 129, 0.22)",
       accentColor: "text-emerald-400",
-      badgeClass: "bg-zinc-900 border-white/10 text-zinc-300",
+      badgeClass: "bg-emerald-950/70 border-emerald-500/40 text-emerald-300",
+      borderClass: "border-emerald-500/30 hover:border-emerald-400/80 shadow-[0_0_30px_-5px_rgba(16,185,129,0.2)]",
       highlight: false,
       hasBorderBeam: false,
     },
     {
       id: "realtime",
       name: "Multi-Feature System",
-      tagline: "Low-latency streaming engines, WebSockets, and HiveMQ MQTT with sub-100ms drift sync.",
+      tagline: "Low-latency streaming engines, WebSockets, and HiveMQ MQTT with sub-100ms sync.",
       price: "₹20,000 – ₹30,000",
       turnaround: "2 Weeks",
-      badge: "Flagship Architecture",
+      badge: "High Performance",
       icon: Radio,
       chips: [
         "HiveMQ MQTT & WebSocket Pipelines",
-        "Raw 44.1kHz Hardware Audio / Media",
-        "Sub-100ms Clock Drift Compensation",
+        "Hardware Audio & MediaCodec Bridges",
+        "Mathematical Drift Clock Compensation",
         "Stress-Tested for 10k+ Concurrency",
       ],
       colSpan: "lg:col-span-7",
-      spotlight: "rgba(139, 92, 246, 0.2)",
-      accentColor: "text-violet-400",
-      badgeClass: "bg-violet-950/60 border-violet-500/40 text-violet-300",
+      spotlight: "rgba(6, 182, 212, 0.22)",
+      accentColor: "text-cyan-400",
+      badgeClass: "bg-cyan-950/70 border-cyan-500/40 text-cyan-300",
+      borderClass: "border-cyan-500/30 hover:border-cyan-400/80 shadow-[0_0_30px_-5px_rgba(6,182,212,0.2)]",
       highlight: false,
       hasBorderBeam: false,
     },
@@ -184,11 +187,11 @@ export function ServicesGrid() {
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
           className="max-w-2xl mx-auto text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-white/10 text-zinc-300 text-xs font-mono mb-4">
-            <Zap className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-950/40 border border-violet-500/30 text-violet-300 text-xs font-mono mb-4 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
+            <Zap className="w-3.5 h-3.5 text-violet-400" />
             <span>SPRINT TIERS &amp; SERVICES</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight heading-metallic">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic">
             What I Build
           </h2>
           <p className="mt-3 text-sm sm:text-base text-neutral-400 font-mono">
@@ -211,58 +214,56 @@ export function ServicesGrid() {
                 <BentoCard
                   spotlightColor={pkg.spotlight}
                   hasBorderBeam={pkg.hasBorderBeam}
-                  className={pkg.highlight ? "border-emerald-500/40 shadow-[0_0_35px_rgba(16,185,129,0.12)]" : ""}
+                  className={pkg.borderClass}
                 >
                   <div>
                     {/* Header */}
-                    <div className="flex items-start justify-between mb-5">
-                      <div className="w-10 h-10 rounded-xl bg-neutral-950 border border-white/10 flex items-center justify-center text-white shadow-inner">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center text-white shadow-inner">
                         <Icon className={`w-5 h-5 ${pkg.accentColor}`} />
                       </div>
-                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono border ${pkg.badgeClass}`}>
+                      <span
+                        className={`text-[11px] font-mono px-3 py-1 rounded-full border ${pkg.badgeClass}`}
+                      >
                         {pkg.badge}
                       </span>
                     </div>
 
-                    {/* Title & Price */}
-                    <div className="flex items-baseline justify-between gap-2 mb-1">
-                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                        {pkg.name}
-                      </h3>
-                      <span className={`text-sm sm:text-base font-extrabold font-mono shrink-0 ${pkg.accentColor}`}>
-                        {pkg.price}
-                      </span>
-                    </div>
-
-                    <p className="text-xs text-neutral-400 font-mono leading-relaxed mb-5">
+                    {/* Title & Tagline */}
+                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                      {pkg.name}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-neutral-400 font-mono mb-6 leading-relaxed">
                       {pkg.tagline}
                     </p>
 
-                    {/* Deliverables Bullet Chips */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+                    {/* Crisp Bullet Chips */}
+                    <div className="space-y-2 mb-6">
                       {pkg.chips.map((chip, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center gap-2 p-2 rounded-xl bg-black/60 border border-white/5 text-xs font-mono text-neutral-300"
-                        >
+                        <div key={idx} className="flex items-center gap-2 text-xs font-mono text-neutral-300">
                           <Check className={`w-3.5 h-3.5 ${pkg.accentColor} shrink-0`} />
-                          <span className="truncate">{chip}</span>
+                          <span>{chip}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Card Footer */}
-                  <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-neutral-500">
-                      Turnaround: {pkg.turnaround}
-                    </span>
+                  {/* Pricing Footer */}
+                  <div className="pt-4 border-t border-white/[0.08] flex items-end justify-between">
+                    <div>
+                      <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
+                        Turnaround: {pkg.turnaround}
+                      </div>
+                      <div className="text-lg sm:text-xl font-extrabold text-white font-mono mt-0.5">
+                        {pkg.price}
+                      </div>
+                    </div>
                     <a
                       href="#intake"
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-white hover:text-emerald-400 transition-colors font-medium group/link"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-black font-semibold text-xs font-mono hover:bg-neutral-200 transition-colors shadow-md"
                     >
-                      <span>Start Sprint</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                      <span>Book Sprint</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                   </div>
                 </BentoCard>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, CheckCircle2 } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -13,24 +13,32 @@ export function ProcessTimeline() {
       title: "Architecture & UI",
       days: "Days 1–3",
       summary: "Database schemas, API contracts & clickable Tailwind interfaces.",
+      glowColor: "rgba(16, 185, 129, 0.4)",
+      nodeColor: "bg-emerald-400",
     },
     {
       step: "02",
       title: "Core Engines & Logic",
       days: "Days 4–8",
       summary: "Auth, payments, native device bridges & real-time WebSocket sync.",
+      glowColor: "rgba(6, 182, 212, 0.4)",
+      nodeColor: "bg-cyan-400",
     },
     {
       step: "03",
       title: "Polish & Edge Cases",
       days: "Days 9–12",
       summary: "Offline resilience, optimistic UI, 60fps micro-animations & QA.",
+      glowColor: "rgba(139, 92, 246, 0.4)",
+      nodeColor: "bg-violet-400",
     },
     {
       step: "04",
       title: "Ship & Handover",
       days: "Days 13–14",
-      summary: "Vercel / AWS production launch, complete IP transfer & Loom walkthrough.",
+      summary: "Production launch, complete IP transfer & Loom walkthrough.",
+      glowColor: "rgba(16, 185, 129, 0.4)",
+      nodeColor: "bg-emerald-400",
     },
   ];
 
@@ -54,63 +62,70 @@ export function ProcessTimeline() {
   };
 
   return (
-    <section id="process" className="py-20 bg-black relative border-t border-white/[0.08] overflow-hidden">
+    <section id="process" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl mx-auto text-center mb-12"
+          transition={{ duration: 0.8, ease: EASE_CUSTOM }}
+          className="max-w-2xl mx-auto text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-white/10 text-zinc-300 text-xs font-mono mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-mono mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
             <Calendar className="w-3.5 h-3.5 text-emerald-400" />
             <span>THE 2-WEEK SPRINT</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight leading-tight heading-metallic">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic">
             Predictable 14-Day Delivery
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-neutral-400 font-mono">
+          <p className="mt-3 text-sm sm:text-base text-neutral-400 font-mono">
             Zero fluff, zero scope creep. From technical spec to live production deployment.
           </p>
         </motion.div>
 
-        {/* 4-Step Horizontal Flow Bar with Viewport Stagger */}
+        {/* 4-Step Visual Milestones with Glowing Nodes */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative"
         >
           {steps.map((item, idx) => (
             <motion.div
               key={item.step}
               variants={itemVariants}
-              whileHover={{ y: -5, scale: 1.02 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="p-5 rounded-2xl bg-[#080808] border border-white/[0.08] hover:border-white/20 transition-colors flex flex-col justify-between relative group"
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ duration: 0.3, ease: EASE_CUSTOM }}
+              className="p-6 rounded-3xl bg-zinc-950/85 backdrop-blur-xl border border-white/[0.08] hover:border-white/25 transition-all flex flex-col justify-between relative group shadow-lg"
             >
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-extrabold font-mono text-emerald-400">
-                    {item.step}
-                  </span>
-                  <span className="text-[11px] font-mono text-zinc-400 px-2 py-0.5 rounded bg-zinc-900 border border-white/5">
+                {/* Node & Step Indicator */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`w-2.5 h-2.5 rounded-full ${item.nodeColor} shadow-[0_0_12px_currentColor]`}
+                    />
+                    <span className="text-base font-extrabold font-mono text-white">
+                      {item.step}
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-mono text-neutral-400 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10">
                     {item.days}
                   </span>
                 </div>
-                <h4 className="text-base font-bold text-white tracking-tight mb-1">
+
+                <h3 className="text-lg font-bold text-white tracking-tight mb-2">
                   {item.title}
-                </h4>
+                </h3>
                 <p className="text-xs text-neutral-400 font-mono leading-relaxed">
                   {item.summary}
                 </p>
               </div>
 
               {idx < steps.length - 1 && (
-                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-20 text-zinc-700">
+                <div className="hidden lg:block absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 text-zinc-700 group-hover:text-zinc-500 transition-colors">
                   <ArrowRight className="w-4 h-4" />
                 </div>
               )}

@@ -1,5 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-plus-jakarta-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Avi Tandon | Full-Stack & Systems MVP Developer",
@@ -50,11 +58,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark bg-black">
-      <body className="font-sans bg-black text-neutral-200 min-h-screen antialiased relative overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-300">
+      <body className={`${plusJakartaSans.variable} font-sans bg-black text-neutral-200 min-h-screen antialiased relative overflow-x-hidden selection:bg-emerald-500/20 selection:text-emerald-300`}>
         {/* Global Atmospheric Ambient Layers */}
         <div className="fixed inset-0 dot-matrix-bg pointer-events-none z-0" />
 
-        {/* 3 Organic, Blurred Ambient Glow Spheres (Emerald, Cyan, Indigo) */}
+        {/* 3 Organic, Blurred Ambient Glow Spheres (Emerald, Cyan, Indigo/Violet) */}
         <div className="fixed -top-28 left-1/2 -translate-x-1/2 w-[750px] h-[550px] glow-emerald-sphere rounded-full blur-[140px] pointer-events-none animate-float-slow z-0" />
         <div className="fixed top-[35%] -left-48 w-[650px] h-[650px] glow-cyan-sphere rounded-full blur-[160px] pointer-events-none animate-float-reverse z-0" />
         <div className="fixed top-[70%] -right-48 w-[700px] h-[700px] glow-indigo-sphere rounded-full blur-[170px] pointer-events-none animate-float-slow z-0" />

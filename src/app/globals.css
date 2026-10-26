@@ -40,16 +40,19 @@ body {
   background: #3f3f46;
 }
 
-/* Glassmorphic AMOLED card styling */
+/* Deep Glass AMOLED Card Styling with Luminous Hairline Borders */
 .amoled-card {
-  background: #080808;
+  background: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .amoled-card:hover {
-  background: #0d0d0d;
-  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(14, 14, 18, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 35px -10px rgba(139, 92, 246, 0.18), 0 0 20px -5px rgba(6, 182, 212, 0.12);
 }
 
 /* Dot-Matrix Layer Masked toward edges */
@@ -102,22 +105,35 @@ body {
 
 /* High-Contrast Metallic Heading Helper */
 .heading-metallic {
-  background: linear-gradient(180deg, #ffffff 0%, #e5e5e5 45%, #a3a3a3 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 45%, #a1a1aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Neon Glow Spheres */
 .glow-emerald-sphere {
-  background: radial-gradient(circle, rgba(5, 150, 105, 0.16) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, rgba(0, 0, 0, 0) 70%);
 }
 
 .glow-cyan-sphere {
-  background: radial-gradient(circle, rgba(2, 132, 199, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
 }
 
 .glow-indigo-sphere {
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* Accent Glow Classes */
+.glow-violet-accent {
+  box-shadow: 0 0 35px -5px rgba(139, 92, 246, 0.25);
+}
+
+.glow-cyan-accent {
+  box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.25);
+}
+
+.glow-emerald-accent {
+  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.25);
 }
 
 /* Selection styling */

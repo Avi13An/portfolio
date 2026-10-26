@@ -8,6 +8,8 @@ import {
   VolumeX,
   Sparkles,
   Zap,
+  Smartphone,
+  Layers,
 } from "lucide-react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 
@@ -88,7 +90,7 @@ export function SukoonCaseStudy() {
   const bentoSpecs = [
     {
       title: "Sub-100ms Search",
-      summary: "Real-time indexed multi-threaded streaming queries.",
+      summary: "Real-time multithreaded indexed streaming queries.",
       metric: "< 85ms",
       badge: "Indexing",
       color: "text-emerald-400",
@@ -104,7 +106,7 @@ export function SukoonCaseStudy() {
     },
     {
       title: "Live Synced Lyrics",
-      summary: "Millisecond LRCLIB parser with auto-centering & Devanagari support.",
+      summary: "Millisecond LRCLIB parser with auto-centering & Devanagari.",
       metric: "±2ms Sync",
       badge: "Timing",
       color: "text-violet-400",
@@ -112,7 +114,7 @@ export function SukoonCaseStudy() {
     },
     {
       title: "Zero UI Jank",
-      summary: "Direct memory-mapped C++ MMKV storage.",
+      summary: "Direct memory-mapped C++ MMKV synchronous storage.",
       metric: "0.12ms Read",
       badge: "NDK C++",
       color: "text-amber-400",
@@ -151,22 +153,39 @@ export function SukoonCaseStudy() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
-          className="max-w-2xl mx-auto text-center mb-12"
+          className="max-w-2xl mx-auto text-center mb-10"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>FEATURED SHOWCASE</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-500/30 text-cyan-400 text-xs font-mono mb-4 shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
+            <span>PRODUCTION CASE STUDY // 01 • NATIVE AUDIO ENGINE</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight heading-metallic">
+
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic mb-3">
             Sukoon Architecture
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-neutral-400 font-mono">
-            Cross-platform mobile streaming pipeline built with Expo 57, Kotlin MediaCodec, and
-            HiveMQ MQTT.
+
+          <p className="text-sm sm:text-base text-neutral-400 font-mono leading-relaxed mb-6">
+            Cross-platform mobile streaming pipeline built with custom Kotlin MediaCodec mixing, 7s stall watchdog, and sub-100ms MQTT drift compensation.
           </p>
 
+          {/* Colorful Glowing Tech Tags */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-8">
+            <span className="px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 text-xs font-mono shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+              React Native (Cyan)
+            </span>
+            <span className="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-mono shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+              C++ MMKV (Emerald)
+            </span>
+            <span className="px-3 py-1 rounded-full bg-violet-950/60 border border-violet-500/40 text-violet-300 text-xs font-mono shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+              MQTT (Violet)
+            </span>
+          </div>
+
           {/* Segmented Top Control Pill with Spring Tabs */}
-          <div className="mt-8 inline-flex items-center p-1 rounded-full bg-neutral-950/90 border border-white/15 shadow-2xl backdrop-blur-md">
+          <div className="inline-flex items-center p-1 rounded-full bg-zinc-950/90 border border-white/15 shadow-2xl backdrop-blur-md">
             <button
               onClick={() => setViewMode("video")}
               className={`relative flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs font-mono font-medium transition-colors ${
@@ -216,7 +235,7 @@ export function SukoonCaseStudy() {
                   onClick={() => setActiveScreenIndex(idx)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all border ${
                     isActive
-                      ? "bg-neutral-900 border-white/40 text-white shadow-lg font-semibold"
+                      ? "bg-zinc-900 border-white/40 text-white shadow-lg font-semibold"
                       : "bg-black border-white/10 text-neutral-400 hover:text-white hover:border-white/20"
                   }`}
                 >
@@ -255,14 +274,14 @@ export function SukoonCaseStudy() {
             {/* Dynamic Island Notch */}
             <div className="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-4 bg-black rounded-full z-30 border border-white/10 flex items-center justify-between px-3">
               <div className="w-2 h-2 rounded-full bg-zinc-900 border border-white/10" />
-              <div className="w-2 h-2 rounded-full bg-emerald-500/80 animate-pulse" />
+              <div className="w-2.5 h-2.5 rounded-full bg-cyan-500/40 border border-cyan-400/50 animate-pulse" />
             </div>
 
-            {/* Smartphone Viewport Screen */}
-            <div className="relative w-full aspect-[9/19.5] rounded-[42px] bg-black overflow-hidden border border-white/15 group">
+            {/* Phone Screen Container */}
+            <div className="relative w-full h-[600px] sm:h-[650px] rounded-[42px] overflow-hidden bg-black border border-white/10 flex items-center justify-center">
               {viewMode === "video" ? (
-                /* Native HTML5 <video> */
-                <div className="relative w-full h-full bg-black">
+                /* Native Video Player with Floating Glass Controls */
+                <div className="relative w-full h-full bg-black flex items-center justify-center group/video">
                   <video
                     ref={videoRef}
                     src="/demo.mp4"
@@ -271,77 +290,80 @@ export function SukoonCaseStudy() {
                     playsInline
                     muted={isMuted}
                     onTimeUpdate={handleTimeUpdate}
-                    className="w-full h-full object-cover select-none cursor-pointer"
-                    onClick={togglePlay}
+                    className="w-full h-full object-cover select-none"
                   />
 
-                  {/* Floating Glass Sound Toggle */}
-                  <div className="absolute top-12 right-3 z-30">
-                    <button
-                      onClick={toggleMute}
-                      className="p-2 rounded-full bg-black/70 border border-white/20 text-white backdrop-blur-md hover:bg-black transition-all flex items-center gap-1.5 shadow-lg"
-                      aria-label={isMuted ? "Unmute video" : "Mute video"}
-                    >
-                      {isMuted ? (
-                        <>
-                          <VolumeX className="w-3.5 h-3.5 text-neutral-300" />
-                          <span className="text-[10px] font-mono text-neutral-300 pr-1 hidden sm:inline-block">
-                            Tap for sound
-                          </span>
-                        </>
-                      ) : (
-                        <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
-                      )}
-                    </button>
-                  </div>
+                  {/* Floating Glass Playback Controls */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 opacity-0 group-hover/video:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6 pointer-events-auto">
+                    {/* Top Status */}
+                    <div className="flex items-center justify-between pt-6">
+                      <span className="text-[10px] font-mono tracking-widest text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                        HD 60FPS STREAM
+                      </span>
+                      <button
+                        onClick={toggleMute}
+                        className="p-2 rounded-full bg-black/60 border border-white/20 text-white hover:bg-black/90 transition-colors backdrop-blur-md"
+                        title={isMuted ? "Unmute audio" : "Mute audio"}
+                      >
+                        {isMuted ? (
+                          <VolumeX className="w-4 h-4 text-neutral-400" />
+                        ) : (
+                          <Volume2 className="w-4 h-4 text-emerald-400" />
+                        )}
+                      </button>
+                    </div>
 
-                  {/* Floating Glass Play/Pause Control on hover */}
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <button
-                      onClick={togglePlay}
-                      className="p-3 rounded-full bg-black/80 border border-white/25 text-white backdrop-blur-md hover:scale-105 transition-transform shadow-xl"
-                      aria-label={isPlaying ? "Pause video" : "Play video"}
-                    >
-                      {isPlaying ? (
-                        <Pause className="w-4 h-4 fill-white" />
-                      ) : (
-                        <Play className="w-4 h-4 fill-white ml-0.5" />
-                      )}
-                    </button>
-                  </div>
+                    {/* Center Play/Pause Trigger */}
+                    <div className="flex items-center justify-center">
+                      <button
+                        onClick={togglePlay}
+                        className="w-14 h-14 rounded-full bg-white/15 border border-white/30 text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all backdrop-blur-md shadow-2xl"
+                      >
+                        {isPlaying ? (
+                          <Pause className="w-6 h-6 fill-current" />
+                        ) : (
+                          <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                        )}
+                      </button>
+                    </div>
 
-                  {/* Glowing Emerald Timeline Progress Bar */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20">
-                    <div
-                      className="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 transition-all duration-150 shadow-[0_0_10px_rgba(16,185,129,0.9)]"
-                      style={{ width: `${videoProgress}%` }}
-                    />
+                    {/* Bottom Progress Bar */}
+                    <div className="w-full">
+                      <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 transition-all duration-150"
+                          style={{ width: `${videoProgress}%` }}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center text-[10px] font-mono text-neutral-400 mt-2">
+                        <span>SUKOON ENGINE</span>
+                        <span className="text-emerald-400">44.1kHz PCM</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ) : (
-                /* Interactive Screenshots Cross-Fade */
+                /* Interactive High-Res Screenshots with Crossfade */
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentScreen.id}
                     initial={{ opacity: 0, scale: 0.98 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.22, ease: "easeInOut" }}
-                    className="w-full h-full relative"
+                    exit={{ opacity: 0, scale: 1.02 }}
+                    transition={{ duration: 0.35, ease: EASE_CUSTOM }}
+                    className="relative w-full h-full"
                   >
                     {imageError[currentScreen.id] ? (
-                      <div className="w-full h-full bg-gradient-to-b from-neutral-900 to-black p-6 flex flex-col justify-between font-mono">
-                        <div className="pt-8">
-                          <span className="text-[10px] px-2 py-0.5 rounded border border-white/10 text-neutral-300">
-                            {currentScreen.label}
-                          </span>
-                          <h4 className="text-base font-bold text-white mt-3">
-                            {currentScreen.label}
-                          </h4>
-                          <p className="text-xs text-neutral-400 mt-2">
-                            {currentScreen.tagline}
-                          </p>
+                      <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-neutral-950">
+                        <div className="w-12 h-12 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center mb-3 text-emerald-400">
+                          <Smartphone className="w-6 h-6" />
                         </div>
+                        <h4 className="text-sm font-bold text-white mb-1 font-mono">
+                          {currentScreen.label}
+                        </h4>
+                        <p className="text-xs text-neutral-400 font-mono">
+                          {currentScreen.tagline}
+                        </p>
                       </div>
                     ) : (
                       /* eslint-disable-next-line @next/next/no-img-element */
@@ -390,7 +412,7 @@ export function SukoonCaseStudy() {
               variants={specCardVariants}
               whileHover={{ y: -6, scale: 1.02 }}
               transition={{ duration: 0.35, ease: EASE_CUSTOM }}
-              className={`p-5 rounded-2xl bg-neutral-950/80 border border-white/[0.08] hover:border-white/25 transition-all group relative overflow-hidden backdrop-blur-md shadow-lg ${item.accentBorder}`}
+              className={`p-5 rounded-2xl bg-zinc-950/85 border border-white/[0.08] hover:border-white/25 transition-all group relative overflow-hidden backdrop-blur-md shadow-lg ${item.accentBorder}`}
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black border border-white/10 text-neutral-400">
