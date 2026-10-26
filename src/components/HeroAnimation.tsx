@@ -8,13 +8,15 @@ const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
 const INITIAL_NAME = "AVI TANDON";
 const TARGET_HEADLINE = "PORTFOLIO";
 
-type Phase = "dot" | "lever" | "spill" | "morph" | "settled";
+type Phase = "lever" | "spill" | "morph" | "settled";
 
 interface Particle {
   x: number;
   y: number;
   vx: number;
   vy: number;
+  origPtX: number;
+  origPtY: number;
   targetX: number;
   targetY: number;
   size: number;
@@ -103,7 +105,7 @@ function generateProceduralBust(): { x: number; y: number; brightness: number }[
 }
 
 export function HeroAnimation() {
-  const [phase, setPhase] = useState<Phase>("dot");
+  const [phase, setPhase] = useState<Phase>("lever");
   const [displayText, setDisplayText] = useState<string>(INITIAL_NAME);
   const [activeGlyphIndices, setActiveGlyphIndices] = useState<Set<number>>(new Set());
 
@@ -111,43 +113,43 @@ export function HeroAnimation() {
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameRef = useRef<number | null>(null);
   const timersRef = useRef<NodeJS.Timeout[]>([]);
-  const phaseRef = useRef<Phase>("dot");
+  const phaseRef = useRef<Phase>("lever");
   phaseRef.current = phase;
 
   // -------------------------------------------------------------
-  // 1. AUTOPLAY SEQUENCE (0.0s -> 0.7s -> 1.2s -> 2.0s -> 2.8s+)
+  // 1. REFINED AUTOPLAY SEQUENCE
+  // 0.0s – 1.0s: Lever drop & tilt
+  // 1.0s – 1.4s: Letters tumble out smoothly into "AVI TANDON"
+  // 1.4s – 3.2s: FULL 1.8s HOLD on "AVI TANDON" front and center
+  // 3.2s – 4.2s: 40ms Matrix glyph scrambler morph into "PORTFOLIO"
+  // 4.2s+: Settles cleanly, 3D halftone particle face condenses
   // -------------------------------------------------------------
   useEffect(() => {
     timersRef.current.forEach(clearTimeout);
     timersRef.current = [];
 
-    setPhase("dot");
+    setPhase("lever");
     setDisplayText(INITIAL_NAME);
     setActiveGlyphIndices(new Set());
 
-    // 0.7s: Exclamation lever drop & tilt
+    // 1.0s: Letters tumble out smoothly into "AVI TANDON" (holds until 3.2s)
     const t1 = setTimeout(() => {
-      setPhase("lever");
-    }, 700);
-
-    // 1.2s: Kinetic letter spill ("AVI TANDON")
-    const t2 = setTimeout(() => {
       setPhase("spill");
-    }, 1200);
+    }, 1000);
 
-    // 2.0s: Rapid matrix glyph scramble morph
-    const t3 = setTimeout(() => {
+    // 3.2s: Matrix scramble morph triggers across 40ms ticks
+    const t2 = setTimeout(() => {
       setPhase("morph");
-    }, 2000);
+    }, 3200);
 
-    // 2.8s: Transition to settled (headline, subline, canvas assembly)
-    const t4 = setTimeout(() => {
+    // 4.2s: Settles into final state with halftone face
+    const t3 = setTimeout(() => {
       setPhase("settled");
       setDisplayText(TARGET_HEADLINE);
       setActiveGlyphIndices(new Set());
-    }, 2800);
+    }, 4200);
 
-    timersRef.current.push(t1, t2, t3, t4);
+    timersRef.current.push(t1, t2, t3);
 
     return () => {
       timersRef.current.forEach(clearTimeout);
@@ -155,13 +157,13 @@ export function HeroAnimation() {
   }, []);
 
   // -------------------------------------------------------------
-  // 2. MATRIX GLYPH SCRAMBLER MORPH (2.0s – 2.8s, 30ms interval)
+  // 2. MATRIX GLYPH SCRAMBLER MORPH (3.2s – 4.2s, 40ms interval)
   // -------------------------------------------------------------
   useEffect(() => {
     if (phase !== "morph") return;
 
     const startTime = Date.now();
-    const duration = 800; // 2.0s to 2.8s is 800ms
+    const duration = 1000; // 3.2s to 4.2s is 1000ms
     const targetLen = TARGET_HEADLINE.length; // 9
 
     const interval = setInterval(() => {
@@ -188,7 +190,7 @@ export function HeroAnimation() {
         setDisplayText(TARGET_HEADLINE);
         setActiveGlyphIndices(new Set());
       }
-    }, 30);
+    }, 40);
 
     return () => clearInterval(interval);
   }, [phase]);
@@ -209,28 +211,17 @@ export function HeroAnimation() {
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      recalculateTargets(width, height);
+
+      const portraitCenterX = width / 2;
+      const portraitCenterY = height * 0.44;
+      const particles = particlesRef.current;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.targetX = portraitCenterX + p.origPtX;
+        p.targetY = portraitCenterY + p.origPtY;
+      }
     };
     window.addEventListener("resize", handleResize);
-
-    // Recalculates particle target coordinates centered behind and above "PORTFOLIO"
-    function recalculateTargets(w: number, h: number) {
-      const portraitCenterX = w / 2;
-      // Head sits directly above and behind "PORTFOLIO"
-      const portraitCenterY = h * 0.44;
-      const particles = particlesRef.current;
-      const pLen = particles.length;
-      if (pLen === 0) return;
-
-      for (let i = 0; i < pLen; i++) {
-        const p = particles[i];
-        p.targetX = portraitCenterX + p.targetX;
-        p.targetY = portraitCenterY + p.targetY;
-      }
-    }
-
-    // Initialize point cloud target positions
-    let targetPoints: { x: number; y: number; brightness: number }[] = [];
 
     const img = new Image();
     img.src = "/profile.png";
@@ -242,7 +233,6 @@ export function HeroAnimation() {
 
       for (let i = 0; i < pts.length; i++) {
         const pt = pts[i];
-        // Scattered in void initially
         const spawnX = Math.random() * width;
         const spawnY = Math.random() * height;
 
@@ -251,6 +241,8 @@ export function HeroAnimation() {
           y: spawnY,
           vx: (Math.random() - 0.5) * 0.35,
           vy: (Math.random() - 0.5) * 0.35,
+          origPtX: pt.x,
+          origPtY: pt.y,
           targetX: portraitCenterX + pt.x,
           targetY: portraitCenterY + pt.y,
           brightness: pt.brightness,
@@ -310,7 +302,6 @@ export function HeroAnimation() {
     };
 
     img.onerror = () => {
-      // Procedural fallback silhouette matrix
       initParticles(generateProceduralBust());
     };
 
@@ -327,12 +318,10 @@ export function HeroAnimation() {
         const p = particles[i];
 
         if (isSettled) {
-          // Sharp halftone face assembly: smooth lerp into target coordinates
           p.x += (p.targetX - p.x) * 0.045;
           p.y += (p.targetY - p.y) * 0.045;
           p.alpha += (p.targetAlpha - p.alpha) * 0.045;
         } else {
-          // Slow ambient void drift
           p.x += p.vx;
           p.y += p.vy;
           if (p.x < 0) p.x = width;
@@ -372,7 +361,7 @@ export function HeroAnimation() {
       />
 
       {/* ------------------------------------------------------------- */}
-      {/* MINIMAL TOP NAV (Fades in at 2.8s+ in Settled Phase) */}
+      {/* MINIMAL TOP NAV (Fades in at 4.2s+ in Settled Phase) */}
       {/* ------------------------------------------------------------- */}
       <div className="w-full fixed top-0 left-0 right-0 z-20 px-6 sm:px-12 md:px-16 py-6 sm:py-8 pointer-events-none">
         <AnimatePresence>
@@ -418,22 +407,10 @@ export function HeroAnimation() {
       </div>
 
       {/* ------------------------------------------------------------- */}
-      {/* CENTERPIECE HERO STAGE: 0.0s – 2.8s+ */}
+      {/* CENTERPIECE HERO STAGE: 0.0s – 4.2s+ */}
       {/* ------------------------------------------------------------- */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto relative z-20 flex flex-col items-center justify-center">
-        {/* PHASE: DOT (0.0s – 0.7s) */}
-        {phase === "dot" && (
-          <div className="h-32 sm:h-44 flex items-center justify-center">
-            <motion.div
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.35, ease: EASE_CUSTOM }}
-              className="w-3.5 h-3.5 bg-white rounded-full shadow-[0_0_20px_white,0_0_35px_rgba(255,255,255,0.8)]"
-            />
-          </div>
-        )}
-
-        {/* PHASE: LEVER DROP & TILT (0.7s – 1.2s) */}
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto relative z-30 flex flex-col items-center justify-center overflow-visible">
+        {/* PHASE 1: LEVER DROP & TILT (0.0s – 1.0s) */}
         {phase === "lever" && (
           <div className="relative h-32 sm:h-44 flex flex-col items-center justify-center">
             {/* Vertical metallic bar drops from above, then tilts right like a lever */}
@@ -445,29 +422,34 @@ export function HeroAnimation() {
                 rotateZ: [0, 0, 65],
               }}
               transition={{
-                duration: 0.5,
+                duration: 0.8,
                 times: [0, 0.45, 1],
                 ease: EASE_CUSTOM,
               }}
               style={{ transformOrigin: "bottom center" }}
               className="w-2.5 sm:w-3 h-14 sm:h-18 rounded-full bg-gradient-to-b from-white via-neutral-300 to-neutral-500 shadow-[0_0_25px_rgba(255,255,255,0.4)] border border-white/30"
             />
-            {/* Center dot forming exclamation mark base */}
-            <div className="w-3.5 h-3.5 bg-white rounded-full shadow-[0_0_20px_white] mt-2" />
+            {/* Center dot forming exclamation mark base with bounce */}
+            <motion.div
+              initial={{ y: -60, scale: 0.6, opacity: 0 }}
+              animate={{ y: [-60, 0, -15, 0], scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, times: [0, 0.5, 0.75, 1], ease: EASE_CUSTOM }}
+              className="w-3.5 h-3.5 bg-white rounded-full shadow-[0_0_20px_white,0_0_35px_rgba(255,255,255,0.8)] mt-2"
+            />
           </div>
         )}
 
-        {/* PHASE: KINETIC LETTER SPILL: "AVI TANDON" (1.2s – 2.0s) */}
+        {/* PHASE 2: KINETIC LETTER SPILL & FULL 1.8s HOLD: "AVI TANDON" (1.0s – 3.2s) */}
         {phase === "spill" && (
-          <div className="min-h-[120px] sm:min-h-[160px] flex items-center justify-center">
-            <div className="flex items-center justify-center gap-1 sm:gap-2 flex-wrap">
+          <div className="w-full flex items-center justify-center text-center overflow-visible">
+            <div className="flex items-center justify-center gap-1 sm:gap-2 flex-nowrap overflow-visible">
               {INITIAL_NAME.split("").map((char, idx) => (
                 <motion.span
                   key={idx}
                   initial={{
                     opacity: 0,
                     y: -30,
-                    scale: 0.4,
+                    scale: 0.5,
                     rotateZ: idx % 2 === 0 ? -25 : 25,
                   }}
                   animate={{
@@ -477,12 +459,12 @@ export function HeroAnimation() {
                     rotateZ: 0,
                   }}
                   transition={{
-                    duration: 0.4,
-                    delay: idx * 0.05,
+                    duration: 0.35,
+                    delay: idx * 0.035,
                     ease: EASE_CUSTOM,
                   }}
-                  className={`text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight font-sans ${
-                    char === " " ? "w-4 sm:w-8" : "heading-metallic"
+                  className={`text-[10.5vw] md:text-[9.5vw] lg:text-[8.5vw] font-black tracking-tight sm:tracking-tighter whitespace-nowrap leading-none select-none ${
+                    char === " " ? "w-3 sm:w-6" : "heading-metallic drop-shadow-[0_15px_40px_rgba(255,255,255,0.18)]"
                   }`}
                 >
                   {char}
@@ -492,16 +474,16 @@ export function HeroAnimation() {
           </div>
         )}
 
-        {/* PHASE: MATRIX GLYPH TEXT MORPH (2.0s – 2.8s) */}
+        {/* PHASE 3: MATRIX GLYPH TEXT MORPH (3.2s – 4.2s, 40ms ticks) */}
         {phase === "morph" && (
-          <div className="min-h-[120px] sm:min-h-[160px] flex items-center justify-center">
-            <div className="flex items-center justify-center gap-0.5 sm:gap-1.5 flex-wrap">
+          <div className="w-full flex items-center justify-center text-center overflow-visible">
+            <div className="flex items-center justify-center gap-0.5 sm:gap-1.5 flex-nowrap overflow-visible">
               {displayText.split("").map((char, idx) => {
                 const isActive = activeGlyphIndices.has(idx);
                 return (
                   <span
                     key={idx}
-                    className={`text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight font-mono transition-colors ${
+                    className={`text-[11.5vw] md:text-[10.5vw] lg:text-[9.5vw] font-black tracking-tight sm:tracking-tighter font-mono whitespace-nowrap leading-none transition-colors select-none ${
                       isActive ? "text-cyan-400 drop-shadow-[0_0_20px_rgba(6,182,212,0.8)]" : "heading-metallic"
                     }`}
                   >
@@ -513,34 +495,18 @@ export function HeroAnimation() {
           </div>
         )}
 
-        {/* PHASE: SETTLED (2.8s+) */}
+        {/* PHASE 4: SETTLED (4.2s+) — Clean "PORTFOLIO" headline without any extra sublines */}
         {phase === "settled" && (
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: EASE_CUSTOM }}
-            className="w-full flex flex-col items-center justify-center"
+            className="w-full flex items-center justify-center text-center overflow-visible"
           >
-            {/* Bold Metallic PORTFOLIO Title */}
-            <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[11rem] font-black tracking-tighter leading-none heading-metallic drop-shadow-[0_15px_40px_rgba(255,255,255,0.14)] select-none">
+            {/* Guaranteed Zero-Cutoff Fluid Clamped Typography */}
+            <h1 className="text-[11.5vw] md:text-[10.5vw] lg:text-[9.5vw] max-w-[92vw] font-black tracking-tight sm:tracking-tighter whitespace-nowrap overflow-visible px-4 leading-none heading-metallic drop-shadow-[0_15px_40px_rgba(255,255,255,0.14)] select-none">
               PORTFOLIO
             </h1>
-
-            {/* Direct Minimal Subline Underneath PORTFOLIO */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: EASE_CUSTOM }}
-              className="w-full max-w-4xl sm:max-w-5xl px-4 flex justify-between items-center mt-3 sm:mt-5 font-mono text-xs sm:text-sm"
-            >
-              <span className="text-zinc-400">Full-Stack Developer</span>
-              <a
-                href="#intake"
-                className="text-zinc-400 hover:text-white transition-colors underline-offset-4 hover:underline"
-              >
-                Contact
-              </a>
-            </motion.div>
           </motion.div>
         )}
       </div>
