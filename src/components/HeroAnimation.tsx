@@ -197,6 +197,8 @@ export function HeroAnimation() {
 
   // -------------------------------------------------------------
   // 3. CANVAS ENGINE: 3D HALFTONE PARTICLE PORTRAIT ASSEMBLY
+  // (Portrait offset shifted upwards so head & eyes float proudly
+  // cleanly above "PORTFOLIO", with letters crossing lower neck/chest)
   // -------------------------------------------------------------
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -212,8 +214,9 @@ export function HeroAnimation() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
 
+      const verticalShift = height < 750 ? 80 : 130;
       const portraitCenterX = width / 2;
-      const portraitCenterY = height * 0.44;
+      const portraitCenterY = height * 0.5 - verticalShift;
       const particles = particlesRef.current;
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
@@ -227,8 +230,9 @@ export function HeroAnimation() {
     img.src = "/profile.png";
 
     const initParticles = (pts: { x: number; y: number; brightness: number }[]) => {
+      const verticalShift = height < 750 ? 80 : 130;
       const portraitCenterX = width / 2;
-      const portraitCenterY = height * 0.44;
+      const portraitCenterY = height * 0.5 - verticalShift;
       const particles: Particle[] = [];
 
       for (let i = 0; i < pts.length; i++) {
