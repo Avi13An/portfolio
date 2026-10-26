@@ -25,13 +25,13 @@ interface Particle {
   brightness: number;
 }
 
-// Procedural 3D halftone silhouette matrix of head & shoulders (~3,000 points)
+// Procedural 3D halftone silhouette matrix of head & shoulders (~3,800 points, high density)
 function generateProceduralBust(): { x: number; y: number; brightness: number }[] {
   const points: { x: number; y: number; brightness: number }[] = [];
-  const step = 4.3;
+  const step = 2.6; // High density sampling for crisp upscaled definition
 
   for (let y = -155; y <= 150; y += step) {
-    for (let x = -160; x <= 160; x += step) {
+    for (let x = -135; x <= 135; x += step) {
       let inside = false;
       let lum = 0;
 
@@ -40,8 +40,8 @@ function generateProceduralBust(): { x: number; y: number; brightness: number }[
         const headY = y + 70; // cranium center at y = -70
         const headX = x;
         const taper = y > -55 ? 1 - ((y + 55) / 75) * 0.42 : 1;
-        const rx = 50 * taper;
-        const ry = 65;
+        const rx = 52 * taper;
+        const ry = 66;
         const dHead = (headX * headX) / (rx * rx) + (headY * headY) / (ry * ry);
 
         if (dHead <= 1) {
@@ -66,7 +66,7 @@ function generateProceduralBust(): { x: number; y: number; brightness: number }[
 
       // 2. Neck
       if (!inside && y >= 15 && y <= 60) {
-        const neckW = 21 + (y - 15) * 0.22;
+        const neckW = 22 + (y - 15) * 0.22;
         if (Math.abs(x) <= neckW) {
           inside = true;
           const nx = x / neckW;
@@ -78,7 +78,7 @@ function generateProceduralBust(): { x: number; y: number; brightness: number }[
       // 3. Shoulders & Torso
       if (!inside && y > 45 && y <= 150) {
         const progress = (y - 45) / 105;
-        const shoulderW = 26 + Math.sin(progress * Math.PI * 0.72) * 135;
+        const shoulderW = 28 + Math.sin(progress * Math.PI * 0.72) * 105;
         if (Math.abs(x) <= shoulderW) {
           inside = true;
           const nx = x / shoulderW;
@@ -91,8 +91,8 @@ function generateProceduralBust(): { x: number; y: number; brightness: number }[
       }
 
       if (inside && lum > 0.18) {
-        const jitterX = (Math.random() - 0.5) * 1.2;
-        const jitterY = (Math.random() - 0.5) * 1.2;
+        const jitterX = (Math.random() - 0.5) * 1.0;
+        const jitterY = (Math.random() - 0.5) * 1.0;
         points.push({
           x: x + jitterX,
           y: y + jitterY,
@@ -118,11 +118,10 @@ export function HeroAnimation() {
 
   // -------------------------------------------------------------
   // 1. REFINED AUTOPLAY SEQUENCE
-  // 0.0s – 1.0s: Lever drop & tilt
-  // 1.0s – 1.4s: Letters tumble out smoothly into "AVI TANDON"
-  // 1.4s – 3.2s: FULL 1.8s HOLD on "AVI TANDON" front and center
-  // 3.2s – 4.2s: 40ms Matrix glyph scrambler morph into "PORTFOLIO"
-  // 4.2s+: Settles cleanly, 3D halftone particle face condenses
+  // 0.0s – 1.0s: Lever drops & tilts
+  // 1.0s – 3.2s: Letters tumble out into "AVI TANDON" & hold dead-center
+  // 3.2s – 4.0s: Rapid matrix scramble morph into "PORTFOLIO" (dead-center)
+  // 4.0s+: "settled" -> "PORTFOLIO" smoothly slides down to bottom
   // -------------------------------------------------------------
   useEffect(() => {
     timersRef.current.forEach(clearTimeout);
@@ -132,22 +131,22 @@ export function HeroAnimation() {
     setDisplayText(INITIAL_NAME);
     setActiveGlyphIndices(new Set());
 
-    // 1.0s: Letters tumble out smoothly into "AVI TANDON" (holds until 3.2s)
+    // 1.0s: Letters tumble out into "AVI TANDON" (holds steady dead-center until 3.2s)
     const t1 = setTimeout(() => {
       setPhase("spill");
     }, 1000);
 
-    // 3.2s: Matrix scramble morph triggers across 40ms ticks
+    // 3.2s: Matrix scramble morph triggers across 35ms ticks
     const t2 = setTimeout(() => {
       setPhase("morph");
     }, 3200);
 
-    // 4.2s: Settles into final state with halftone face
+    // 4.0s: Scramble completes, settled state begins (bottom slide initiates)
     const t3 = setTimeout(() => {
       setPhase("settled");
       setDisplayText(TARGET_HEADLINE);
       setActiveGlyphIndices(new Set());
-    }, 4200);
+    }, 4000);
 
     timersRef.current.push(t1, t2, t3);
 
@@ -157,13 +156,13 @@ export function HeroAnimation() {
   }, []);
 
   // -------------------------------------------------------------
-  // 2. MATRIX GLYPH SCRAMBLER MORPH (3.2s – 4.2s, 40ms interval)
+  // 2. MATRIX GLYPH SCRAMBLER MORPH (3.2s – 4.0s, 35ms interval)
   // -------------------------------------------------------------
   useEffect(() => {
     if (phase !== "morph") return;
 
     const startTime = Date.now();
-    const duration = 1000; // 3.2s to 4.2s is 1000ms
+    const duration = 800; // 3.2s to 4.0s is 800ms
     const targetLen = TARGET_HEADLINE.length; // 9
 
     const interval = setInterval(() => {
@@ -190,15 +189,14 @@ export function HeroAnimation() {
         setDisplayText(TARGET_HEADLINE);
         setActiveGlyphIndices(new Set());
       }
-    }, 40);
+    }, 35);
 
     return () => clearInterval(interval);
   }, [phase]);
 
   // -------------------------------------------------------------
   // 3. CANVAS ENGINE: 3D HALFTONE PARTICLE PORTRAIT ASSEMBLY
-  // (Portrait offset shifted upwards so head & eyes float proudly
-  // cleanly above "PORTFOLIO", with letters crossing lower neck/chest)
+  // (Dead-center on both axes, upscaled to fill 55%-65% of viewport)
   // -------------------------------------------------------------
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -214,14 +212,17 @@ export function HeroAnimation() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
 
-      const verticalShift = height < 750 ? 80 : 130;
-      const portraitCenterX = width / 2;
-      const portraitCenterY = height * 0.5 - verticalShift;
+      // Upscaled dimensions filling 55% to 65% of the viewport
+      const targetHeight = Math.min(height * 0.62, width * 0.72);
+      const scale = targetHeight / 310;
+      const offsetX = width / 2;
+      const offsetY = height / 2 - 25;
+
       const particles = particlesRef.current;
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        p.targetX = portraitCenterX + p.origPtX;
-        p.targetY = portraitCenterY + p.origPtY;
+        p.targetX = offsetX + p.origPtX * scale;
+        p.targetY = offsetY + p.origPtY * scale;
       }
     };
     window.addEventListener("resize", handleResize);
@@ -230,9 +231,11 @@ export function HeroAnimation() {
     img.src = "/profile.png";
 
     const initParticles = (pts: { x: number; y: number; brightness: number }[]) => {
-      const verticalShift = height < 750 ? 80 : 130;
-      const portraitCenterX = width / 2;
-      const portraitCenterY = height * 0.5 - verticalShift;
+      const targetHeight = Math.min(height * 0.62, width * 0.72);
+      const scale = targetHeight / 310;
+      const offsetX = width / 2;
+      const offsetY = height / 2 - 25;
+
       const particles: Particle[] = [];
 
       for (let i = 0; i < pts.length; i++) {
@@ -247,10 +250,10 @@ export function HeroAnimation() {
           vy: (Math.random() - 0.5) * 0.35,
           origPtX: pt.x,
           origPtY: pt.y,
-          targetX: portraitCenterX + pt.x,
-          targetY: portraitCenterY + pt.y,
+          targetX: offsetX + pt.x * scale,
+          targetY: offsetY + pt.y * scale,
           brightness: pt.brightness,
-          size: 0.9 + pt.brightness * 1.9,
+          size: (0.95 + pt.brightness * 1.7) * Math.min(scale, 1.35),
           alpha: 0.08,
           targetAlpha: 0.25 + pt.brightness * 0.65,
         });
@@ -266,14 +269,14 @@ export function HeroAnimation() {
           initParticles(generateProceduralBust());
           return;
         }
-        const sampleSize = 250;
+        const sampleSize = 240;
         offCanvas.width = sampleSize;
         offCanvas.height = sampleSize;
         offCtx.drawImage(img, 0, 0, sampleSize, sampleSize);
         const imgData = offCtx.getImageData(0, 0, sampleSize, sampleSize);
         const data = imgData.data;
         const sampled: { x: number; y: number; brightness: number }[] = [];
-        const step = 4;
+        const step = 2; // High-density sampling every 2 pixels
 
         for (let py = 0; py < sampleSize; py += step) {
           for (let px = 0; px < sampleSize; px += step) {
@@ -286,8 +289,8 @@ export function HeroAnimation() {
               const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
               if (lum > 0.18) {
                 sampled.push({
-                  x: (px - sampleSize / 2) * 1.3,
-                  y: (py - sampleSize / 2) * 1.3,
+                  x: (px - sampleSize / 2) * 1.25,
+                  y: (py - sampleSize / 2) * 1.25,
                   brightness: lum,
                 });
               }
@@ -322,6 +325,7 @@ export function HeroAnimation() {
         const p = particles[i];
 
         if (isSettled) {
+          // Sharp halftone face assembly: smooth lerp into upscaled target coordinates
           p.x += (p.targetX - p.x) * 0.045;
           p.y += (p.targetY - p.y) * 0.045;
           p.alpha += (p.targetAlpha - p.alpha) * 0.045;
@@ -365,7 +369,7 @@ export function HeroAnimation() {
       />
 
       {/* ------------------------------------------------------------- */}
-      {/* MINIMAL TOP NAV (Fades in at 4.2s+ in Settled Phase) */}
+      {/* MINIMAL TOP NAV (Fades in at 4.0s+ in Settled Phase) */}
       {/* ------------------------------------------------------------- */}
       <div className="w-full fixed top-0 left-0 right-0 z-20 px-6 sm:px-12 md:px-16 py-6 sm:py-8 pointer-events-none">
         <AnimatePresence>
@@ -411,9 +415,14 @@ export function HeroAnimation() {
       </div>
 
       {/* ------------------------------------------------------------- */}
-      {/* CENTERPIECE HERO STAGE: 0.0s – 4.2s+ */}
+      {/* CENTERPIECE HERO STAGE: 0.0s – 4.0s+ */}
+      {/* Smoothly glides down from center (y: 0) to bottom (calc(40vh - 3.5rem)) */}
       {/* ------------------------------------------------------------- */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto relative z-30 flex flex-col items-center justify-center overflow-visible">
+      <motion.div
+        animate={{ y: phase === "settled" ? "calc(40vh - 3.5rem)" : 0 }}
+        transition={{ duration: 0.9, ease: EASE_CUSTOM }}
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto relative z-30 flex flex-col items-center justify-center overflow-visible"
+      >
         {/* PHASE 1: LEVER DROP & TILT (0.0s – 1.0s) */}
         {phase === "lever" && (
           <div className="relative h-32 sm:h-44 flex flex-col items-center justify-center">
@@ -443,7 +452,7 @@ export function HeroAnimation() {
           </div>
         )}
 
-        {/* PHASE 2: KINETIC LETTER SPILL & FULL 1.8s HOLD: "AVI TANDON" (1.0s – 3.2s) */}
+        {/* PHASE 2: KINETIC LETTER SPILL & HOLD: "AVI TANDON" (1.0s – 3.2s) */}
         {phase === "spill" && (
           <div className="w-full flex items-center justify-center text-center overflow-visible">
             <div className="flex items-center justify-center gap-1 sm:gap-2 flex-nowrap overflow-visible">
@@ -467,7 +476,7 @@ export function HeroAnimation() {
                     delay: idx * 0.035,
                     ease: EASE_CUSTOM,
                   }}
-                  className={`text-[10.5vw] md:text-[9.5vw] lg:text-[8.5vw] font-black tracking-tight sm:tracking-tighter whitespace-nowrap leading-none select-none ${
+                  className={`text-[8.5vw] sm:text-[7.5vw] md:text-[6.5vw] lg:text-[6vw] font-black tracking-tight whitespace-nowrap leading-none select-none ${
                     char === " " ? "w-3 sm:w-6" : "heading-metallic drop-shadow-[0_15px_40px_rgba(255,255,255,0.18)]"
                   }`}
                 >
@@ -478,7 +487,7 @@ export function HeroAnimation() {
           </div>
         )}
 
-        {/* PHASE 3: MATRIX GLYPH TEXT MORPH (3.2s – 4.2s, 40ms ticks) */}
+        {/* PHASE 3: MATRIX GLYPH TEXT MORPH (3.2s – 4.0s, 35ms ticks) */}
         {phase === "morph" && (
           <div className="w-full flex items-center justify-center text-center overflow-visible">
             <div className="flex items-center justify-center gap-0.5 sm:gap-1.5 flex-nowrap overflow-visible">
@@ -487,7 +496,7 @@ export function HeroAnimation() {
                 return (
                   <span
                     key={idx}
-                    className={`text-[11.5vw] md:text-[10.5vw] lg:text-[9.5vw] font-black tracking-tight sm:tracking-tighter font-mono whitespace-nowrap leading-none transition-colors select-none ${
+                    className={`text-[8.5vw] sm:text-[7.5vw] md:text-[6.5vw] lg:text-[6vw] font-black tracking-tight font-mono whitespace-nowrap leading-none transition-colors select-none ${
                       isActive ? "text-cyan-400 drop-shadow-[0_0_20px_rgba(6,182,212,0.8)]" : "heading-metallic"
                     }`}
                   >
@@ -499,24 +508,23 @@ export function HeroAnimation() {
           </div>
         )}
 
-        {/* PHASE 4: SETTLED (4.2s+) — Clean "PORTFOLIO" headline without any extra sublines */}
+        {/* PHASE 4: SETTLED (4.0s+) — "PORTFOLIO" positioned cleanly at bottom with zero cutoff */}
         {phase === "settled" && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease: EASE_CUSTOM }}
+            initial={{ opacity: 0.85 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: EASE_CUSTOM }}
             className="w-full flex items-center justify-center text-center overflow-visible"
           >
-            {/* Guaranteed Zero-Cutoff Fluid Clamped Typography */}
-            <h1 className="text-[11.5vw] md:text-[10.5vw] lg:text-[9.5vw] max-w-[92vw] font-black tracking-tight sm:tracking-tighter whitespace-nowrap overflow-visible px-4 leading-none heading-metallic drop-shadow-[0_15px_40px_rgba(255,255,255,0.14)] select-none">
+            <h1 className="text-[8.5vw] sm:text-[7.5vw] md:text-[6.5vw] lg:text-[6vw] font-black tracking-tight whitespace-nowrap px-4 leading-none heading-metallic drop-shadow-[0_15px_40px_rgba(255,255,255,0.14)] select-none">
               PORTFOLIO
             </h1>
           </motion.div>
         )}
-      </div>
+      </motion.div>
 
-      {/* Empty bottom spacer to center content in viewport */}
-      <div className="h-10 sm:h-16" />
+      {/* Empty bottom spacer */}
+      <div className="h-6 sm:h-10" />
     </section>
   );
 }
