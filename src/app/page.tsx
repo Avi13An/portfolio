@@ -1,8 +1,7 @@
 import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroAnimation } from "@/components/HeroAnimation";
-import { WebsiteRevamp } from "@/components/WebsiteRevamp";
-import { SukoonCaseStudy } from "@/components/SukoonCaseStudy";
+import { ProofOfWork } from "@/components/ProofOfWork";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { ProjectIntake } from "@/components/ProjectIntake";
@@ -22,19 +21,16 @@ export default function Home() {
       {/* 1. HERO REEL ANIMATION: 5-Phase Choreography */}
       <HeroAnimation />
 
-      {/* 2. LIVE BENTHAM REVAMP SHOWCASE: Interactive Split Slider & Side-by-Side */}
-      <WebsiteRevamp />
+      {/* 2. UNIFIED PROOF OF WORK HUB: Bentham Web Revamp + Sukoon Mobile Engine */}
+      <ProofOfWork />
 
-      {/* 3. FEATURED CASE STUDY: Sukoon Music Engine */}
-      <SukoonCaseStudy />
-
-      {/* 4. WHAT I BUILD: Services Grid */}
+      {/* 3. WHAT I BUILD: Services Grid */}
       <ServicesGrid />
 
-      {/* 5. THE 2-WEEK DELIVERY PROCESS */}
+      {/* 4. THE 2-WEEK DELIVERY PROCESS */}
       <ProcessTimeline />
 
-      {/* 6. PROJECT INTAKE SECTION */}
+      {/* 5. PROJECT INTAKE SECTION */}
       <ProjectIntake />
 
       {/* FOOTER */}

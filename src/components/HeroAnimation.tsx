@@ -109,6 +109,7 @@ export function HeroAnimation() {
   const [displayText, setDisplayText] = useState<string>(INITIAL_NAME);
   const [activeGlyphIndices, setActiveGlyphIndices] = useState<Set<number>>(new Set());
 
+  const sectionRef = useRef<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameRef = useRef<number | null>(null);
@@ -312,8 +313,15 @@ export function HeroAnimation() {
       initParticles(generateProceduralBust());
     };
 
-    // Render loop
+    // Render loop with IntersectionObserver to eliminate background CPU/GPU lag
+    let isVisible = true;
+    let isRunning = false;
+
     const render = () => {
+      if (!isVisible) {
+        isRunning = false;
+        return;
+      }
       ctx.clearRect(0, 0, width, height);
 
       const currentPhase = phaseRef.current;
@@ -347,19 +355,51 @@ export function HeroAnimation() {
       animationFrameRef.current = requestAnimationFrame(render);
     };
 
-    render();
+    const startLoop = () => {
+      if (!isRunning && isVisible) {
+        isRunning = true;
+        animationFrameRef.current = requestAnimationFrame(render);
+      }
+    };
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
+    const stopLoop = () => {
+      isRunning = false;
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
       }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { threshold: 0.02 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    startLoop();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", handleResize);
+      stopLoop();
     };
   }, []);
 
   return (
     <section
       id="hero"
+      ref={sectionRef}
+      style={{ transform: "translateZ(0)", willChange: "transform" }}
       className="relative min-h-screen w-full flex flex-col justify-between items-center overflow-hidden bg-black text-white select-none"
     >
       {/* 3D Halftone Particle Point-Cloud Canvas */}
