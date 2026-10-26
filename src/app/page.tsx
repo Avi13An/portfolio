@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar } from "@/components/Navbar";
-import { Hero } from "@/components/Hero";
+import { HeroAnimation } from "@/components/HeroAnimation";
 import { SukoonCaseStudy } from "@/components/SukoonCaseStudy";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
@@ -18,8 +18,8 @@ export default function Home() {
       {/* Top Fixed Navigation */}
       <Navbar />
 
-      {/* 1. HERO SECTION */}
-      <Hero />
+      {/* 1. HERO REEL ANIMATION: 5-Phase Choreography */}
+      <HeroAnimation />
 
       {/* 2. FEATURED CASE STUDY: Sukoon Music Engine */}
       <SukoonCaseStudy />
