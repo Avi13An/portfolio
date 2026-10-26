@@ -199,7 +199,10 @@ export function SukoonCaseStudy() {
                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
                 />
               )}
-              <span className="relative z-10">🎬 Watch 60s Demo Video</span>
+              <span className="relative z-10 flex items-center gap-1.5">
+                <Play className="w-3.5 h-3.5 fill-current" />
+                <span>System Demo Video</span>
+              </span>
             </button>
 
             <button
@@ -215,7 +218,10 @@ export function SukoonCaseStudy() {
                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
                 />
               )}
-              <span className="relative z-10">📱 Interactive Screenshots</span>
+              <span className="relative z-10 flex items-center gap-1.5">
+                <Layers className="w-3.5 h-3.5" />
+                <span>Interface Walkthrough</span>
+              </span>
             </button>
           </div>
         </motion.div>

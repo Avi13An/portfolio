@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Check, ArrowUpRight, Copy } from "lucide-react";
+import MetallicButton from "@/components/ui/metallic-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -64,12 +65,12 @@ export function FloatingDock() {
         </button>
 
         {/* Start Project Button */}
-        <a
-          href="#intake"
-          className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full bg-white text-black font-semibold text-xs hover:bg-zinc-200 transition-all shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)] shrink-0"
-        >
-          <span>Start Project</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
+        <a href="#intake" className="inline-block shrink-0">
+          <MetallicButton
+            label="Start Project"
+            icon={<ArrowUpRight className="w-3.5 h-3.5 text-zinc-200" />}
+            className="!h-8 sm:!h-9 !min-w-0 !px-3 sm:!px-4 !text-xs font-semibold"
+          />
         </a>
       </div>
     </motion.div>

@@ -13,9 +13,11 @@ import {
   Volume2,
   VolumeX,
   Smartphone,
-  Check,
+  Globe,
+  Layers,
 } from "lucide-react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
+import MetallicButton from "@/components/ui/metallic-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -232,9 +234,9 @@ export function ProofOfWork() {
             Select a case study to inspect live architecture, performance metrics, and interactive systems.
           </p>
 
-          {/* 2. PRIMARY SEGMENTED SWITCHER: Bentham vs Sukoon */}
+          {/* 2. PRIMARY SEGMENTED SWITCHER: Web Architecture vs Mobile Systems */}
           <div className="inline-flex items-center p-1.5 rounded-full bg-zinc-950/90 border border-white/10 shadow-2xl relative backdrop-blur-md">
-            {/* Tab 1: Web Revamp (Bentham) */}
+            {/* Tab 1: Web Architecture (Bentham) */}
             <button
               type="button"
               onClick={() => setPowTab("bentham")}
@@ -250,12 +252,12 @@ export function ProofOfWork() {
                 />
               )}
               <span className="relative z-10 flex items-center gap-2">
-                <span className="text-sm sm:text-base leading-none">⚡</span>
-                <span>01 // Web Revamp (Bentham Legal)</span>
+                <Globe className={`w-3.5 h-3.5 shrink-0 ${powTab === "bentham" ? "text-black" : "text-cyan-400"}`} />
+                <span>01 // Web Architecture (Bentham Legal)</span>
               </span>
             </button>
 
-            {/* Tab 2: Mobile Engine (Sukoon) */}
+            {/* Tab 2: Mobile Systems (Sukoon) */}
             <button
               type="button"
               onClick={() => setPowTab("sukoon")}
@@ -271,8 +273,8 @@ export function ProofOfWork() {
                 />
               )}
               <span className="relative z-10 flex items-center gap-2">
-                <span className="text-sm sm:text-base leading-none">📱</span>
-                <span>02 // Mobile Engine (Sukoon Audio)</span>
+                <Smartphone className={`w-3.5 h-3.5 shrink-0 ${powTab === "sukoon" ? "text-black" : "text-emerald-400"}`} />
+                <span>02 // Mobile Systems (Sukoon Audio)</span>
               </span>
             </button>
           </div>
@@ -295,7 +297,7 @@ export function ProofOfWork() {
             <div className="flex flex-col items-center justify-center mb-8">
               {/* Animated Segmented Sub-Toggle */}
               <div className="inline-flex items-center p-1.5 rounded-full bg-zinc-950/90 border border-white/10 shadow-xl relative backdrop-blur-md">
-                {/* Tab 1: Legacy Website */}
+                {/* Tab 1: Legacy Build */}
                 <button
                   type="button"
                   onClick={() => setActiveBenthamTab("legacy")}
@@ -313,12 +315,12 @@ export function ProofOfWork() {
                     />
                   )}
                   <span className="relative z-10 flex items-center gap-2">
-                    <span className="text-sm leading-none">🔴</span>
-                    <span>Legacy Website (Original)</span>
+                    <span className="w-2 h-2 rounded-full bg-zinc-600 shrink-0" />
+                    <span>Legacy Client Build</span>
                   </span>
                 </button>
 
-                {/* Tab 2: Avi's Revamp */}
+                {/* Tab 2: Production Revamp */}
                 <button
                   type="button"
                   onClick={() => setActiveBenthamTab("revamp")}
@@ -336,8 +338,8 @@ export function ProofOfWork() {
                     />
                   )}
                   <span className="relative z-10 flex items-center gap-2">
-                    <span className="text-sm leading-none">⚡</span>
-                    <span>Avi&apos;s Revamp (Production Live)</span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                    <span>Production Revamp (Live)</span>
                   </span>
                 </button>
               </div>
@@ -409,44 +411,34 @@ export function ProofOfWork() {
                   </div>
                 </div>
 
-                {/* Right Action Controls */}
+                {/* Right Action Controls using Metallic Buttons */}
                 <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                  {/* Open Live Site ↗ */}
+                  {/* Open Live Site */}
                   <a
                     href={activeBenthamUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-300 hover:text-white text-xs font-medium transition-all"
-                    title="Open active website in new browser tab"
                   >
-                    <span className="hidden sm:inline">Open Live Site</span>
-                    <span className="sm:hidden">Live</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
+                    <MetallicButton
+                      label="Open Live Site"
+                      icon={<ExternalLink className="w-3.5 h-3.5" />}
+                      className="h-9 min-w-0 px-3.5 text-xs"
+                    />
                   </a>
 
-                  {/* Fullscreen View ⛶ / Exit Fullscreen ✕ */}
-                  <button
-                    type="button"
+                  {/* Fullscreen View / Exit Fullscreen */}
+                  <MetallicButton
                     onClick={() => setIsFullscreen(!isFullscreen)}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                      isFullscreen
-                        ? "bg-red-500/20 border border-red-500/40 text-red-300 hover:bg-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.2)]"
-                        : "bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-300 hover:text-white"
-                    }`}
-                    title={isFullscreen ? "Exit Fullscreen Mode (Esc)" : "Toggle Fullscreen View"}
-                  >
-                    {isFullscreen ? (
-                      <>
+                    label={isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
+                    icon={
+                      isFullscreen ? (
                         <X className="w-3.5 h-3.5 text-red-400" />
-                        <span>Exit Fullscreen</span>
-                      </>
-                    ) : (
-                      <>
+                      ) : (
                         <Maximize2 className="w-3.5 h-3.5 text-cyan-400" />
-                        <span className="hidden sm:inline">Fullscreen View</span>
-                      </>
-                    )}
-                  </button>
+                      )
+                    }
+                    className="h-9 min-w-0 px-3.5 text-xs"
+                  />
                 </div>
               </div>
 
@@ -520,7 +512,10 @@ export function ProofOfWork() {
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10">🎬 Watch 60s Demo Video</span>
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <Play className={`w-3.5 h-3.5 ${sukoonMode === "video" ? "fill-black text-black" : "fill-current"}`} />
+                  <span>System Demo Video</span>
+                </span>
               </button>
 
               <button
@@ -537,7 +532,10 @@ export function ProofOfWork() {
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10">📱 Interactive Screenshots</span>
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>Interface Walkthrough</span>
+                </span>
               </button>
             </div>
 

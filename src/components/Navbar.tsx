@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { ArrowUpRight, Menu, X, Cpu } from "lucide-react";
+import MetallicButton from "@/components/ui/metallic-button";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -64,9 +65,9 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Status & CTA */}
+          {/* Status & Metallic CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs">
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -74,22 +75,21 @@ export function Navbar() {
               <span>Available for MVP Sprints</span>
             </div>
 
-            <a
-              href="#intake"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white text-black text-xs font-semibold hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]"
-            >
-              <span>Start a Project</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+            <a href="#intake">
+              <MetallicButton
+                label="Start a Sprint"
+                icon={<ArrowUpRight className="w-3.5 h-3.5 text-zinc-200" />}
+              />
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-3">
-            <a
-              href="#intake"
-              className="px-3 py-1.5 rounded-lg bg-white text-black text-xs font-semibold"
-            >
-              Start
+            <a href="#intake">
+              <MetallicButton
+                label="Start"
+                className="min-w-0 px-4 h-9 text-xs"
+              />
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -122,10 +122,13 @@ export function Navbar() {
               <a
                 href="#intake"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-white text-black text-sm font-semibold"
+                className="block w-full"
               >
-                <span>Start a Project</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <MetallicButton
+                  label="Start a Sprint"
+                  icon={<ArrowUpRight className="w-4 h-4" />}
+                  className="w-full"
+                />
               </a>
             </div>
           </div>

@@ -16,6 +16,7 @@ import {
   PartyPopper,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import MetallicButton from "@/components/ui/metallic-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -91,8 +92,9 @@ export function ProjectIntake() {
             Let&apos;s build something unforgettable.
           </h2>
 
-          <p className="text-sm sm:text-base text-neutral-400">
-            ⚡ Guaranteed response within 12–24h • Currently booking next sprint.
+          <p className="text-sm sm:text-base text-neutral-400 flex items-center justify-center gap-1.5">
+            <Zap className="w-3.5 h-3.5 text-emerald-400 inline shrink-0" />
+            <span>Guaranteed response within 12–24h • Currently booking next sprint.</span>
           </p>
         </motion.div>
 
@@ -390,14 +392,13 @@ export function ProjectIntake() {
                   </div>
 
                   {/* Submit Button */}
-                  <div>
-                    <button
+                  <div className="flex justify-center pt-2">
+                    <MetallicButton
                       type="submit"
-                      className="w-full py-4 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.35)] flex items-center justify-center gap-2 group"
-                    >
-                      <span>Send Project Brief</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                      label="Deploy Next Sprint"
+                      icon={<ArrowRight className="w-4 h-4 text-zinc-200 group-hover:translate-x-1 transition-transform" />}
+                      className="w-full !h-12 text-sm font-semibold rounded-2xl"
+                    />
                   </div>
 
                   {/* External Tally Fallback Link */}

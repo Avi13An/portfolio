@@ -112,8 +112,8 @@ export function WebsiteRevamp() {
                 />
               )}
               <span className="relative z-10 flex items-center gap-2">
-                <span className="text-sm leading-none">🔴</span>
-                <span>Legacy Website (Original)</span>
+                <span className="w-2 h-2 rounded-full bg-zinc-500 shrink-0" />
+                <span>Legacy Client Build</span>
               </span>
             </button>
 
@@ -135,8 +135,8 @@ export function WebsiteRevamp() {
                 />
               )}
               <span className="relative z-10 flex items-center gap-2">
-                <span className="text-sm leading-none">⚡</span>
-                <span>Avi&apos;s Revamp (Production Live)</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span>Production Revamp (Live)</span>
               </span>
             </button>
           </div>
@@ -227,7 +227,7 @@ export function WebsiteRevamp() {
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
 
-              {/* Fullscreen View ⛶ / Exit Fullscreen ✕ */}
+              {/* Fullscreen View / Exit Fullscreen */}
               <button
                 type="button"
                 onClick={() => setIsFullscreen(!isFullscreen)}
