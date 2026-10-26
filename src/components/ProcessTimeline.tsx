@@ -55,6 +55,8 @@ export function ProcessTimeline() {
 
   return (
     <section id="process" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
+      {/* Anchor alias for smooth navigation */}
+      <span id="about" className="absolute -top-24 pointer-events-none" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

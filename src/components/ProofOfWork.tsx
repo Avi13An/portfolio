@@ -190,6 +190,7 @@ export function ProofOfWork() {
       }`}
     >
       {/* Anchor aliases for smooth navigation */}
+      <span id="projects" className="absolute -top-24 pointer-events-none" />
       <span id="proof-of-work" className="absolute -top-24 pointer-events-none" />
       <span id="revamp-showcase" className="absolute -top-24 pointer-events-none" />
 
