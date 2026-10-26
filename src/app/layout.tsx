@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const modernRomance = localFont({
-  src: "./fonts/ModernRomanceRegular-PVDjx.otf",
-  variable: "--font-modern-romance",
+const customFont = localFont({
+  src: "./fonts/LibrevilleFree-K7YjX.otf",
+  variable: "--font-custom",
   display: "swap",
 });
 
@@ -56,9 +56,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={modernRomance.variable}>
+    <html lang="en" className={customFont.variable}>
       <body
-        className={`${modernRomance.className} bg-black text-white antialiased selection:bg-violet-500/30 selection:text-white min-h-screen relative overflow-x-hidden`}
+        className={`${customFont.className} bg-black text-white antialiased selection:bg-violet-500/30 selection:text-white min-h-screen relative overflow-x-hidden`}
       >
         {/* Global Atmospheric Ambient Layers */}
         <div className="fixed inset-0 dot-matrix-bg pointer-events-none z-0" />

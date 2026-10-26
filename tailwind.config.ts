@@ -22,9 +22,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-modern-romance)", "serif"],
-        serif: ["var(--font-modern-romance)", "serif"],
-        mono: ["var(--font-modern-romance)", "serif"],
+        sans: ["var(--font-custom)", "sans-serif"],
+        serif: ["var(--font-custom)", "serif"],
+        mono: ["var(--font-custom)", "sans-serif"],
       },
       animation: {
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
