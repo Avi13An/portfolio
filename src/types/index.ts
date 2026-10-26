@@ -6,7 +6,7 @@ export interface ServiceItem {
   description: string;
   deliverables: string[];
   techStack: string[];
-  accentColor: "emerald" | "cyan" | "violet" | "amber";
+  accentColor?: string;
 }
 
 export interface ProcessStep {

@@ -38,13 +38,13 @@ export function Navbar() {
             href="#hero"
             className="flex items-center gap-3 group focus:outline-none"
           >
-            <div className="w-9 h-9 rounded-lg bg-zinc-950 border border-white/15 flex items-center justify-center text-zinc-100 text-sm font-bold shadow-inner group-hover:border-emerald-500/50 group-hover:text-emerald-400 transition-colors">
-              <Cpu className="w-4 h-4 text-emerald-400" />
+            <div className="w-9 h-9 rounded-lg bg-zinc-950 border border-white/15 flex items-center justify-center text-zinc-100 text-sm font-bold shadow-inner group-hover:border-white/40 group-hover:text-white transition-colors">
+              <Cpu className="w-4 h-4 text-zinc-300" />
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-semibold tracking-tight text-white flex items-center gap-1.5">
                 AVI TANDON
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.9)] animate-pulse"></span>
               </span>
               <span className="text-[11px] text-zinc-400 hidden sm:inline-block">
                 Full-Stack &amp; Systems MVP Developer
@@ -67,10 +67,10 @@ export function Navbar() {
 
           {/* Status & Metallic CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs">
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)]"></span>
               </span>
               <span>Available for MVP Sprints</span>
             </div>
@@ -104,8 +104,8 @@ export function Navbar() {
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-3 pt-3 pb-4 border-t border-white/10 bg-black/95 rounded-2xl p-4 space-y-2">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs mb-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs mb-2">
+              <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)] animate-pulse"></span>
               <span>Available for 2-Week MVP Delivery</span>
             </div>
             {navLinks.map((link) => (

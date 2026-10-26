@@ -11,20 +11,19 @@ import {
   Zap,
 } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
+import MetallicButton from "@/components/ui/metallic-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 interface BentoCardProps {
   children: React.ReactNode;
   className?: string;
-  spotlightColor?: string;
   hasBorderBeam?: boolean;
 }
 
 function BentoCard({
   children,
   className = "",
-  spotlightColor = "rgba(16, 185, 129, 0.15)",
   hasBorderBeam = false,
 }: BentoCardProps) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -45,18 +44,18 @@ function BentoCard({
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -6, scale: 1.015 }}
       transition={{ duration: 0.35, ease: EASE_CUSTOM }}
-      className={`group relative rounded-3xl bg-zinc-950/85 backdrop-blur-xl border p-6 sm:p-7 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between ${className}`}
+      className={`group relative rounded-3xl bg-zinc-950/85 backdrop-blur-xl border border-white/10 hover:border-white/25 p-6 sm:p-7 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between shadow-[0_0_30px_-5px_rgba(0,0,0,0.8)] ${className}`}
     >
       {/* Animated Glowing Border Beam for Flagship Card */}
       {hasBorderBeam && (
-        <div className="absolute -inset-[100%] animate-spin-slow opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(139,92,246,0.8)_120deg,transparent_180deg)] pointer-events-none" />
+        <div className="absolute -inset-[100%] animate-spin-slow opacity-0 group-hover:opacity-30 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(255,255,255,0.4)_120deg,transparent_180deg)] pointer-events-none" />
       )}
 
       {/* Interactive Cursor Following Spotlight */}
       <div
         className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"
         style={{
-          background: `radial-gradient(450px circle at ${mousePosition.x}px ${mousePosition.y}px, ${spotlightColor}, transparent 80%)`,
+          background: `radial-gradient(450px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 255, 255, 0.08), transparent 80%)`,
         }}
       />
 
@@ -82,11 +81,6 @@ export function ServicesGrid() {
         "Automated CI/CD & Vercel Edge Launch",
       ],
       colSpan: "lg:col-span-7",
-      spotlight: "rgba(139, 92, 246, 0.25)",
-      accentColor: "text-violet-400",
-      badgeClass: "bg-violet-950/70 border-violet-500/40 text-violet-300",
-      borderClass: "border-violet-500/40 hover:border-violet-400/80 shadow-[0_0_35px_-5px_rgba(139,92,246,0.25)]",
-      highlight: true,
       hasBorderBeam: true,
     },
     {
@@ -104,11 +98,6 @@ export function ServicesGrid() {
         "Automated EAS Store Pipelines",
       ],
       colSpan: "lg:col-span-5",
-      spotlight: "rgba(6, 182, 212, 0.22)",
-      accentColor: "text-cyan-400",
-      badgeClass: "bg-cyan-950/70 border-cyan-500/40 text-cyan-300",
-      borderClass: "border-cyan-500/30 hover:border-cyan-400/80 shadow-[0_0_30px_-5px_rgba(6,182,212,0.2)]",
-      highlight: false,
       hasBorderBeam: false,
     },
     {
@@ -126,11 +115,6 @@ export function ServicesGrid() {
         "Live Production URL Deployment",
       ],
       colSpan: "lg:col-span-5",
-      spotlight: "rgba(16, 185, 129, 0.22)",
-      accentColor: "text-emerald-400",
-      badgeClass: "bg-emerald-950/70 border-emerald-500/40 text-emerald-300",
-      borderClass: "border-emerald-500/30 hover:border-emerald-400/80 shadow-[0_0_30px_-5px_rgba(16,185,129,0.2)]",
-      highlight: false,
       hasBorderBeam: false,
     },
     {
@@ -148,11 +132,6 @@ export function ServicesGrid() {
         "Stress-Tested for 10k+ Concurrency",
       ],
       colSpan: "lg:col-span-7",
-      spotlight: "rgba(6, 182, 212, 0.22)",
-      accentColor: "text-cyan-400",
-      badgeClass: "bg-cyan-950/70 border-cyan-500/40 text-cyan-300",
-      borderClass: "border-cyan-500/30 hover:border-cyan-400/80 shadow-[0_0_30px_-5px_rgba(6,182,212,0.2)]",
-      highlight: false,
       hasBorderBeam: false,
     },
   ];
@@ -187,14 +166,14 @@ export function ServicesGrid() {
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
           className="max-w-2xl mx-auto text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-950/40 border border-violet-500/30 text-violet-300 text-xs mb-4 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
-            <Zap className="w-3.5 h-3.5 text-violet-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs mb-4 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+            <Zap className="w-3.5 h-3.5 text-zinc-300" />
             <span>SPRINT TIERS &amp; SERVICES</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic">
             What I Build
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-neutral-400">
+          <p className="mt-3 text-sm sm:text-base text-zinc-400">
             Predictable 2-week MVP sprints with transparent INR pricing. No hourly billing.
           </p>
         </motion.div>
@@ -212,18 +191,16 @@ export function ServicesGrid() {
             return (
               <motion.div key={pkg.id} variants={gridItemVariants} className={pkg.colSpan}>
                 <BentoCard
-                  spotlightColor={pkg.spotlight}
                   hasBorderBeam={pkg.hasBorderBeam}
-                  className={pkg.borderClass}
                 >
                   <div>
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/10 flex items-center justify-center text-white shadow-inner">
-                        <Icon className={`w-5 h-5 ${pkg.accentColor}`} />
+                        <Icon className="w-5 h-5 text-white" />
                       </div>
                       <span
-                        className={`text-[11px] px-3 py-1 rounded-full border ${pkg.badgeClass}`}
+                        className="text-[11px] px-3 py-1 rounded-full border bg-white/[0.04] border-white/[0.12] text-zinc-300"
                       >
                         {pkg.badge}
                       </span>
@@ -233,15 +210,15 @@ export function ServicesGrid() {
                     <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
                       {pkg.name}
                     </h3>
-                    <p className="text-xs sm:text-sm text-neutral-400 mb-6 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-zinc-400 mb-6 leading-relaxed">
                       {pkg.tagline}
                     </p>
 
                     {/* Crisp Bullet Chips */}
                     <div className="space-y-2 mb-6">
                       {pkg.chips.map((chip, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-xs text-neutral-300">
-                          <Check className={`w-3.5 h-3.5 ${pkg.accentColor} shrink-0`} />
+                        <div key={idx} className="flex items-center gap-2 text-xs text-zinc-300">
+                          <Check className="w-3.5 h-3.5 text-white shrink-0" />
                           <span>{chip}</span>
                         </div>
                       ))}
@@ -249,21 +226,21 @@ export function ServicesGrid() {
                   </div>
 
                   {/* Pricing Footer */}
-                  <div className="pt-4 border-t border-white/[0.08] flex items-end justify-between">
+                  <div className="pt-4 border-t border-white/[0.08] flex items-end justify-between gap-3">
                     <div>
-                      <div className="text-[10px] text-neutral-400 uppercase tracking-wider">
+                      <div className="text-[10px] text-zinc-400 uppercase tracking-wider">
                         Turnaround: {pkg.turnaround}
                       </div>
                       <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5">
                         {pkg.price}
                       </div>
                     </div>
-                    <a
-                      href="#intake"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-colors shadow-md"
-                    >
-                      <span>Book Sprint</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    <a href="#intake" className="inline-block shrink-0">
+                      <MetallicButton
+                        label="Book Sprint"
+                        icon={<ArrowUpRight className="w-3.5 h-3.5 text-zinc-200" />}
+                        className="!h-9 !min-w-0 !px-4 !text-xs font-semibold"
+                      />
                     </a>
                   </div>
                 </BentoCard>

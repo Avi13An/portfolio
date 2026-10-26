@@ -54,7 +54,7 @@ body {
 
 /* Deep Glass AMOLED Card Styling with Luminous Hairline Borders */
 .amoled-card {
-  background: rgba(9, 9, 11, 0.85);
+  background: rgba(10, 10, 12, 0.85);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -62,9 +62,9 @@ body {
 }
 
 .amoled-card:hover {
-  background: rgba(14, 14, 18, 0.95);
+  background: rgba(18, 18, 22, 0.95);
   border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 35px -10px rgba(139, 92, 246, 0.18), 0 0 20px -5px rgba(6, 182, 212, 0.12);
+  box-shadow: 0 0 30px -5px rgba(255, 255, 255, 0.08);
 }
 
 /* Dot-Matrix Layer Masked toward edges */
@@ -122,34 +122,8 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Neon Glow Spheres */
-.glow-emerald-sphere {
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, rgba(0, 0, 0, 0) 70%);
-}
-
-.glow-cyan-sphere {
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
-}
-
-.glow-indigo-sphere {
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
-}
-
-/* Accent Glow Classes */
-.glow-violet-accent {
-  box-shadow: 0 0 35px -5px rgba(139, 92, 246, 0.25);
-}
-
-.glow-cyan-accent {
-  box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.25);
-}
-
-.glow-emerald-accent {
-  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.25);
-}
-
 /* Selection styling */
 ::selection {
-  background-color: rgba(139, 92, 246, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }

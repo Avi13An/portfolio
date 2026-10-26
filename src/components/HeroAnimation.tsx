@@ -537,7 +537,7 @@ export function HeroAnimation() {
                   <span
                     key={idx}
                     className={`text-[8.5vw] sm:text-[7.5vw] md:text-[6.5vw] lg:text-[6vw] font-black tracking-tight whitespace-nowrap leading-none transition-colors select-none ${
-                      isActive ? "text-cyan-400 drop-shadow-[0_0_20px_rgba(6,182,212,0.8)]" : "heading-metallic"
+                      isActive ? "text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.9)]" : "heading-metallic"
                     }`}
                   >
                     {char}

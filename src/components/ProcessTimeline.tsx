@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Calendar, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -13,32 +13,24 @@ export function ProcessTimeline() {
       title: "Architecture & UI",
       days: "Days 1–3",
       summary: "Database schemas, API contracts & clickable Tailwind interfaces.",
-      glowColor: "rgba(16, 185, 129, 0.4)",
-      nodeColor: "bg-emerald-400",
     },
     {
       step: "02",
       title: "Core Engines & Logic",
       days: "Days 4–8",
       summary: "Auth, payments, native device bridges & real-time WebSocket sync.",
-      glowColor: "rgba(6, 182, 212, 0.4)",
-      nodeColor: "bg-cyan-400",
     },
     {
       step: "03",
       title: "Polish & Edge Cases",
       days: "Days 9–12",
       summary: "Offline resilience, optimistic UI, 60fps micro-animations & QA.",
-      glowColor: "rgba(139, 92, 246, 0.4)",
-      nodeColor: "bg-violet-400",
     },
     {
       step: "04",
       title: "Ship & Handover",
       days: "Days 13–14",
       summary: "Production launch, complete IP transfer & Loom walkthrough.",
-      glowColor: "rgba(16, 185, 129, 0.4)",
-      nodeColor: "bg-emerald-400",
     },
   ];
 
@@ -72,14 +64,14 @@ export function ProcessTimeline() {
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
           className="max-w-2xl mx-auto text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
-            <Calendar className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs mb-4 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+            <Calendar className="w-3.5 h-3.5 text-zinc-300" />
             <span>THE 2-WEEK SPRINT</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic">
             Predictable 14-Day Delivery
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-neutral-400">
+          <p className="mt-3 text-sm sm:text-base text-zinc-400">
             Zero fluff, zero scope creep. From technical spec to live production deployment.
           </p>
         </motion.div>
@@ -104,14 +96,12 @@ export function ProcessTimeline() {
                 {/* Node & Step Indicator */}
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <span
-                      className={`w-2.5 h-2.5 rounded-full ${item.nodeColor} shadow-[0_0_12px_currentColor]`}
-                    />
+                    <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)]" />
                     <span className="text-base font-extrabold text-white">
                       {item.step}
                     </span>
                   </div>
-                  <span className="text-[11px] text-neutral-400 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10">
+                  <span className="text-[11px] text-zinc-400 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10">
                     {item.days}
                   </span>
                 </div>
@@ -119,7 +109,7 @@ export function ProcessTimeline() {
                 <h3 className="text-lg font-bold text-white tracking-tight mb-2">
                   {item.title}
                 </h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <p className="text-xs text-zinc-400 leading-relaxed">
                   {item.summary}
                 </p>
               </div>

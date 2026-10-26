@@ -24,14 +24,14 @@ export function FloatingDock() {
       transition={{ duration: 0.7, ease: EASE_CUSTOM, delay: 0.5 }}
       className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-[94vw] sm:max-w-fit pointer-events-auto"
     >
-      <div className="flex items-center gap-2 sm:gap-3 bg-black/85 backdrop-blur-2xl border border-emerald-500/30 rounded-full px-3 sm:px-5 py-2 sm:py-2.5 shadow-[0_10px_35px_-10px_rgba(16,185,129,0.35)] ring-1 ring-white/10">
-        {/* Pulsing Status Dot & Text */}
+      <div className="flex items-center gap-2 sm:gap-3 bg-black/85 backdrop-blur-2xl border border-white/[0.12] rounded-full px-3 sm:px-5 py-2 sm:py-2.5 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.8)] ring-1 ring-white/[0.08]">
+        {/* Glowing Status Dot & Text */}
         <div className="flex items-center gap-2 pr-1 border-r border-white/10 hidden sm:flex">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
+            <span className="relative inline-flex rounded-full w-2 h-2 bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)]"></span>
           </span>
-          <span className="text-[11px] text-emerald-300 font-medium whitespace-nowrap">
+          <span className="text-[11px] text-zinc-300 font-medium whitespace-nowrap">
             Available for Next Sprint
           </span>
         </div>
@@ -39,10 +39,10 @@ export function FloatingDock() {
         {/* Email Copy Pill */}
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-white/10 hover:border-emerald-500/50 text-zinc-300 hover:text-white transition-all text-xs group"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-white/10 hover:border-white/40 text-zinc-300 hover:text-white transition-all text-xs group"
           title="Click to copy email address"
         >
-          <Mail className="w-3.5 h-3.5 text-emerald-400" />
+          <Mail className="w-3.5 h-3.5 text-zinc-300" />
           <span className="hidden md:inline">avitan.offic@gmail.com</span>
           <span className="md:hidden">Email</span>
 
@@ -53,9 +53,9 @@ export function FloatingDock() {
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
-                className="flex items-center gap-1 text-emerald-400 font-bold ml-1 text-[11px]"
+                className="flex items-center gap-1 text-white font-bold ml-1 text-[11px]"
               >
-                <Check className="w-3 h-3" />
+                <Check className="w-3 h-3 text-white" />
                 <span>Copied!</span>
               </motion.span>
             ) : (

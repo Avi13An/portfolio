@@ -10,6 +10,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import MetallicButton from "@/components/ui/metallic-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -26,7 +27,6 @@ export function WebsiteRevamp() {
       ? "https://www.bentham.legal"
       : "https://benthamrevamp.vercel.app";
 
-  // Lock body scroll and handle Escape key when in fullscreen mode
   useEffect(() => {
     if (isFullscreen) {
       document.body.style.overflow = "hidden";
@@ -55,14 +55,6 @@ export function WebsiteRevamp() {
         isFullscreen ? "overflow-visible" : "overflow-hidden"
       }`}
     >
-      {/* Ambient background glow (hidden when in fullscreen mode) */}
-      {!isFullscreen && (
-        <>
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-cyan-500/[0.07] blur-[170px] rounded-full pointer-events-none -z-10" />
-          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[400px] bg-emerald-500/[0.06] blur-[160px] rounded-full pointer-events-none -z-10" />
-        </>
-      )}
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1. HEADER & CONTROLS */}
         <motion.div
@@ -73,10 +65,10 @@ export function WebsiteRevamp() {
           className="max-w-3xl mx-auto text-center mb-10"
         >
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs mb-4 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
+              <span className="relative inline-flex rounded-full w-2 h-2 bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)]"></span>
             </span>
             <span>CASE STUDY // 02 • FULL-STACK WEB REVAMP</span>
           </div>
@@ -87,57 +79,39 @@ export function WebsiteRevamp() {
           </h2>
 
           {/* Subline */}
-          <p className="text-sm sm:text-base text-neutral-400 leading-relaxed mb-8">
+          <p className="text-sm sm:text-base text-zinc-400 leading-relaxed mb-8">
             Toggle between the legacy client architecture and my modernized,
             high-conversion rebuild.
           </p>
 
-          {/* Animated Segmented Toggle */}
-          <div className="inline-flex items-center p-1.5 rounded-full bg-zinc-950/90 border border-white/10 shadow-2xl relative backdrop-blur-md">
+          {/* Segmented Toggle */}
+          <div className="inline-flex items-center p-1.5 rounded-full bg-black/90 border border-white/[0.1] shadow-2xl relative backdrop-blur-md gap-1">
             {/* Tab 1: Legacy Website */}
             <button
               type="button"
               onClick={() => setActiveTab("legacy")}
-              className={`relative px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-colors z-10 flex items-center gap-2 ${
+              className={`relative px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm transition-all z-10 flex items-center gap-2 border ${
                 activeTab === "legacy"
-                  ? "text-black font-semibold"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-white text-black font-semibold shadow-[0_0_20px_rgba(255,255,255,0.25)] border-transparent"
+                  : "bg-white/[0.03] text-zinc-400 border-white/[0.06] hover:text-white hover:bg-white/[0.06]"
               }`}
             >
-              {activeTab === "legacy" && (
-                <motion.div
-                  layoutId="revampTab"
-                  className="absolute inset-0 bg-white rounded-full shadow-lg"
-                  transition={{ type: "spring", stiffness: 450, damping: 35 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-zinc-500 shrink-0" />
-                <span>Legacy Client Build</span>
-              </span>
+              <span className={`w-2 h-2 rounded-full shrink-0 ${activeTab === "legacy" ? "bg-black" : "bg-zinc-600"}`} />
+              <span>Legacy Client Build</span>
             </button>
 
             {/* Tab 2: Avi's Revamp */}
             <button
               type="button"
               onClick={() => setActiveTab("revamp")}
-              className={`relative px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-colors z-10 flex items-center gap-2 ${
+              className={`relative px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm transition-all z-10 flex items-center gap-2 border ${
                 activeTab === "revamp"
-                  ? "text-black font-semibold"
-                  : "text-zinc-400 hover:text-white"
+                  ? "bg-white text-black font-semibold shadow-[0_0_20px_rgba(255,255,255,0.25)] border-transparent"
+                  : "bg-white/[0.03] text-zinc-400 border-white/[0.06] hover:text-white hover:bg-white/[0.06]"
               }`}
             >
-              {activeTab === "revamp" && (
-                <motion.div
-                  layoutId="revampTab"
-                  className="absolute inset-0 bg-white rounded-full shadow-[0_0_30px_rgba(16,185,129,0.35)]"
-                  transition={{ type: "spring", stiffness: 450, damping: 35 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                <span>Production Revamp (Live)</span>
-              </span>
+              <span className={`w-2 h-2 rounded-full shrink-0 ${activeTab === "revamp" ? "bg-black" : "bg-white shadow-[0_0_6px_rgba(255,255,255,0.9)] animate-pulse"}`} />
+              <span>Production Revamp (Live)</span>
             </button>
           </div>
 
@@ -151,9 +125,9 @@ export function WebsiteRevamp() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.25, ease: EASE_CUSTOM }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/40 border border-amber-500/30 text-amber-300 text-xs shadow-[0_0_20px_rgba(245,158,11,0.12)] text-center"
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.1] text-zinc-400 text-xs shadow-inner text-center"
                 >
-                  <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <AlertTriangle className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
                   <span>
                     Status: 3.4s Load Time • Cluttered Information Architecture • Rigid Static Layout
                   </span>
@@ -165,9 +139,9 @@ export function WebsiteRevamp() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.25, ease: EASE_CUSTOM }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs shadow-[0_0_25px_rgba(16,185,129,0.18)] text-center"
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.15] text-white text-xs shadow-[0_0_25px_rgba(255,255,255,0.06)] text-center"
                 >
-                  <Zap className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <Zap className="w-3.5 h-3.5 text-white shrink-0" />
                   <span>
                     Status: 0.4s FCP • 99 Core Web Vitals • Interactive Hero Sandbox • Next.js 15 &amp; Framer Motion
                   </span>
@@ -187,69 +161,59 @@ export function WebsiteRevamp() {
         >
           {/* Browser Header Bar */}
           <div className="px-4 py-3 bg-[#0a0a0d] border-b border-white/[0.08] flex items-center justify-between gap-3 shrink-0 select-none">
-            {/* Left: macOS Traffic Lights */}
+            {/* Left: Window Dots */}
             <div className="flex items-center gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => isFullscreen && setIsFullscreen(false)}
                 title={isFullscreen ? "Exit Fullscreen" : "Close"}
-                className="w-3 h-3 rounded-full bg-[#ff5f56] hover:opacity-80 transition-opacity"
+                className="w-3 h-3 rounded-full bg-zinc-700 hover:bg-zinc-600 transition-opacity"
               />
-              <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+              <span className="w-3 h-3 rounded-full bg-zinc-800" />
               <button
                 type="button"
                 onClick={() => setIsFullscreen(!isFullscreen)}
                 title={isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
-                className="w-3 h-3 rounded-full bg-[#27c93f] hover:opacity-80 transition-opacity"
+                className="w-3 h-3 rounded-full bg-zinc-700 hover:bg-zinc-600 transition-opacity"
               />
             </div>
 
             {/* Center: Clean URL Pill */}
             <div className="flex-1 max-w-xs sm:max-w-md mx-2 flex items-center justify-center">
               <div className="w-full flex items-center justify-center gap-2 px-3 py-1.5 rounded-lg bg-black/60 border border-white/[0.08] text-xs text-zinc-300 shadow-inner">
-                <Lock className="w-3 h-3 text-emerald-400 shrink-0" />
+                <Lock className="w-3 h-3 text-zinc-400 shrink-0" />
                 <span className="truncate">{activeDisplayUrl}</span>
               </div>
             </div>
 
             {/* Right Action Controls */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-              {/* Open Live Site ↗ */}
+              {/* Open Live Site */}
               <a
                 href={activeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-300 hover:text-white text-xs font-medium transition-all"
-                title="Open active website in new browser tab"
               >
-                <span className="hidden sm:inline">Open Live Site</span>
-                <span className="sm:hidden">Live</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <MetallicButton
+                  label="Open Live Site"
+                  icon={<ExternalLink className="w-3.5 h-3.5" />}
+                  className="!h-9 !min-w-0 !px-3.5 !text-xs"
+                />
               </a>
 
               {/* Fullscreen View / Exit Fullscreen */}
-              <button
-                type="button"
+              <MetallicButton
                 onClick={() => setIsFullscreen(!isFullscreen)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  isFullscreen
-                    ? "bg-red-500/20 border border-red-500/40 text-red-300 hover:bg-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.2)]"
-                    : "bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-300 hover:text-white"
-                }`}
-                title={isFullscreen ? "Exit Fullscreen Mode (Esc)" : "Toggle Fullscreen View"}
-              >
-                {isFullscreen ? (
-                  <>
-                    <X className="w-3.5 h-3.5 text-red-400" />
-                    <span>Exit Fullscreen</span>
-                  </>
-                ) : (
-                  <>
-                    <Maximize2 className="w-3.5 h-3.5 text-cyan-400" />
-                    <span className="hidden sm:inline">Fullscreen View</span>
-                  </>
-                )}
-              </button>
+                label={isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
+                icon={
+                  isFullscreen ? (
+                    <X className="w-3.5 h-3.5 text-zinc-300" />
+                  ) : (
+                    <Maximize2 className="w-3.5 h-3.5 text-zinc-300" />
+                  )
+                }
+                className="!h-9 !min-w-0 !px-3.5 !text-xs"
+              />
             </div>
           </div>
 

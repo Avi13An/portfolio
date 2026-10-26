@@ -32,7 +32,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/5">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center text-emerald-400">
+            <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/15 flex items-center justify-center text-zinc-300">
               <Cpu className="w-4 h-4" />
             </div>
             <div>
@@ -47,9 +47,9 @@ export function Footer() {
           <div className="flex items-center gap-4">
             <a
               href="mailto:avitan.offic@gmail.com"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-950 border border-white/10 hover:border-emerald-500/40 hover:text-emerald-300 transition-all text-zinc-300"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-950 border border-white/10 hover:border-white/30 hover:text-white transition-all text-zinc-300"
             >
-              <Mail className="w-3.5 h-3.5 text-emerald-400" />
+              <Mail className="w-3.5 h-3.5 text-zinc-300" />
               <span>avitan.offic@gmail.com</span>
             </a>
             <a
@@ -57,7 +57,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="p-2 rounded-lg bg-zinc-950 border border-white/10 hover:border-cyan-500/40 hover:text-cyan-300 transition-all text-zinc-400"
+              className="p-2 rounded-lg bg-zinc-950 border border-white/10 hover:border-white/30 hover:text-white transition-all text-zinc-400"
             >
               <Github className="w-4 h-4" />
             </a>
@@ -66,7 +66,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
-              className="p-2 rounded-lg bg-zinc-950 border border-white/10 hover:border-violet-500/40 hover:text-violet-300 transition-all text-zinc-400"
+              className="p-2 rounded-lg bg-zinc-950 border border-white/10 hover:border-white/30 hover:text-white transition-all text-zinc-400"
             >
               <Linkedin className="w-4 h-4" />
             </a>
@@ -74,7 +74,7 @@ export function Footer() {
 
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 bg-zinc-950 px-3 py-1.5 rounded-lg border border-white/10">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)] animate-pulse"></span>
               <span className="text-zinc-300">LOCAL CLOCK: {time || "16:10:00"} IST</span>
             </div>
 
