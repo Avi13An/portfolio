@@ -401,13 +401,13 @@ export function HeroAnimation() {
 
   return (
     <section
-      id="hero"
+      id="intro"
       ref={sectionRef}
       style={{ transform: "translateZ(0)", willChange: "transform" }}
       className="relative min-h-screen w-full flex flex-col justify-between items-center overflow-hidden bg-black text-white select-none"
     >
-      {/* Anchor alias for INTRO tab */}
-      <span id="intro" className="absolute -top-24 pointer-events-none" />
+      {/* Anchor alias for HERO */}
+      <span id="hero" className="absolute -top-24 pointer-events-none" />
 
       {/* 3D Halftone Particle Point-Cloud Canvas */}
       <canvas

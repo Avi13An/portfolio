@@ -183,15 +183,15 @@ export function ProofOfWork() {
 
   return (
     <section
-      id="featured-architecture"
+      id="proof-of-work"
       style={{ transform: "translateZ(0)" }}
       className={`py-24 bg-black relative border-t border-white/[0.08] ${
         isFullscreen ? "overflow-visible" : "overflow-hidden"
       }`}
     >
       {/* Anchor aliases for smooth navigation */}
+      <span id="featured-architecture" className="absolute -top-24 pointer-events-none" />
       <span id="projects" className="absolute -top-24 pointer-events-none" />
-      <span id="proof-of-work" className="absolute -top-24 pointer-events-none" />
       <span id="revamp-showcase" className="absolute -top-24 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -375,23 +375,13 @@ export function ProofOfWork() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <LiquidMetalButton
-                      label="Open Live Site"
-                      icon={<ExternalLink className="w-3.5 h-3.5" />}
-                    />
+                    <LiquidMetalButton label="Open Live Site" />
                   </a>
 
                   {/* Fullscreen View / Exit Fullscreen */}
                   <LiquidMetalButton
                     onClick={() => setIsFullscreen(!isFullscreen)}
                     label={isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
-                    icon={
-                      isFullscreen ? (
-                        <X className="w-3.5 h-3.5 text-zinc-300" />
-                      ) : (
-                        <Maximize2 className="w-3.5 h-3.5 text-zinc-300" />
-                      )
-                    }
                   />
                 </div>
               </div>

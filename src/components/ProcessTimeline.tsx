@@ -54,9 +54,9 @@ export function ProcessTimeline() {
   };
 
   return (
-    <section id="process" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
+    <section id="timeline" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
       {/* Anchor aliases for smooth navigation */}
-      <span id="timeline" className="absolute -top-24 pointer-events-none" />
+      <span id="process" className="absolute -top-24 pointer-events-none" />
       <span id="about" className="absolute -top-24 pointer-events-none" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

@@ -6,7 +6,6 @@ import {
   Smartphone,
   Radio,
   Layers,
-  ArrowUpRight,
   Check,
   Zap,
 } from "lucide-react";
@@ -236,10 +235,7 @@ export function ServicesGrid() {
                       </div>
                     </div>
                     <a href="#contact" className="inline-block shrink-0">
-                      <LiquidMetalButton
-                        label="Book Sprint"
-                        icon={<ArrowUpRight className="w-3.5 h-3.5 text-zinc-200" />}
-                      />
+                      <LiquidMetalButton label="Book Sprint" />
                     </a>
                   </div>
                 </BentoCard>

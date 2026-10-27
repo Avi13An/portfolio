@@ -68,9 +68,9 @@ export function ProjectIntake() {
   };
 
   return (
-    <section id="intake" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
+    <section id="contact" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
       {/* Anchor alias for smooth navigation */}
-      <span id="contact" className="absolute -top-24 pointer-events-none" />
+      <span id="intake" className="absolute -top-24 pointer-events-none" />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -146,10 +146,9 @@ export function ProjectIntake() {
 
               <a
                 href="mailto:avitan.offic@gmail.com"
-                className="py-2 px-3 rounded-xl bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-colors flex items-center justify-center gap-1 shrink-0 shadow-md"
+                className="py-2 px-4 rounded-xl bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-colors flex items-center justify-center shrink-0 shadow-md"
               >
                 <span>Send</span>
-                <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
           </motion.div>
@@ -278,7 +277,7 @@ export function ProjectIntake() {
                       href="mailto:avitan.offic@gmail.com"
                       className="px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition-colors shadow-lg"
                     >
-                      Open Email App ↗
+                      Open Email App
                     </a>
                   </div>
                 </motion.div>
@@ -393,7 +392,6 @@ export function ProjectIntake() {
                     <LiquidMetalButton
                       type="submit"
                       label="Deploy Next Sprint"
-                      icon={<ArrowRight className="w-4 h-4 text-zinc-200 group-hover:translate-x-1 transition-transform" />}
                       className="w-full"
                     />
                   </div>

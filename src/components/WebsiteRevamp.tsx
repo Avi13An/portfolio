@@ -194,23 +194,13 @@ export function WebsiteRevamp() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <LiquidMetalButton
-                  label="Open Live Site"
-                  icon={<ExternalLink className="w-3.5 h-3.5" />}
-                />
+                <LiquidMetalButton label="Open Live Site" />
               </a>
 
               {/* Fullscreen View / Exit Fullscreen */}
               <LiquidMetalButton
                 onClick={() => setIsFullscreen(!isFullscreen)}
                 label={isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
-                icon={
-                  isFullscreen ? (
-                    <X className="w-3.5 h-3.5 text-zinc-300" />
-                  ) : (
-                    <Maximize2 className="w-3.5 h-3.5 text-zinc-300" />
-                  )
-                }
               />
             </div>
           </div>

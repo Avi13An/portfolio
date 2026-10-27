@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-
-const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const TABS = [
   { id: "intro", label: "INTRO" },
@@ -14,97 +12,89 @@ const TABS = [
 ];
 
 export function Navbar() {
-  const [activeTab, setActiveTab] = useState<string>("intro");
+  const [activeTab, setActiveTab] = useState("intro");
+  const isScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Smooth scroll click handler
+  // Handle Smooth Scroll on Tab Click
   const handleTabClick = (id: string) => {
+    isScrollingRef.current = true;
     setActiveTab(id);
+
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const yOffset = -70; // Header offset
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
+
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    // Lock scroll-spy until smooth scroll finishes
+    scrollTimeoutRef.current = setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 900);
   };
 
-  // Active section observer on scroll
+  // Scroll-Spy Position Calculation
   useEffect(() => {
     const handleScroll = () => {
-      // Pin to contact if reached the bottom of the page
-      if (
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 60
-      ) {
+      if (isScrollingRef.current) return;
+
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // If scrolled to bottom, lock to contact
+      if (scrollY + viewportHeight >= documentHeight - 60) {
         setActiveTab("contact");
         return;
       }
 
-      // Pin to intro if near the top
-      if (window.scrollY < 120) {
-        setActiveTab("intro");
-        return;
-      }
+      const offset = 220; // Trigger threshold
+      const currentPos = scrollY + offset;
 
-      const sections = TABS.map((tab) => ({
-        id: tab.id,
-        offset: document.getElementById(tab.id)?.offsetTop ?? 0,
-      })).sort((a, b) => a.offset - b.offset);
-
-      const scrollPosition = window.scrollY + 280;
-
-      let current = sections[0].id;
-      for (const s of sections) {
-        if (scrollPosition >= s.offset) {
-          current = s.id;
+      for (let i = TABS.length - 1; i >= 0; i--) {
+        const section = document.getElementById(TABS[i].id);
+        if (section) {
+          const top = section.offsetTop;
+          if (currentPos >= top) {
+            setActiveTab(TABS[i].id);
+            break;
+          }
         }
       }
-      setActiveTab(current);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center"
-      aria-label="Main Navigation"
-    >
-      <div className="p-1 sm:p-1.5 rounded-full bg-black/80 backdrop-blur-xl border border-white/[0.12] shadow-[0_8px_32px_rgba(0,0,0,0.8)] flex items-center max-w-[95vw] sm:max-w-fit overflow-x-auto no-scrollbar gap-0.5 sm:gap-1">
+    <header className="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center">
+      <nav className="p-1 rounded-full bg-black/85 backdrop-blur-2xl border border-white/[0.12] shadow-[0_12px_40px_rgba(0,0,0,0.9)] flex items-center max-w-[95vw] sm:max-w-fit overflow-x-auto no-scrollbar gap-0.5 sm:gap-1">
         {TABS.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
             <button
               key={tab.id}
-              type="button"
               onClick={() => handleTabClick(tab.id)}
-              className="relative px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider transition-colors rounded-full cursor-pointer flex items-center justify-center whitespace-nowrap focus:outline-none"
-              role="tab"
-              aria-selected={isActive}
+              className={`relative px-3 sm:px-4 md:px-5 py-2 text-xs sm:text-[13px] tracking-wider uppercase font-medium rounded-full cursor-pointer transition-colors duration-200 select-none whitespace-nowrap focus:outline-none ${
+                isActive ? "text-black font-semibold" : "text-zinc-400 hover:text-white"
+              }`}
             >
-              {/* Continuous Sliding Pill via Framer Motion layoutId */}
               {isActive && (
                 <motion.div
-                  layoutId="activeNavTab"
-                  className="absolute inset-0 bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)] z-0"
+                  layoutId="activeTabPill"
+                  className="absolute inset-0 bg-white rounded-full shadow-[0_2px_15px_rgba(255,255,255,0.4)]"
                   transition={{ type: "spring", stiffness: 450, damping: 35 }}
                 />
               )}
-
-              {/* Tab Text */}
-              <span
-                className={`relative z-10 select-none transition-colors ${
-                  isActive
-                    ? "text-black font-bold"
-                    : "text-zinc-400 hover:text-white"
-                }`}
-              >
-                {tab.label}
-              </span>
+              <span className="relative z-10">{tab.label}</span>
             </button>
           );
         })}
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
 

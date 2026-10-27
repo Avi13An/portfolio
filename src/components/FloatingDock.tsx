@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Check, ArrowUpRight, Copy } from "lucide-react";
+import { Mail, Check, Copy } from "lucide-react";
 import LiquidMetalButton from "@/components/ui/liquid-metal-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -66,10 +66,7 @@ export function FloatingDock() {
 
         {/* Start Sprint Button */}
         <a href="#contact" className="inline-block shrink-0">
-          <LiquidMetalButton
-            label="Start Sprint"
-            icon={<ArrowUpRight className="w-3.5 h-3.5 text-zinc-200" />}
-          />
+          <LiquidMetalButton label="Start Sprint" />
         </a>
       </div>
     </motion.div>
