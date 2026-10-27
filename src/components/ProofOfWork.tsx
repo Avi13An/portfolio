@@ -184,7 +184,7 @@ export function ProofOfWork() {
     <section
       id="proof-of-work"
       style={{ transform: "translateZ(0)" }}
-      className={`py-24 bg-black relative border-t border-white/[0.08] ${
+      className={`py-24 bg-black relative ${
         isFullscreen ? "overflow-visible" : "overflow-hidden"
       }`}
     >

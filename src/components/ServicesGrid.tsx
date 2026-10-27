@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Rocket,
   Smartphone,
@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import LiquidMetalButton from "@/components/ui/liquid-metal-button";
+import { TiltCard } from "@/components/ui/tilt-card";
+import { AnimatedCounter } from "@/components/ui/animated-counter";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -24,41 +26,17 @@ function BentoCard({
   className = "",
   hasBorderBeam = false,
 }: BentoCardProps) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  }
-
   return (
-    <motion.div
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ y: -6, scale: 1.015 }}
-      transition={{ duration: 0.35, ease: EASE_CUSTOM }}
-      className={`group relative rounded-3xl bg-zinc-950/85 backdrop-blur-xl border border-white/10 hover:border-white/25 p-6 sm:p-7 transition-all duration-300 overflow-hidden h-full flex flex-col justify-between shadow-[0_0_30px_-5px_rgba(0,0,0,0.8)] ${className}`}
+    <TiltCard
+      className={`group relative rounded-3xl p-6 sm:p-7 overflow-hidden h-full flex flex-col justify-between ${className}`}
     >
       {/* Animated Glowing Border Beam for Flagship Card */}
       {hasBorderBeam && (
         <div className="absolute -inset-[100%] animate-spin-slow opacity-0 group-hover:opacity-30 transition-opacity duration-500 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(255,255,255,0.4)_120deg,transparent_180deg)] pointer-events-none" />
       )}
 
-      {/* Interactive Cursor Following Spotlight */}
-      <div
-        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"
-        style={{
-          background: `radial-gradient(450px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 255, 255, 0.08), transparent 80%)`,
-        }}
-      />
-
       <div className="relative z-10 flex flex-col justify-between h-full">{children}</div>
-    </motion.div>
+    </TiltCard>
   );
 }
 
@@ -68,7 +46,8 @@ export function ServicesGrid() {
       id: "lean-core",
       name: "Lean Core MVP",
       tagline: "Full-stack web application ready for paying customers and investor demos.",
-      price: "₹10,000 – ₹18,000",
+      priceMin: 10000,
+      priceMax: 18000,
       turnaround: "7–10 Days",
       badge: "Flagship Sprint",
       icon: Rocket,
@@ -85,7 +64,8 @@ export function ServicesGrid() {
       id: "mobile-app",
       name: "Mobile Applications",
       tagline: "Fluid cross-platform iOS & Android mobile apps with custom native modules.",
-      price: "₹20,000 – ₹30,000",
+      priceMin: 20000,
+      priceMax: 30000,
       turnaround: "2 Weeks",
       badge: "iOS & Android",
       icon: Smartphone,
@@ -102,7 +82,8 @@ export function ServicesGrid() {
       id: "prototype",
       name: "Starter / Prototype",
       tagline: "Interactive proof-of-concept and high-converting landing page to validate your thesis.",
-      price: "₹5,000 – ₹8,000",
+      priceMin: 5000,
+      priceMax: 8000,
       turnaround: "2–4 Days",
       badge: "Fast Validation",
       icon: Layers,
@@ -119,7 +100,8 @@ export function ServicesGrid() {
       id: "realtime",
       name: "Multi-Feature System",
       tagline: "Low-latency streaming engines, WebSockets, and HiveMQ MQTT with sub-100ms sync.",
-      price: "₹20,000 – ₹30,000",
+      priceMin: 20000,
+      priceMax: 30000,
       turnaround: "2 Weeks",
       badge: "High Performance",
       icon: Radio,
@@ -154,7 +136,7 @@ export function ServicesGrid() {
   };
 
   return (
-    <section id="services" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
+    <section id="services" className="py-24 bg-black relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -222,8 +204,10 @@ export function ServicesGrid() {
                       <div className="text-[10px] text-zinc-400 uppercase tracking-wider">
                         Turnaround: {pkg.turnaround}
                       </div>
-                      <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5">
-                        {pkg.price}
+                      <div className="text-lg sm:text-xl font-extrabold text-white mt-0.5 flex items-center gap-1">
+                        <AnimatedCounter prefix="₹" to={pkg.priceMin} />
+                        <span>–</span>
+                        <AnimatedCounter prefix="₹" to={pkg.priceMax} />
                       </div>
                     </div>
                     <a href="#contact" className="inline-block shrink-0">
@@ -239,3 +223,5 @@ export function ServicesGrid() {
     </section>
   );
 }
+
+export default ServicesGrid;

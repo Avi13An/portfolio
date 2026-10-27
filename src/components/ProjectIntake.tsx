@@ -66,7 +66,7 @@ export function ProjectIntake() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
+    <section id="contact" className="pt-24 pb-28 sm:pb-36 bg-black relative overflow-hidden">
       {/* Anchor alias for smooth navigation */}
       <span id="intake" className="absolute -top-24 pointer-events-none" />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

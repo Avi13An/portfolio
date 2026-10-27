@@ -5,7 +5,6 @@ import { ProofOfWork } from "@/components/ProofOfWork";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { ProjectIntake } from "@/components/ProjectIntake";
-import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 export default function Home() {
@@ -20,20 +19,29 @@ export default function Home() {
       {/* 1. HERO REEL ANIMATION: 5-Phase Choreography */}
       <HeroAnimation />
 
+      {/* Hairline Gradient Separator */}
+      <div className="w-full max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-white/12 to-transparent my-16 sm:my-24" />
+
       {/* 2. UNIFIED PROOF OF WORK HUB: Bentham Web Revamp + Sukoon Mobile Engine */}
       <ProofOfWork />
+
+      {/* Hairline Gradient Separator */}
+      <div className="w-full max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-white/12 to-transparent my-16 sm:my-24" />
 
       {/* 3. WHAT I BUILD: Services Grid */}
       <ServicesGrid />
 
+      {/* Hairline Gradient Separator */}
+      <div className="w-full max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-white/12 to-transparent my-16 sm:my-24" />
+
       {/* 4. THE 2-WEEK DELIVERY PROCESS */}
       <ProcessTimeline />
 
+      {/* Hairline Gradient Separator */}
+      <div className="w-full max-w-6xl mx-auto h-px bg-gradient-to-r from-transparent via-white/12 to-transparent my-16 sm:my-24" />
+
       {/* 5. PROJECT INTAKE SECTION */}
       <ProjectIntake />
-
-      {/* FOOTER */}
-      <Footer />
     </main>
   );
 }

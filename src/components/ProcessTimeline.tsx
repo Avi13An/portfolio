@@ -3,6 +3,8 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
+import { TiltCard } from "@/components/ui/tilt-card";
+import { AnimatedCounter } from "@/components/ui/animated-counter";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -54,7 +56,7 @@ export function ProcessTimeline() {
   };
 
   return (
-    <section id="timeline" className="py-24 bg-black relative border-t border-white/[0.08] overflow-hidden">
+    <section id="timeline" className="py-24 bg-black relative overflow-hidden">
       {/* Anchor aliases for smooth navigation */}
       <span id="process" className="absolute -top-24 pointer-events-none" />
       <span id="about" className="absolute -top-24 pointer-events-none" />
@@ -68,7 +70,7 @@ export function ProcessTimeline() {
           className="max-w-2xl mx-auto text-center mb-14"
         >
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic">
-            Predictable 14-Day Delivery
+            Predictable <AnimatedCounter to={14} />-Day Delivery
           </h2>
         </motion.div>
 
@@ -84,37 +86,37 @@ export function ProcessTimeline() {
             <motion.div
               key={item.step}
               variants={itemVariants}
-              whileHover={{ y: -6, scale: 1.02 }}
-              transition={{ duration: 0.3, ease: EASE_CUSTOM }}
-              className="p-6 rounded-3xl bg-zinc-950/85 backdrop-blur-xl border border-white/[0.08] hover:border-white/25 transition-all flex flex-col justify-between relative group shadow-lg"
+              className="h-full"
             >
-              <div>
-                {/* Node & Step Indicator */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)]" />
-                    <span className="text-base font-extrabold text-white">
-                      {item.step}
+              <TiltCard className="p-6 h-full flex flex-col justify-between relative group">
+                <div>
+                  {/* Node & Step Indicator */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)]" />
+                      <span className="text-base font-extrabold text-white">
+                        {item.step}
+                      </span>
+                    </div>
+                    <span className="text-[11px] text-zinc-400 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10">
+                      {item.days}
                     </span>
                   </div>
-                  <span className="text-[11px] text-zinc-400 px-2.5 py-1 rounded-full bg-zinc-900 border border-white/10">
-                    {item.days}
-                  </span>
+
+                  <h3 className="text-lg font-bold text-white tracking-tight mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    {item.summary}
+                  </p>
                 </div>
 
-                <h3 className="text-lg font-bold text-white tracking-tight mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  {item.summary}
-                </p>
-              </div>
-
-              {idx < steps.length - 1 && (
-                <div className="hidden lg:block absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 text-zinc-700 group-hover:text-zinc-500 transition-colors">
-                  <ArrowRight className="w-4 h-4" />
-                </div>
-              )}
+                {idx < steps.length - 1 && (
+                  <div className="hidden lg:block absolute -right-3.5 top-1/2 -translate-y-1/2 z-20 text-zinc-700 group-hover:text-zinc-500 transition-colors">
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                )}
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
@@ -122,3 +124,5 @@ export function ProcessTimeline() {
     </section>
   );
 }
+
+export default ProcessTimeline;

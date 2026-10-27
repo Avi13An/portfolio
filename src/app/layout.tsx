@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { SpotlightBackground } from "@/components/ui/spotlight-background";
 import "./globals.css";
 
 const customFont = localFont({
@@ -62,6 +63,7 @@ export default function RootLayout({
       >
         {/* Global Atmospheric Ambient Layers */}
         <div className="fixed inset-0 dot-matrix-bg pointer-events-none z-0" />
+        <SpotlightBackground />
 
         <div className="relative z-10">{children}</div>
       </body>
