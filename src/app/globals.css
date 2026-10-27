@@ -127,3 +127,13 @@ body {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
+
+@keyframes border-beam {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+

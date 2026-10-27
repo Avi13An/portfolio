@@ -388,12 +388,14 @@ export function ProjectIntake() {
                   </div>
 
                   {/* Submit Button */}
-                  <div className="flex justify-center pt-2">
+                  <div className="flex justify-center pt-3 pb-1">
                     <LiquidMetalButton
                       type="submit"
-                      label="Deploy Next Sprint"
+                      size="lg"
                       className="w-full"
-                    />
+                    >
+                      Deploy Next Sprint
+                    </LiquidMetalButton>
                   </div>
 
                   {/* External Tally Fallback Link */}

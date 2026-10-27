@@ -375,14 +375,16 @@ export function ProofOfWork() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <LiquidMetalButton label="Open Live Site" />
+                    <LiquidMetalButton size="sm">Open Live Site</LiquidMetalButton>
                   </a>
 
                   {/* Fullscreen View / Exit Fullscreen */}
                   <LiquidMetalButton
+                    size="sm"
                     onClick={() => setIsFullscreen(!isFullscreen)}
-                    label={isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
-                  />
+                  >
+                    {isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
+                  </LiquidMetalButton>
                 </div>
               </div>
 

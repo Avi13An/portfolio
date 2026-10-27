@@ -66,7 +66,7 @@ export function FloatingDock() {
 
         {/* Start Sprint Button */}
         <a href="#contact" className="inline-block shrink-0">
-          <LiquidMetalButton label="Start Sprint" />
+          <LiquidMetalButton size="sm">Start Sprint</LiquidMetalButton>
         </a>
       </div>
     </motion.div>

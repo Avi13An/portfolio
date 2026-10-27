@@ -235,7 +235,7 @@ export function ServicesGrid() {
                       </div>
                     </div>
                     <a href="#contact" className="inline-block shrink-0">
-                      <LiquidMetalButton label="Book Sprint" />
+                      <LiquidMetalButton size="sm">Book Sprint</LiquidMetalButton>
                     </a>
                   </div>
                 </BentoCard>
