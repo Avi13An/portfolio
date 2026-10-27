@@ -7,7 +7,6 @@ import {
   Radio,
   Layers,
   Check,
-  Zap,
 } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import LiquidMetalButton from "@/components/ui/liquid-metal-button";
@@ -163,18 +162,11 @@ export function ServicesGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
-          className="max-w-2xl mx-auto text-center mb-16"
+          className="max-w-2xl mx-auto text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs mb-4 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
-            <Zap className="w-3.5 h-3.5 text-zinc-300" />
-            <span>SPRINT TIERS &amp; SERVICES</span>
-          </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic">
             What I Build
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-zinc-400">
-            Predictable 2-week MVP sprints with transparent INR pricing. No hourly billing.
-          </p>
         </motion.div>
 
         {/* Asymmetrical Bento Grid with Staggered Scroll Cascades */}

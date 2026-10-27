@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -65,18 +65,11 @@ export function ProcessTimeline() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
-          className="max-w-2xl mx-auto text-center mb-16"
+          className="max-w-2xl mx-auto text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs mb-4 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
-            <Calendar className="w-3.5 h-3.5 text-zinc-300" />
-            <span>THE 2-WEEK SPRINT</span>
-          </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight heading-metallic">
             Predictable 14-Day Delivery
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-zinc-400">
-            Zero fluff, zero scope creep. From technical spec to live production deployment.
-          </p>
         </motion.div>
 
         {/* 4-Step Visual Milestones with Glowing Nodes */}

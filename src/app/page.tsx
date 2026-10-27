@@ -7,7 +7,6 @@ import { ProcessTimeline } from "@/components/ProcessTimeline";
 import { ProjectIntake } from "@/components/ProjectIntake";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { FloatingDock } from "@/components/FloatingDock";
 
 export default function Home() {
   return (
@@ -35,9 +34,6 @@ export default function Home() {
 
       {/* FOOTER */}
       <Footer />
-
-      {/* Persistent Floating Quick-Contact Dock */}
-      <FloatingDock />
     </main>
   );
 }

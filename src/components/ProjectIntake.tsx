@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  Sparkles,
   ExternalLink,
   Mail,
   Github,
@@ -10,7 +9,6 @@ import {
   Check,
   Copy,
   ArrowRight,
-  Zap,
   PartyPopper,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -78,21 +76,11 @@ export function ProjectIntake() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
-          className="max-w-2xl mx-auto text-center mb-12"
+          className="max-w-3xl mx-auto text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs mb-4 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>DIRECT INTAKE &amp; CONTACT HUB</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-3 heading-metallic">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] heading-metallic">
             Let&apos;s build something unforgettable.
           </h2>
-
-          <p className="text-sm sm:text-base text-zinc-400 flex items-center justify-center gap-1.5">
-            <Zap className="w-3.5 h-3.5 text-zinc-300 inline shrink-0" />
-            <span>Guaranteed response within 12–24h • Currently booking next sprint.</span>
-          </p>
         </motion.div>
 
         {/* 3 PROMINENT CHANNEL CARDS */}

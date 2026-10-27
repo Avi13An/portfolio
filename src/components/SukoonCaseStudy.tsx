@@ -164,19 +164,6 @@ export function SukoonCaseStudy() {
             Cross-platform mobile streaming pipeline built with custom Kotlin MediaCodec mixing, 7s stall watchdog, and sub-100ms MQTT drift compensation.
           </p>
 
-          {/* Decluttered Tech Tags */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-8">
-            <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs">
-              React Native
-            </span>
-            <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs">
-              C++ MMKV
-            </span>
-            <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs">
-              HiveMQ MQTT
-            </span>
-          </div>
-
           {/* Segmented Top Control Pill */}
           <div className="inline-flex items-center p-1.5 rounded-full bg-black/90 border border-white/[0.1] shadow-2xl backdrop-blur-md gap-1">
             <button

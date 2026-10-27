@@ -383,19 +383,6 @@ export function ProofOfWork() {
             style={{ transform: "translateZ(0)", willChange: "transform" }}
             className="w-full flex flex-col items-center"
           >
-            {/* Decluttered Tech Tags */}
-            <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6">
-              <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs">
-                React Native
-              </span>
-              <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs">
-                C++ MMKV
-              </span>
-              <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs">
-                HiveMQ MQTT
-              </span>
-            </div>
-
             {/* Sukoon Sub-Controls: Video vs Screenshots */}
             <div className="inline-flex items-center p-1.5 rounded-full bg-black/90 border border-white/[0.1] shadow-2xl backdrop-blur-md mb-8 gap-1">
               <button
