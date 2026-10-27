@@ -7,7 +7,6 @@ import {
   Maximize2,
   X,
   Zap,
-  AlertTriangle,
   Play,
   Pause,
   Volume2,
@@ -203,24 +202,10 @@ export function ProofOfWork() {
           transition={{ duration: 0.8, ease: EASE_CUSTOM }}
           className="max-w-3xl mx-auto text-center mb-8"
         >
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.12] text-zinc-300 text-xs mb-4 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70 opacity-75"></span>
-              <span className="relative inline-flex rounded-full w-2 h-2 bg-white shadow-[0_0_10px_rgba(255,255,255,0.9)]"></span>
-            </span>
-            <span>FEATURED CLIENT WORK • PROOF OF CONCEPT</span>
-          </div>
-
           {/* Headline */}
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.1] mb-4 heading-metallic">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.1] mb-6 heading-metallic">
             Production-Grade Engineering &amp; Design
           </h2>
-
-          {/* Subline */}
-          <p className="text-sm sm:text-base text-zinc-400 leading-relaxed mb-8 max-w-2xl mx-auto">
-            Select a case study to inspect live architecture, performance metrics, and interactive systems.
-          </p>
 
           {/* 2. PRIMARY SEGMENTED SWITCHER: Web Architecture vs Mobile Systems */}
           <div className="inline-flex items-center p-1.5 rounded-full bg-black/90 border border-white/[0.1] shadow-2xl relative backdrop-blur-md gap-1">
@@ -268,7 +253,7 @@ export function ProofOfWork() {
             className="w-full"
           >
             {/* Bentham Sub-controls */}
-            <div className="flex flex-col items-center justify-center mb-8">
+            <div className="flex flex-col items-center justify-center mb-6">
               {/* Segmented Sub-Toggle */}
               <div className="inline-flex items-center p-1.5 rounded-full bg-black/90 border border-white/[0.1] shadow-xl relative backdrop-blur-md gap-1">
                 {/* Tab 1: Legacy Build */}
@@ -298,37 +283,6 @@ export function ProofOfWork() {
                   <span className={`w-2 h-2 rounded-full shrink-0 ${activeBenthamTab === "revamp" ? "bg-black" : "bg-white shadow-[0_0_6px_rgba(255,255,255,0.9)] animate-pulse"}`} />
                   <span>Production Revamp (Live)</span>
                 </button>
-              </div>
-
-              {/* Dynamic Impact Pill */}
-              <div className="mt-4 flex items-center justify-center min-h-[38px]">
-                <AnimatePresence mode="wait">
-                  {activeBenthamTab === "legacy" ? (
-                    <motion.div
-                      key="legacy-pill"
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.25, ease: EASE_CUSTOM }}
-                      className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.1] text-zinc-400 text-xs shadow-inner text-center"
-                    >
-                      <AlertTriangle className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-                      <span>Status: 3.4s Load Time • Cluttered Information Architecture • Rigid Static Layout</span>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="revamp-pill"
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.25, ease: EASE_CUSTOM }}
-                      className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.15] text-white text-xs shadow-[0_0_25px_rgba(255,255,255,0.06)] text-center"
-                    >
-                      <Zap className="w-3.5 h-3.5 text-white shrink-0" />
-                      <span>Status: 0.4s FCP • 99 Core Web Vitals • Interactive Hero Sandbox • Next.js 15 &amp; Framer Motion</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
             </div>
 
