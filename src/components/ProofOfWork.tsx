@@ -17,7 +17,7 @@ import {
   Layers,
 } from "lucide-react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import MetallicButton from "@/components/ui/metallic-button";
+import LiquidMetalButton from "@/components/ui/liquid-metal-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -367,7 +367,7 @@ export function ProofOfWork() {
                   </div>
                 </div>
 
-                {/* Right Action Controls using Metallic Buttons */}
+                {/* Right Action Controls using LiquidMetal Buttons */}
                 <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                   {/* Open Live Site */}
                   <a
@@ -375,15 +375,14 @@ export function ProofOfWork() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <MetallicButton
+                    <LiquidMetalButton
                       label="Open Live Site"
                       icon={<ExternalLink className="w-3.5 h-3.5" />}
-                      className="!h-9 !min-w-0 !px-3.5 !text-xs"
                     />
                   </a>
 
                   {/* Fullscreen View / Exit Fullscreen */}
-                  <MetallicButton
+                  <LiquidMetalButton
                     onClick={() => setIsFullscreen(!isFullscreen)}
                     label={isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
                     icon={
@@ -393,7 +392,6 @@ export function ProofOfWork() {
                         <Maximize2 className="w-3.5 h-3.5 text-zinc-300" />
                       )
                     }
-                    className="!h-9 !min-w-0 !px-3.5 !text-xs"
                   />
                 </div>
               </div>

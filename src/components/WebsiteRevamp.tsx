@@ -10,7 +10,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import MetallicButton from "@/components/ui/metallic-button";
+import LiquidMetalButton from "@/components/ui/liquid-metal-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -194,15 +194,14 @@ export function WebsiteRevamp() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <MetallicButton
+                <LiquidMetalButton
                   label="Open Live Site"
                   icon={<ExternalLink className="w-3.5 h-3.5" />}
-                  className="!h-9 !min-w-0 !px-3.5 !text-xs"
                 />
               </a>
 
               {/* Fullscreen View / Exit Fullscreen */}
-              <MetallicButton
+              <LiquidMetalButton
                 onClick={() => setIsFullscreen(!isFullscreen)}
                 label={isFullscreen ? "Exit Fullscreen" : "Fullscreen View"}
                 icon={
@@ -212,7 +211,6 @@ export function WebsiteRevamp() {
                     <Maximize2 className="w-3.5 h-3.5 text-zinc-300" />
                   )
                 }
-                className="!h-9 !min-w-0 !px-3.5 !text-xs"
               />
             </div>
           </div>

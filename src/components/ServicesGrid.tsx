@@ -11,7 +11,7 @@ import {
   Zap,
 } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
-import MetallicButton from "@/components/ui/metallic-button";
+import LiquidMetalButton from "@/components/ui/liquid-metal-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -235,11 +235,10 @@ export function ServicesGrid() {
                         {pkg.price}
                       </div>
                     </div>
-                    <a href="#intake" className="inline-block shrink-0">
-                      <MetallicButton
+                    <a href="#contact" className="inline-block shrink-0">
+                      <LiquidMetalButton
                         label="Book Sprint"
                         icon={<ArrowUpRight className="w-3.5 h-3.5 text-zinc-200" />}
-                        className="!h-9 !min-w-0 !px-4 !text-xs font-semibold"
                       />
                     </a>
                   </div>

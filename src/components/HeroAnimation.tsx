@@ -213,17 +213,19 @@ export function HeroAnimation() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
 
-      // Upscaled dimensions filling 55% to 65% of the viewport
-      const targetHeight = Math.min(height * 0.62, width * 0.72);
-      const scale = targetHeight / 310;
-      const offsetX = width / 2;
-      const offsetY = height / 2 - 25;
+      // Refined dimensions balanced & proportional to the screen (Task 2)
+      const sampleHeight = 310;
+      const sampleWidth = 310;
+      const targetHeight = Math.min(height * 0.42, width * 0.48);
+      const scale = targetHeight / sampleHeight;
+      const offsetX = (width - sampleWidth * scale) / 2;
+      const offsetY = (height - sampleHeight * scale) / 2 - 15;
 
       const particles = particlesRef.current;
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        p.targetX = offsetX + p.origPtX * scale;
-        p.targetY = offsetY + p.origPtY * scale;
+        p.targetX = offsetX + (p.origPtX + sampleWidth / 2) * scale;
+        p.targetY = offsetY + (p.origPtY + sampleHeight / 2) * scale;
       }
     };
     window.addEventListener("resize", handleResize);
@@ -232,10 +234,12 @@ export function HeroAnimation() {
     img.src = "/profile.png";
 
     const initParticles = (pts: { x: number; y: number; brightness: number }[]) => {
-      const targetHeight = Math.min(height * 0.62, width * 0.72);
-      const scale = targetHeight / 310;
-      const offsetX = width / 2;
-      const offsetY = height / 2 - 25;
+      const sampleHeight = 310;
+      const sampleWidth = 310;
+      const targetHeight = Math.min(height * 0.42, width * 0.48);
+      const scale = targetHeight / sampleHeight;
+      const offsetX = (width - sampleWidth * scale) / 2;
+      const offsetY = (height - sampleHeight * scale) / 2 - 15;
 
       const particles: Particle[] = [];
 
@@ -251,10 +255,10 @@ export function HeroAnimation() {
           vy: (Math.random() - 0.5) * 0.35,
           origPtX: pt.x,
           origPtY: pt.y,
-          targetX: offsetX + pt.x * scale,
-          targetY: offsetY + pt.y * scale,
+          targetX: offsetX + (pt.x + sampleWidth / 2) * scale,
+          targetY: offsetY + (pt.y + sampleHeight / 2) * scale,
           brightness: pt.brightness,
-          size: (0.95 + pt.brightness * 1.7) * Math.min(scale, 1.35),
+          size: (0.95 + pt.brightness * 1.7) * Math.min(scale * 1.3, 1.25),
           alpha: 0.08,
           targetAlpha: 0.25 + pt.brightness * 0.65,
         });
@@ -402,57 +406,14 @@ export function HeroAnimation() {
       style={{ transform: "translateZ(0)", willChange: "transform" }}
       className="relative min-h-screen w-full flex flex-col justify-between items-center overflow-hidden bg-black text-white select-none"
     >
+      {/* Anchor alias for INTRO tab */}
+      <span id="intro" className="absolute -top-24 pointer-events-none" />
+
       {/* 3D Halftone Particle Point-Cloud Canvas */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none z-10"
       />
-
-      {/* ------------------------------------------------------------- */}
-      {/* MINIMAL TOP NAV (Fades in at 4.0s+ in Settled Phase) */}
-      {/* ------------------------------------------------------------- */}
-      <div className="w-full fixed top-0 left-0 right-0 z-20 px-6 sm:px-12 md:px-16 py-6 sm:py-8 pointer-events-none">
-        <AnimatePresence>
-          {phase === "settled" && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: EASE_CUSTOM }}
-              className="flex items-center justify-between w-full pointer-events-auto"
-            >
-              {/* Left Identity */}
-              <a
-                href="#hero"
-                className="text-xs sm:text-sm font-bold tracking-widest text-white hover:opacity-80 transition-opacity"
-              >
-                AVI TANDON
-              </a>
-
-              {/* Right Minimal Menu */}
-              <nav className="flex items-center gap-4 sm:gap-8 text-[11px] sm:text-xs tracking-widest text-zinc-400">
-                <a href="#hero" className="hover:text-white transition-colors">
-                  HOME
-                </a>
-                <a
-                  href="#featured-architecture"
-                  className="hover:text-white transition-colors"
-                >
-                  ABOUT
-                </a>
-                <a href="#services" className="hover:text-white transition-colors">
-                  SERVICES
-                </a>
-                <a href="#process" className="hover:text-white transition-colors">
-                  PROJECTS
-                </a>
-                <a href="#intake" className="hover:text-white transition-colors">
-                  CONTACT
-                </a>
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
 
       {/* ------------------------------------------------------------- */}
       {/* CENTERPIECE HERO STAGE: 0.0s – 4.0s+ */}

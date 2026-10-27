@@ -6,15 +6,15 @@ import { motion } from "framer-motion";
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const TABS = [
-  { id: "hero", label: "HOME" },
-  { id: "about", label: "ABOUT" },
+  { id: "intro", label: "INTRO" },
+  { id: "proof-of-work", label: "PROOF OF WORK" },
   { id: "services", label: "SERVICES" },
-  { id: "projects", label: "PROJECTS" },
+  { id: "timeline", label: "TIMELINE" },
   { id: "contact", label: "CONTACT" },
 ];
 
 export function Navbar() {
-  const [activeTab, setActiveTab] = useState<string>("hero");
+  const [activeTab, setActiveTab] = useState<string>("intro");
 
   // Smooth scroll click handler
   const handleTabClick = (id: string) => {
@@ -28,7 +28,7 @@ export function Navbar() {
   // Active section observer on scroll
   useEffect(() => {
     const handleScroll = () => {
-      // Pin to contact if at the very bottom
+      // Pin to contact if reached the bottom of the page
       if (
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 60
@@ -37,19 +37,16 @@ export function Navbar() {
         return;
       }
 
-      // Pin to hero if at the very top
+      // Pin to intro if near the top
       if (window.scrollY < 120) {
-        setActiveTab("hero");
+        setActiveTab("intro");
         return;
       }
 
-      const sections = [
-        { id: "hero", offset: document.getElementById("hero")?.offsetTop ?? 0 },
-        { id: "projects", offset: document.getElementById("projects")?.offsetTop ?? 0 },
-        { id: "services", offset: document.getElementById("services")?.offsetTop ?? 0 },
-        { id: "about", offset: document.getElementById("about")?.offsetTop ?? 0 },
-        { id: "contact", offset: document.getElementById("contact")?.offsetTop ?? 0 },
-      ].sort((a, b) => a.offset - b.offset);
+      const sections = TABS.map((tab) => ({
+        id: tab.id,
+        offset: document.getElementById(tab.id)?.offsetTop ?? 0,
+      })).sort((a, b) => a.offset - b.offset);
 
       const scrollPosition = window.scrollY + 280;
 
@@ -80,7 +77,7 @@ export function Navbar() {
               key={tab.id}
               type="button"
               onClick={() => handleTabClick(tab.id)}
-              className="relative px-3.5 sm:px-5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold tracking-wider transition-colors rounded-full cursor-pointer flex items-center justify-center whitespace-nowrap focus:outline-none"
+              className="relative px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-[10px] sm:text-xs font-semibold tracking-wider transition-colors rounded-full cursor-pointer flex items-center justify-center whitespace-nowrap focus:outline-none"
               role="tab"
               aria-selected={isActive}
             >

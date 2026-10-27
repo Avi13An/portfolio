@@ -14,7 +14,7 @@ import {
   PartyPopper,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import MetallicButton from "@/components/ui/metallic-button";
+import LiquidMetalButton from "@/components/ui/liquid-metal-button";
 
 const EASE_CUSTOM: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -390,11 +390,11 @@ export function ProjectIntake() {
 
                   {/* Submit Button */}
                   <div className="flex justify-center pt-2">
-                    <MetallicButton
+                    <LiquidMetalButton
                       type="submit"
                       label="Deploy Next Sprint"
                       icon={<ArrowRight className="w-4 h-4 text-zinc-200 group-hover:translate-x-1 transition-transform" />}
-                      className="w-full !h-12 text-sm font-semibold rounded-2xl"
+                      className="w-full"
                     />
                   </div>
 
